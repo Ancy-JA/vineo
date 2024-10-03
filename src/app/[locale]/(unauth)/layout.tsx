@@ -1,94 +1,61 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
 
-import { DemoBanner } from '@/components/DemoBanner';
-import LocaleSwitcher from '@/components/LocaleSwitcher';
-import { BaseTemplate } from '@/templates/BaseTemplate';
-
-export default function Layout(props: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  unstable_setRequestLocale(props.params.locale);
-  const t = useTranslations('RootLayout');
-
+export default function Welcome() {
   return (
-    <>
-      <DemoBanner />
-      <BaseTemplate
-        leftNav={(
-          <>
-            <li>
-              <Link
-                href="/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('home_link')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('about_link')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/counter/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('counter_link')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/portfolio/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('portfolio_link')}
-              </Link>
-            </li>
-            <li>
-              <a
-                className="border-none text-gray-700 hover:text-gray-900"
-                href="https://github.com/ixartz/Next-js-Boilerplate"
-              >
-                GitHub
-              </a>
-            </li>
-          </>
-        )}
-        rightNav={(
-          <>
-            <li>
-              <Link
-                href="/sign-in/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('sign_in_link')}
-              </Link>
-            </li>
+    <div className="flex min-h-screen items-center justify-center bg-white">
+      <div className="flex flex-col md:flex-row max-w-6xl items-center bg-white p-8">
+        
+        {/* Left Section - Text and Button */}
+        <div className="md:w-1/2 flex flex-col items-start p-6">
+          {/* Logo */}
+          <Image
+            src="/vineo.png" // Update with your actual logo path
+            alt="Vineo Logo"
+            width={150}
+            height={50}
+          />
 
-            <li>
-              <Link
-                href="/sign-up/"
-                className="border-none text-gray-700 hover:text-gray-900"
-              >
-                {t('sign_up_link')}
-              </Link>
-            </li>
+          {/* Headline */}
+          <h1 className="mt-4 text-3xl font-bold text-gray-800">
+            Discover the perfect wine for you
+          </h1>
 
-            <li>
-              <LocaleSwitcher />
-            </li>
-          </>
-        )}
-      >
-        <div className="py-5 text-xl [&_p]:my-6">{props.children}</div>
-      </BaseTemplate>
-    </>
+          {/* Description */}
+          <p className="mt-2 text-lg text-gray-600 max-w-md">
+            Join Vineo and match with wines that fit your taste thanks to our personalized recommendations.
+            <br />
+            Be surprised with new flavors and unforgettable experiences.
+          </p>
+
+          {/* Call to Action Button */}
+          <Link href="/sign-in">
+            <button
+              type="button"
+              className="mt-6 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-md"
+            >
+              Get Started
+            </button>
+          </Link>
+        </div>
+
+        {/* Right Section - Image */}
+        <div className="md:w-1/2 flex justify-center mt-6 md:mt-0">
+          <Image
+            src="/banner.png" // Path to your wine bottle image
+            alt="Wine bottles"
+            width={500}
+            height={500}
+            className="object-contain"
+          />
+        </div>
+      </div>
+    </div>
   );
 }
+
+
+
+
+
+
