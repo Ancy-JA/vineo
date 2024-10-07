@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
+import { useLoginUserMutation } from '@/app/redux/authApi'; // Import the mutation hook
+
 // Yup validation schema
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email').required('Email is required'),
@@ -18,6 +20,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loginUser] = useLoginUserMutation(); // Use the mutation from authApi
 
   const {
     register,
@@ -35,28 +38,10 @@ export default function LoginPage() {
     setApiError('');
     setLoading(true);
 
-    const query = `
-      query userLogin($payload: UserLoginDto!) {
-        userLogin(payload: $payload) {
-          accessToken
-          refreshToken
-        }
-      }
-    `;
-
     try {
-      const response = await fetch('https://vineoback-gh-qa.caprover2.innogenio.com/graphql', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query,
-          variables: { payload: formData },
-        }),
-      });
+      const { data, error } = await loginUser(formData).unwrap(); // Use the loginUser mutation
 
-      const { data, errors } = await response.json();
-
-      if (errors) {
+      if (error) {
         setApiError('Login failed.');
       } else {
         const { accessToken, refreshToken } = data.userLogin;
