@@ -1,11 +1,11 @@
 'use client';
 
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Box, Typography, Link, IconButton } from '@mui/material';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, IconButton, Link, Typography } from '@mui/material';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 // Yup validation schema
@@ -60,79 +60,72 @@ export default function LoginPage() {
         setApiError('Login failed.');
       } else {
         const { accessToken, refreshToken } = data.userLogin;
-        console.log('Login successful', { accessToken, refreshToken });
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
       }
-    } catch (err) {
-      setApiError('An error occurred. Please try again.');
+    } catch {
+      setApiError('Incorrect email or password.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="relative flex w-full min-h-screen items-center justify-center bg-gray-50 font-inter">
-      <div className="absolute top-6 left-6">
+    <div className="relative flex min-h-screen w-full items-center justify-center bg-gray-50 font-inter">
+      <div className="absolute left-6 top-6">
         <Image src="/vineo.png" alt="Vineo Logo" width={100} height={100} />
       </div>
 
       {/* Background Image Container */}
-      <div
-        className="absolute right-20 top-20 left-0 bottom-0 bg-no-repeat md:bg-center lg:bg-left bg-image"
-        style={{
-          backgroundImage: "url('/glass-bottle.png')",
-        }}
-      >
-        <style jsx>{`
-          .bg-image {
-            background-size: 600px;
-          }
-        `}</style>
+      <div className="absolute bottom-0 left-0 right-20 top-20 bg-glass-bottle bg-600px bg-no-repeat md:bg-center lg:bg-left">
         <span className="sr-only">Wine illustration</span>
       </div>
 
       {/* Main container with flexbox to align the elements */}
-      <div className="relative w-full max-w-lg px-6 py-4 shadow-2xl rounded-lg z-10 lg:left-40 top-0 bottom-40">
-        <Typography variant="h3" component="h2" className="mb-6 text-center font-bold text-gray-800 text-4xl md:text-3xl lg:text-4xl">
+      <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
+        <Typography variant="h3" component="h2" className="mb-6 text-center font-inter text-4xl font-bold text-[#303E63] md:text-3xl lg:text-4xl">
           Welcome to Vineo
         </Typography>
 
-        <Typography variant="h6" component="h2" className="mb-6 text-center font-bold text-gray-800">
+        <Typography variant="h6" component="h2" className="mb-6 text-center font-inter font-bold text-[#394A59]">
           Login
         </Typography>
 
-        {apiError && <p className="text-red-500 text-sm text-center mb-4">{apiError}</p>}
+        {apiError && <p className="mb-4 text-center text-sm text-red-500">{apiError}</p>}
 
         <Box component="form" noValidate className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label className="block text-gray-700 mb-2">Email</label>
+            <label htmlFor="email" className="mb-2 block text-[#394A59]">Email</label>
             <input
+              id="email"
               type="email"
               {...register('email')}
-              className={`w-full p-3 border bg-gray-100 bg-opacity-60 ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`w-full border bg-gray-100/60 p-3 ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
           </div>
 
           <div>
-            <label className="block text-gray-700 mb-2">Password</label>
+            <label htmlFor="password" className="mb-2 block text-[#394A59]">Password</label>
             <div className="relative">
               <input
+                id="password"
                 type={showPassword ? 'text' : 'password'}
                 {...register('password')}
-                className={`w-full p-3 border bg-gray-100 bg-opacity-60 ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                className={`w-full border bg-gray-100/60 p-3 ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              <span className="absolute right-3 top-1/2 -translate-y-1/2">
                 <IconButton onClick={handleTogglePasswordVisibility} edge="end" className="focus:outline-none">
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </span>
             </div>
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+            {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
           </div>
 
-          <div className="flex items-center justify-between mt-4">
-            <span className="text-gray-600">Remember Me</span>
-            <Link href="/forgot-password" className="text-sm text-gray-600">
+          <div className="mt-4 flex items-center justify-between">
+            <span className="text-[#303E63]">Remember Me</span>
+            <Link href="/forgot-password" className="text-sm text-[#303E63]">
               Have you forgotten your password?
             </Link>
           </div>
@@ -140,17 +133,14 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full bg-[#F78A79] hover:bg-[#F66F65] text-white font-bold py-3 px-4 rounded-lg mt-4 focus:outline-none focus:ring-2 focus:ring-[#F78A79] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`mt-4 w-full rounded-lg bg-[#F78A79] px-4 py-3 font-bold text-white hover:bg-[#F66F65] focus:outline-none focus:ring-2 focus:ring-[#F78A79] ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
 
-          <div className="flex justify-center mt-4">
-            <button
-              type="button"
-            >
-              {/* Load the SVG from the public folder */}
-              <img src="/flat-color-icons_google.svg" alt="Google Icon" className="mr-2" width={24} height={24} />
+          <div className="mt-4 flex justify-center">
+            <button type="button">
+              <Image src="/flat-color-icons_google.svg" alt="Google Icon" className="mr-2" width={24} height={24} />
             </button>
           </div>
         </Box>

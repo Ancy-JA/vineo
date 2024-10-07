@@ -1,9 +1,24 @@
 import type { Config } from 'tailwindcss';
 
-export default {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+const config: Config = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}', // Ensure all relevant files are scanned
+
+  ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
+      },
+      backgroundSize: {
+        '600px': '600px', // Custom background size
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'], // Custom font family
+      },
+    },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
