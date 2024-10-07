@@ -39,14 +39,18 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const { data, error } = await loginUser(formData).unwrap(); // Use the loginUser mutation
+      // Call the mutation and unwrap the result
+      const { data } = await loginUser(formData).unwrap();
 
-      if (error) {
-        setApiError('Login failed.');
-      } else {
+      // Check if tokens exist in the response
+      if (data && data.userLogin) {
         const { accessToken, refreshToken } = data.userLogin;
+
+        // Store tokens in localStorage
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
+      } else {
+        setApiError('Login failed. No token returned.');
       }
     } catch {
       setApiError('Incorrect email or password.');
@@ -62,7 +66,7 @@ export default function LoginPage() {
       </div>
 
       {/* Background Image Container */}
-      <div className="absolute bottom-0 left-0 right-20 top-20 bg-glass-bottle bg-600px bg-no-repeat md:bg-center lg:bg-left">
+      <div className="absolute bottom-0 left-0 right-20 top-24 bg-glass-bottle bg-39rem bg-no-repeat md:bg-center lg:bg-left">
         <span className="sr-only">Wine illustration</span>
       </div>
 

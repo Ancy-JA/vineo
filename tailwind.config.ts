@@ -11,7 +11,7 @@ const config: Config = {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
       },
       backgroundSize: {
-        '600px': '600px', // Custom background size
+        '39rem': '39rem', // Custom background size
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
