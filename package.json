@@ -40,6 +40,7 @@
     "@logtail/pino": "^0.5.0",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
+    "@next/swc-win32-x64-msvc": "^14.2.15",
     "@reduxjs/toolkit": "^2.2.7",
     "@sentry/nextjs": "^8.29.0",
     "@spotlightjs/spotlight": "^2.3.2",
