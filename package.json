@@ -48,6 +48,7 @@
     "@types/yup": "^0.32.0",
     "cors": "^2.8.5",
     "drizzle-orm": "^0.33.0",
+    "formik": "^2.4.6",
     "graphql": "^16.9.0",
     "next": "^14.2.9",
     "next-intl": "^3.19.1",

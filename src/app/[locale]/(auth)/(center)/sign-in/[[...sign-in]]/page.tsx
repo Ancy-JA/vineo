@@ -1,126 +1,63 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box, IconButton, Link, Typography } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useForm, FieldError, UseFormRegister } from 'react-hook-form';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
-//import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
-import { useLoginUserMutation, useGetBoxHistoryQuery, useGetSubscriptionStatusMutation } from '@/app/redux/authApi';
+import { useRouter } from 'next/navigation';
+import { useFormik } from 'formik';
+import { useLoginUserMutation } from '@/app/redux/authApi';
 
-// Validation Schema using Yup
+// Yup validation schema
 const validationSchema = Yup.object({
   email: Yup.string().email('Please enter a valid email').required('Email is required'),
   password: Yup.string().required('Password is required'),
 });
 
-// Define FormData structure
-interface FormData {
-  email: string;
-  password: string;
-}
-
-// Interface for TextInput Props
-interface TextInputProps {
-  id: keyof FormData; // Ensure the id corresponds to the keys in FormData
-  label: string;
-  type: string;
-  register: UseFormRegister<FormData>; // Type-safe register function
-  error?: FieldError; // Optional error field to show validation errors
-}
-
-// TextInput Component
-const TextInput: React.FC<TextInputProps> = ({ id, label, type, register, error }) => (
-  <div>
-    <label htmlFor={id} className="mb-2 block text-gray-700">{label}</label>
-    <input
-      id={id}
-      type={type}
-      {...register(id)}
-      className={`w-full border bg-gray-100/60 p-3 ${error ? 'border-red-500' : 'border-gray-300'} rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500`}
-    />
-    {error && <div className="mt-1 text-sm text-red-500">{error.message}</div>}
-  </div>
-);
-
-// Main Login Component
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const [loginUser] = useLoginUserMutation();
-  const [getSubscriptionStatus] = useGetSubscriptionStatusMutation();
-  //const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
-  });
+  // Formik initialization
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        const { data } = await loginUser(values).unwrap();
+        if (data?.userLogin?.accessToken && data?.userLogin?.refreshToken) {
+          const { accessToken, refreshToken } = data.userLogin;
 
-  // Handles form submission
-  const onSubmit = async (formData: FormData) => {
-    setApiError('');
-    setLoading(true);
+          // Store tokens in localStorage
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
 
-    try {
-      const { data } = await loginUser(formData).unwrap();
-      if (data?.userLogin) {
-        const { accessToken, refreshToken } = data.userLogin;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
-        setIsLoggedIn(true);
-      } else {
-        setApiError('Login failed.');
-      }
-    } catch {
-      setApiError('Incorrect email or password.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch subscription status if logged in
-  useEffect(() => {
-    const fetchSubscriptionStatus = async () => {
-      if (isLoggedIn) {
-        try {
-          const subscriptionStatus = await getSubscriptionStatus({}).unwrap();
-          console.log('Subscription Status:', subscriptionStatus);
-        } catch (error) {
-          console.error('Error fetching subscription status:', error);
+          // Redirect to the dashboard
+          router.push('/userdashboard');
         }
+      } finally {
+        setLoading(false);
       }
-    };
-    fetchSubscriptionStatus();
-  }, [isLoggedIn, getSubscriptionStatus]);
-
-  // Fetch box history after login
-  const { data: boxHistoryData, error: boxHistoryError } = useGetBoxHistoryQuery(
-    { page: 1, limit: 10 },
-    { skip: !isLoggedIn }
-  );
-
-  useEffect(() => {
-    if (boxHistoryData) console.log('Box History Data:', boxHistoryData);
-    if (boxHistoryError) console.error('Error fetching Box History:', boxHistoryError);
-  }, [boxHistoryData, boxHistoryError]);
+    },
+  });
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center bg-gray-50 font-inter">
-      {/* Logo */}
       <div className="absolute left-6 top-6">
         <Image src="/vineo.png" alt="Vineo Logo" width={100} height={100} />
       </div>
-
-      {/* Background Image */}
+      {/* Background Image Container */}
       <div className="absolute bottom-0 left-0 right-20 top-24 bg-glass-bottle bg-39rem bg-no-repeat md:bg-center lg:bg-left">
-        <div className="sr-only">Wine illustration</div>
+        <span className="sr-only">Wine illustration</span>
       </div>
 
-      {/* Main Login Container */}
       <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
         <Typography variant="h3" className="mb-6 text-center text-2xl font-bold text-[#303E63]">
           Welcome to Vineo
@@ -129,21 +66,36 @@ export default function LoginPage() {
           Login
         </Typography>
 
-        {/* API Error */}
-        {apiError && <div className="mb-4 text-center text-sm text-red-500">{apiError}</div>}
+        <Box component="form" noValidate className="space-y-4" onSubmit={formik.handleSubmit}>
+          {/* Email Input */}
+          <div>
+            <label htmlFor="email" className="mb-2 block text-gray-700">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              className={`w-full border bg-gray-100/60 p-3 ${formik.errors.email && formik.touched.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            />
+            {formik.errors.email && formik.touched.email ? (
+              <div className="mt-1 text-sm text-red-500">{formik.errors.email}</div>
+            ) : null}
+          </div>
 
-        {/* Login Form */}
-        <Box component="form" noValidate className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <TextInput id="email" label="Email" type="email" register={register} error={errors.email} />
-          
+          {/* Password Input */}
           <div>
             <label htmlFor="password" className="mb-2 block text-[#394A59]">Password</label>
             <div className="relative">
               <input
                 id="password"
+                name="password"
                 type={showPassword ? 'text' : 'password'}
-                {...register('password')}
-                className={`w-full border bg-gray-100/60 p-3 ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                className={`w-full border bg-gray-100/60 p-3 ${formik.errors.password && formik.touched.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" className="focus:outline-none">
@@ -151,16 +103,16 @@ export default function LoginPage() {
                 </IconButton>
               </div>
             </div>
-            {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
+            {formik.errors.password && formik.touched.password ? (
+              <p className="mt-1 text-sm text-red-500">{formik.errors.password}</p>
+            ) : null}
           </div>
 
-          {/* Additional Form Options */}
           <div className="mt-4 flex items-center justify-between">
             <span className="text-[#303E63]">Remember Me</span>
             <Link href="/forgot-password" className="text-sm text-[#303E63]">Forgot your password?</Link>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -169,7 +121,6 @@ export default function LoginPage() {
             {loading ? 'Logging in...' : 'Login'}
           </button>
 
-          {/* Social Login (Placeholder for Google) */}
           <div className="mt-4 flex justify-center">
             <button type="button">
               <Image src="/flat-color-icons_google.svg" alt="Google Icon" className="mr-2" width={24} height={24} />

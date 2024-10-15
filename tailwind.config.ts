@@ -16,6 +16,9 @@ const config: Config = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
       },
+      colors: {
+        customPink: '#F78A79',
+      },
     },
   },
   plugins: [],

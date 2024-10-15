@@ -27,11 +27,14 @@ export default withSentryConfig(
       experimental: {
         serverComponentsExternalPackages: ['@electric-sql/pglite'],
       },
+      images: {
+        domains: ['minio-api.srv.vineowines.com'],
+      },
     }),
   ),
   {
     // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
+    // GitHub - getsentry/sentry-webpack-plugin: Repo moved to https://github.com/getsentry/sentry-javascri
     // FIXME: Add your Sentry organization and project names
     org: 'nextjs-boilerplate-org',
     project: 'nextjs-boilerplate',
