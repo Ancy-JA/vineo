@@ -3,7 +3,10 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ExitToApp } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { SlSettings } from "react-icons/sl";
+import { GrHomeRounded } from "react-icons/gr";
+import { CiStar } from "react-icons/ci";
 import { useGetBoxHistoryQuery, useGetSubscriptionStatusMutation } from '@/app/redux/authApi';
 import { IMAGES } from '../../../../constants/imageconstants';
 
@@ -35,10 +38,10 @@ const DashboardPage: React.FC = () => {
 
   // Infinite scroll observer
   const observer = useRef<IntersectionObserver | null>(null);
-  
+
   const lastBoxElementRef = useCallback(
     (node: HTMLDivElement | null) => {
-      if (isFetching) return; // Prevent multiple calls if already fetching
+      if (isFetching || !hasMore) return; // Prevent multiple calls if already fetching or no more boxes
 
       if (observer.current) observer.current.disconnect(); // Disconnect previous observer
 
@@ -50,7 +53,7 @@ const DashboardPage: React.FC = () => {
 
       if (node) observer.current.observe(node); // Attach the observer to the last box element
     },
-    [isFetching, hasMore]
+    [isFetching, hasMore, page] // Added `page` to dependencies
   );
 
   useEffect(() => {
@@ -67,8 +70,15 @@ const DashboardPage: React.FC = () => {
       const newBoxes = boxHistoryData?.data?.getBoxHistory?.boxes || [];
       console.log("newboxes", newBoxes);
 
-      setBoxes((prevBoxes) => [...prevBoxes, ...newBoxes]);
-      setHasMore(newBoxes.length > 0); // If no new boxes, stop infinite scroll
+      // Only set `hasMore` if there are new boxes to avoid fetching unnecessary pages
+      if (newBoxes.length > 0) {
+        setBoxes((prevBoxes) => [...prevBoxes, ...newBoxes]);
+        setHasMore(newBoxes.length === 4); // Adjust based on the limit
+      } else {
+        // Explicitly stop further requests if no new boxes are available
+        setHasMore(false);
+        if (observer.current) observer.current.disconnect(); // Disconnect observer
+      }
     }
 
     if (boxHistoryError) {
@@ -104,35 +114,41 @@ const DashboardPage: React.FC = () => {
   return (
     <div className="flex min-h-screen w-screen">
       {/* Sidebar */}
-      <div className="fixed top-0 left-0 z-20 h-full w-64 bg-white shadow-lg">
-        <div className="flex flex-col items-center py-6">
-          <Image src={IMAGES.vineoLogo} alt="Vineo Logo" width={100} height={50} />
+      <div className="fixed top-0 left-0 z-20 h-100 w-64 bg-white shadow-lg">
+        <div className="flex flex-col ml-9 py-8">
+          <Image src={IMAGES.vineoLogo} alt="Vineo Logo" width={100} height={40} />
         </div>
-        <nav className="flex flex-col space-y-4 p-4">
-          <Link href="/profile" className="flex items-center py-2 px-4 hover:bg-gray-200 rounded-lg">
-            <Image src={IMAGES.home} alt="home" width={25} height={25} /> Home
+        <nav className="flex flex-col space-y-6 px-4">
+          <Link href="/profile" className="flex items-center  px-4 hover:bg-gray-100 rounded-lg">
+            <GrHomeRounded  className="mr-4 text-customPink"size={19} />
+            <span className="text-customPink font-inter">Home</span>
           </Link>
-          <Link href="/dashboard" className="flex items-center py-2 px-4 hover:bg-gray-200 rounded-lg">
-            <Image src={IMAGES.virtualcellar} alt="virtualcellar" width={25} height={25} /> Virtual Cellar
+          <Link href="/dashboard" className="flex items-center  px-3 hover:bg-gray-100 rounded-lg">
+            <Image src={IMAGES.virtualcellar} alt="Virtual Cellar" width={24} height={20} className="mr-4" />
+            <span className="text-gray-800 font-inter">Virtual Cellar</span>
           </Link>
-          <Link href="/subscription" className="flex items-center py-2 px-4 hover:bg-gray-200 rounded-lg">
-            <Image src={IMAGES.subscription} alt="subscription" width={25} height={25} /> Subscription
+          <Link href="/subscription" className="flex items-center  px-3 hover:bg-gray-100 rounded-lg">
+            <CiStar  className= "mr-4 text-gray-600"size={25} />
+            <span className="text-gray-800 font-inter">Subscription</span>
           </Link>
-          <Link href="/settings" className="flex items-center py-2 px-4 hover:bg-gray-200 rounded-lg">
-            <Image src={IMAGES.settings} alt="settings" width={25} height={25} /> Settings
+          <Link href="/settings" className="flex items-center  px-4 hover:bg-gray-100 rounded-lg">
+            <SlSettings   className="mr-4 text-gray-500 "size={20} />
+            <span className="text-gray-800 font-inter">Settings</span>
           </Link>
-          <Link href="/logout" className="flex items-center py-2 px-4 hover:bg-gray-200 rounded-lg">
-            <ExitToApp className="mr-2" /> Logout
+          <Link href="/logout" className="flex items-center py-10 px-4 hover:bg-gray-100 rounded-lg">
+            <LogoutIcon className="mr-4 text-gray-500" />
+            <span className="text-gray-800 font-inter">Logout</span>
           </Link>
-          <div className="flex">
-            <Image src="/assets/images/coins.svg" alt="coins" width={45} height={45} />
+          <div className="flex  mt-8 px-4 py-4">
+            <Image src={IMAGES.coins} alt="Vineo coins" width={40} height={40} className="mr-4" />
             <div>
-              <div>Carlos Bernabeu</div>
-              Vineo coins
+              <div className="font-inter text-gray-800">Carlos Bernabeu</div>
+              <div className="text-sm text-gray-500 mb-10">400 Vineo Coins</div>
             </div>
           </div>
         </nav>
       </div>
+
 
       {/* Main Dashboard Content */}
       <div className="flex-grow p-6 lg:p-10 bg-white-100 ml-64">
@@ -143,7 +159,7 @@ const DashboardPage: React.FC = () => {
             className="bg-white shadow-md rounded-lg p-6 mb-6 w-full"
             ref={index === boxes.length - 1 ? lastBoxElementRef : null} // Attach ref to last box for infinite scroll
           >
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Box from {new Date(box.date).toLocaleDateString()}</h2>
+            <h2 className="text-xl font-inter text-gray-800 mb-4">Box from {new Date(box.date).toLocaleDateString()}</h2>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               <div className="col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {box.wines.map((wine: Wine, wineIndex: number) => (
