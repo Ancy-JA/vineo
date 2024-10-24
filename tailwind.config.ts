@@ -7,6 +7,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      
       backgroundImage: {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
       },
@@ -18,7 +19,10 @@ const config: Config = {
       },
       colors: {
         customPink: '#F78A79',
+        hoverPink:  '#D4695B',
         customGray: '#394A59',
+        dotGray: '#555',  // Custom color for pagination dots
+        dotActive: '#F78A79', // Custom color for active pagination dots
       },
     },
   },
@@ -76,6 +80,25 @@ const config: Config = {
           '&:hover::-webkit-scrollbar-thumb:hover': {
             background: '#333',
           },
+        },
+        // New utility to make scrollbar ends rounded by default
+        '.scrollbar-rounded': {
+          'scrollbar-width': 'thin',
+          '&::-webkit-scrollbar-thumb': {
+            'border-radius': '10px',
+          },
+        },
+        // Custom Swiper Pagination styles
+        '.swiper-pagination-bullet': {
+          width: '6px !important', // Smaller size for the dots
+          height: '6px !important',
+          backgroundColor: '#B0B0B0 !important', // Custom color (can be dotGray)
+          opacity: '0.5 !important',
+          transition: 'opacity 0.3s ease !important',
+        },
+        '.swiper-pagination-bullet-active': {
+          backgroundColor: '#87CEEB!important', // Custom active dot color (can be dotActive)
+          opacity: '1 !important',
         },
       };
       addUtilities(newUtilities);

@@ -1,26 +1,46 @@
 'use client';
-
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function CenteredLayout(props: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
-    // Check for user authentication via localStorage (or any other method)
-    const userToken = localStorage.getItem('accessToken');
+    const checkAuthentication = () => {
+      const userToken = localStorage.getItem('accessToken');
+      console.log('User Token on Check:', userToken); // Debugging
 
-    // If userToken exists and user is on the login page, redirect to dashboard
-    if (userToken && pathname === '/login') {
-      router.push('/userdashboard');
-    }
+      // Redirect if user is authenticated and on login page
+      if (userToken && pathname === '/sign-in') {
+        console.log('Redirecting to dashboard...');
+        router.push('/userdashboard');
+      }
 
-    // If userToken does not exist and user is trying to access protected routes, redirect to login
-    if (!userToken && pathname !== '/login') {
-      router.push('/login');
+      // Redirect to login if accessing a protected route without token
+      if (!userToken && pathname !== '/sign-in') {
+        console.log('Redirecting to sign-in...');
+        router.push('/sign-in');
+      }
+
+      // Mark the check as complete
+      setIsCheckingAuth(false);
+    };
+
+    // Only perform checks when not on the sign-in page
+    if (pathname !== '/sign-in') {
+      checkAuthentication();
+    } else {
+      // Allow rendering for the login page
+      setIsCheckingAuth(false);
     }
   }, [router, pathname]);
+
+  if (isCheckingAuth) {
+    // Prevent rendering until authentication check is complete
+    return null;
+  }
 
   return <div>{props.children}</div>;
 }

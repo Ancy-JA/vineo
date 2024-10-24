@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import { useLoginUserMutation } from '@/app/redux/authApi';
-
+import { IMAGES } from '../../../../../constants/imageconstants';
 // Yup validation schema
 const validationSchema = Yup.object({
   email: Yup.string().email('Please enter a valid email').required('Email is required'),
@@ -32,16 +32,20 @@ export default function LoginPage() {
       setLoading(true);
       try {
         const { data } = await loginUser(values).unwrap();
+        console.log("Login Response:", data); // Debugging: Check login response
         if (data?.userLogin?.accessToken && data?.userLogin?.refreshToken) {
           const { accessToken, refreshToken } = data.userLogin;
 
           // Store tokens in localStorage
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
+          console.log("Tokens saved:", { accessToken, refreshToken }); // Debugging
 
           // Redirect to the dashboard
           router.push('/userdashboard');
         }
+      } catch (error) {
+        console.error("Login failed:", error); // Debugging: Catch login errors
       } finally {
         setLoading(false);
       }
@@ -51,7 +55,7 @@ export default function LoginPage() {
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center bg-gray-50 font-inter">
       <div className="absolute left-6 top-6">
-        <Image src="/vineo.png" alt="Vineo Logo" width={100} height={100} />
+        <Image src={IMAGES.vineoLogo} alt="Vineo Logo" width={100} height={100} />
       </div>
       {/* Background Image Container */}
       <div className="absolute bottom-0 left-0 right-20 top-24 bg-glass-bottle bg-39rem bg-no-repeat md:bg-center lg:bg-left">
@@ -59,10 +63,10 @@ export default function LoginPage() {
       </div>
 
       <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
-        <Typography variant="h3" className="mb-6 text-center text-2xl font-bold text-[#303E63]">
+        <Typography variant="h4" className="mb-6 text-center font-inter !font-bold !text-2xl  text-[#303E63]">
           Welcome to Vineo
         </Typography>
-        <Typography variant="h6" className="mb-6 text-center font-bold text-[#394A59]">
+        <Typography variant="h6" className="mb-6 text-center !text-xl font-inter text-[#394A59]">
           Login
         </Typography>
 
