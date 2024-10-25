@@ -186,14 +186,16 @@ const DashboardPage: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow flex flex-col pl-10 p-6 ml-6 lg:p-10 bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full">
+      <main className="flex-grow flex flex-col pl-10 p-6 ml-6 lg:p-10 bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full overflow-hidden">
   {boxes.map((box, index) => (
-    <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-6 w-full" ref={index === boxes.length - 1 ? handleInfiniteScroll : null}>
+    <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-6 w-full overflow-hidden" ref={index === boxes.length - 1 ? handleInfiniteScroll : null}>
       <h4 className="text-xl md:text-2xl lg:text-3xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</h4>
-      <div className="flex flex-wrap lg:flex-nowrap gap-4 min-w-0 w-full">
+      
+      {/* Flex Container with Default Row Layout on Larger Screens */}
+      <div className="flex flex-col lg:flex-row gap-4 min-w-0 w-full overflow-hidden">
         
-        {/* Wine Data Box using Swiper for screens smaller than md */}
-        <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full md:hidden">
+        {/* Swiper Component (Visible only below lg) */}
+        <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full lg:hidden overflow-hidden">
           <Swiper 
             modules={[Pagination]}
             spaceBetween={16} 
@@ -233,8 +235,8 @@ const DashboardPage: React.FC = () => {
           </Swiper>
         </div>
 
-        {/* Regular Flex Layout for screens md and above */}
-        <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full hidden md:flex overflow-x-auto space-x-4 min-w-0">
+        {/* Regular Flex Layout (Visible only lg and above) */}
+        <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full hidden lg:flex overflow-x-auto space-x-4 min-w-0">
           {box.wines.map((wine: Wine, wineIndex: number) => (
             <div key={wineIndex} className="flex flex-col items-center w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1rem)]">
               <Image 
@@ -254,24 +256,28 @@ const DashboardPage: React.FC = () => {
           ))}
         </div>
 
-        {/* Graph Box */}
-        <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full flex justify-center items-center lg:mt-0 mt-6 min-w-0 max-w-none">
+        {/* Graph Box - Visible only on 2xl screens */}
+        <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full  justify-center items-center hidden 2xl:flex min-w-0 max-w-none">
           <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full"/>
         </div>
       </div>
+
+      {/* Graph Box - Visible on xl and smaller */}
+      <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full flex justify-center items-center mt-6 2xl:hidden min-w-0 max-w-none">
+        <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full"/>
+      </div>
+
       <div className="mt-4 text-center">
         <button className="bg-customPink text-white px-6 md:px-8 lg:px-10 py-2 md:py-3 lg:py-4 rounded-lg hover:bg-hoverPink text-base md:text-lg lg:text-xl">View Box Details</button>
       </div>
     </div>
   ))}
+
   {isFetching && <p>Loading...</p>}
   {subscriptionLoading && <p>Loading Subscription Status...</p>}
   {boxHistoryError && <p>Error loading box history</p>}
   {subscriptionError && <p>Error loading subscription status...</p>}
 </main>
-
-
-
 
     </div>
   </div>

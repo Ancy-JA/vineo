@@ -76,7 +76,7 @@ export const authApi = createApi({
     
     // Type assertion to help TypeScript understand the error structure
     const resultData = result?.data as { errors?: Array<{ extensions?: { response?: { statusCode?: number } } }> };
-
+console.log(resultData?.errors?.[0]?.extensions?.response?.statusCode);
     // Use the correctly structured path to check for 401
     if (resultData?.errors?.[0]?.extensions?.response?.statusCode === 401) {
       console.warn("Unauthorized error detected. Attempting to refresh token...");
