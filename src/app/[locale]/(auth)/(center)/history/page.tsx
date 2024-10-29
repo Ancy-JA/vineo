@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
-import { useGetBoxHistoryAdminQuery } from '@/app/redux/authApi';
+import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/authApi';
 import debounce from 'lodash.debounce';
 import { BsDownload } from 'react-icons/bs';
 import { FaEye, FaCheck, FaTimes, FaEdit, FaTruck } from 'react-icons/fa';
@@ -17,6 +17,7 @@ interface Wine {
 }
 
 interface Box {
+  _id: string;
   user: User;
   box_wines: Wine[];
   created_at: string;
@@ -30,31 +31,88 @@ const HistoryPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const pageSize = Numbers.page_size;
 
-  // Use the query with debouncedSearchTerm
+  // Fetch box history with debounced search term
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery(
     { searchString: debouncedSearchTerm, page, pageSize }
   );
 
-  // Debounce the search term update
+  // Mutation hook for fetching the download URL
+  const [getBoxWinePrintCard] = useGetBoxWinePrintCardMutation();
+
+  // Debounce function for search term
   const debouncedSetSearchTerm = useCallback(
     debounce((term: string) => {
       setDebouncedSearchTerm(term);
-      setPage(1); // Reset to the first page on a new search
+      setPage(1);
     }, 500),
     []
   );
 
-  // Update searchTerm and trigger debounced search term update
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
-    debouncedSetSearchTerm(newSearchTerm); // This will update debouncedSearchTerm after debounce delay
+    debouncedSetSearchTerm(newSearchTerm);
   };
 
-  // Refetch data when debouncedSearchTerm or page changes
+  // Refetch data when search term or page changes
   useEffect(() => {
     refetch();
   }, [debouncedSearchTerm, page]);
+
+
+  // Function to handle the download action
+  // Define the expected response structure
+  interface GetBoxWinePrintCardResponse {
+    data: {
+      getBoxWinePrintCard: string; // Assuming this is a Base64-encoded string
+    };
+  }
+
+  const handleDownload = async (boxId: string) => {
+    try {
+      console.log(`Initiating download for box ID: ${boxId}`);
+
+      // Fetch the response and assert the type
+      const response = await getBoxWinePrintCard({ boxId: String(boxId) }).unwrap() as unknown as GetBoxWinePrintCardResponse;
+      
+
+      // Extract the Base64 string from the nested object
+      const base64Data = response.data.getBoxWinePrintCard;
+     
+
+      // Normalize the Base64 data for URL-safe characters
+      const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
+      
+
+      // Decode the Base64 string
+      const binaryString = window.atob(normalizedBase64);
+      
+
+      // Convert binary string to byte array
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+     
+
+      // Create a URL for the Blob and trigger the download
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `box_${boxId}.pdf`;
+     
+
+      downloadLink.click();
+    
+
+      // Release the object URL after download to free memory
+      URL.revokeObjectURL(downloadLink.href);
+      
+    } catch (error) {
+      console.error("Error fetching download data:", error);
+    }
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
@@ -67,17 +125,6 @@ const HistoryPage: React.FC = () => {
     setPage(newPage);
   };
 
-  const clientHistory = fetchedBoxes.map((box: Box, _index: number) => ({
-    name: box.user.name,
-    phone: box.user.phone,
-    wines: box.box_wines.map((wine: Wine) => wine.name),
-    startDate: new Date(box.created_at).toLocaleDateString(),
-    endDate: new Date(box.delivery_date).toLocaleDateString(),
-    status: box.status,
-    deliverable: box.status === 'Entregable',
-    count: `${box.box_wines.length} veces`,
-  }));
-
   const renderPageNumbers = () => {
     const pages = [];
     if (totalPages <= 5) {
@@ -86,8 +133,7 @@ const HistoryPage: React.FC = () => {
           <button
             key={i}
             onClick={() => handlePageClick(i)}
-            className={`px-3 py-1 border rounded ${page === i ? 'bg-blue-500 text-white' : 'text-black'
-              }`}
+            className={`px-3 py-1 border rounded ${page === i ? 'bg-blue-500 text-white' : 'text-black'}`}
           >
             {i}
           </button>
@@ -98,8 +144,7 @@ const HistoryPage: React.FC = () => {
         <button
           key={1}
           onClick={() => handlePageClick(1)}
-          className={`px-3 py-1 border rounded ${page === 1 ? 'bg-blue-500 text-white' : 'text-black'
-            }`}
+          className={`px-3 py-1 border rounded ${page === 1 ? 'bg-blue-500 text-white' : 'text-black'}`}
         >
           1
         </button>
@@ -114,8 +159,7 @@ const HistoryPage: React.FC = () => {
           <button
             key={i}
             onClick={() => handlePageClick(i)}
-            className={`px-3 py-1 border rounded ${page === i ? 'bg-blue-500 text-white' : 'text-black'
-              }`}
+            className={`px-3 py-1 border rounded ${page === i ? 'bg-blue-500 text-white' : 'text-black'}`}
           >
             {i}
           </button>
@@ -128,8 +172,7 @@ const HistoryPage: React.FC = () => {
         <button
           key={totalPages}
           onClick={() => handlePageClick(totalPages)}
-          className={`px-3 py-1 border rounded ${page === totalPages ? 'bg-blue-500 text-white' : 'text-black'
-            }`}
+          className={`px-3 py-1 border rounded ${page === totalPages ? 'bg-blue-500 text-white' : 'text-black'}`}
         >
           {totalPages}
         </button>
@@ -141,9 +184,8 @@ const HistoryPage: React.FC = () => {
   return (
     <div className="min-h-screen w-screen bg-gray-100 p-4">
       <div className="w-full bg-white p-4 rounded-lg shadow-md">
-        <div className='mb-3 border-b font-bold '>Wine box history</div>
+        <div className="mb-3 border-b font-bold">Wine box history</div>
 
-        {/* Search Bar */}
         <div className="mb-4">
           <input
             type="text"
@@ -154,8 +196,7 @@ const HistoryPage: React.FC = () => {
           />
         </div>
 
-        {/* Responsive Grid Header */}
-        <div className="hidden xl:grid grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr] gap-2 items-center p-2 border-b  text-left font-semibold bg-gray-200">
+        <div className="hidden xl:grid grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr] gap-2 items-center p-2 border-b text-left font-semibold bg-gray-200">
           <div>User details</div>
           <div>Wine in box</div>
           <div>Creation date</div>
@@ -165,56 +206,45 @@ const HistoryPage: React.FC = () => {
           <div>Behavior/Actions</div>
         </div>
 
-        {clientHistory.length > 0 ? (
-          clientHistory.map((item, _index) => (
+        {fetchedBoxes.length > 0 ? (
+          fetchedBoxes.map((box) => (
             <div
-              key={_index}
+              key={box._id}
               className="grid grid-cols-1 xl:grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr] gap-2 items-center p-2 border-b text-left"
             >
-              {/* User Details */}
               <div className="flex items-left space-x-4">
-                <div className="rounded-full bg-blue-500 text-white w-8 h-8 flex items-center justify-center ">
-                  {item.name.charAt(0)}
+                <div className="rounded-full bg-blue-500 text-white w-8 h-8 flex items-center justify-center">
+                  {box.user.name.charAt(0)}
                 </div>
-                <div >
-                  <div className="font-semi-bold">{item.name}</div>
-                  <div className="text-sm text-gray-600">{item.phone}</div>
+                <div>
+                  <div className="font-semi-bold">{box.user.name}</div>
+                  <div className="text-sm text-gray-600">{box.user.phone}</div>
                 </div>
               </div>
 
-              {/* Wines in Box with "veces" to the right of each wine */}
               <div className="grid gap-y-1">
-                {item.wines.map((wine, _idx) => (
+                {box.box_wines.map((wine, _idx) => (
                   <div key={_idx} className="flex justify-between items-center text-sm text-gray-700">
-                    <span className="truncate">{wine}</span>
+                    <span className="truncate">{wine.name}</span>
                     <span className="text-green-500 px-2 py-1 rounded border border-green-500">
-                      {item.count}
+                      {`${box.box_wines.length} veces`}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {/* Creation Date */}
-              <div className="text-sm text-gray-600">{item.startDate}</div>
-
-              {/* Delivery Date */}
-              <div className="text-sm text-gray-600">{item.endDate}</div>
-
-              {/* Type of Box */}
+              <div className="text-sm text-gray-600">{new Date(box.created_at).toLocaleDateString()}</div>
+              <div className="text-sm text-gray-600">{new Date(box.delivery_date).toLocaleDateString()}</div>
               <div>
-                <span
-                  className={`px-2 py-1 rounded ${item.deliverable ? 'text-green-500' : 'text-red-500'}`}
-                >
-                  {item.deliverable ? 'Entregable' : 'Rechazada'}
+                <span className={`px-2 py-1 rounded ${box.status === 'Entregable' ? 'text-green-500' : 'text-red-500'}`}>
+                  {box.status === 'Entregable' ? 'Entregable' : 'Rechazada'}
                 </span>
               </div>
+              <div className="text-sm text-red-600">{box.status}</div>
 
-              {/* Status */}
-              <div className="text-sm text-red-600">{item.status}</div>
-
-              {/* Actions */}
               <div className="flex flex-wrap space-x-2 space-y-2">
-                <button className=" bg-purple-500 text-white p-2 rounded-full">
+                <button className="bg-purple-500 text-white p-2 rounded-full"
+                  onClick={() => handleDownload(box._id)}>
                   <BsDownload />
                 </button>
                 <button className=" bg-orange-500 text-white p-2 rounded-full">
@@ -242,7 +272,6 @@ const HistoryPage: React.FC = () => {
           <div className="text-gray-500 text-center p-4">No data available</div>
         )}
 
-        {/* Pagination */}
         <div className="flex justify-between items-center mt-4">
           <span className="text-gray-700">{totalClients} Clientes</span>
           <div className="flex-1 flex justify-end items-center space-x-2">

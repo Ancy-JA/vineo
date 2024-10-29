@@ -190,6 +190,25 @@ export const authApi = createApi({
         },
       }),
     }),
+// getBoxWine card mutation
+
+// In your authApi setup for getBoxWinePrintCard
+getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
+  query: ({ boxId }) => ({
+    url: '',
+    method: 'POST',
+    body: {
+      query: `
+        query getBoxWinePrintCard($box: String!) {
+          getBoxWinePrintCard(box: $box)
+        }
+      `,
+      variables: { box: boxId }, // Pass boxId as `box`
+    },
+  }),
+}),
+
+
 
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({
@@ -237,5 +256,6 @@ export const {
   useLoginUserMutation,
   useGetBoxHistoryQuery,
   useGetSubscriptionStatusMutation,
-  useGetBoxHistoryAdminQuery, // Export the new hook for the getBoxHistoryAdmin endpoint
+  useGetBoxHistoryAdminQuery, 
+  useGetBoxWinePrintCardMutation,
 } = authApi;
