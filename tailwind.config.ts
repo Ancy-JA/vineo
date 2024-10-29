@@ -24,6 +24,9 @@ const config: Config = {
         dotGray: '#555',  // Custom color for pagination dots
         dotActive: '#F78A79', // Custom color for active pagination dots
       },
+      screens: {
+        xsm: '400px',  // Define an extra small breakpoint
+      },
     },
   },
   plugins: [

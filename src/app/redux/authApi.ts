@@ -39,7 +39,7 @@ const refreshAccessToken = async () => {
       // Store new tokens
       localStorage.setItem('accessToken', newAccessToken);
       localStorage.setItem('refreshToken', newRefreshToken);
-      
+
       return newAccessToken;
     } else {
       console.warn("Failed to refresh token. Redirecting to sign-in.");
@@ -71,22 +71,19 @@ export const authApi = createApi({
       credentials: 'include',
     })(args, api, extraOptions);
 
-    // Log the initial request result for debugging
-    console.log("Initial request result:", result);
-    
     // Type assertion to help TypeScript understand the error structure
     const resultData = result?.data as { errors?: Array<{ extensions?: { response?: { statusCode?: number } } }> };
-console.log(resultData?.errors?.[0]?.extensions?.response?.statusCode);
+    console.log(resultData?.errors?.[0]?.extensions?.response?.statusCode);
     // Use the correctly structured path to check for 401
     if (resultData?.errors?.[0]?.extensions?.response?.statusCode === 401) {
       console.warn("Unauthorized error detected. Attempting to refresh token...");
-      
+
       // Attempt to refresh the token
       const newAccessToken = await refreshAccessToken();
 
       if (newAccessToken) {
         console.log("Retrying API request with new access token:", newAccessToken);
-        
+
         // Retry the request with the new access token
         result = await fetchBaseQuery({
           baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql',
@@ -100,29 +97,16 @@ console.log(resultData?.errors?.[0]?.extensions?.response?.statusCode);
         })(args, api, extraOptions);
 
         // Handle the retry result
-        if (result.error) {
-          console.error("Retry with new access token failed:", result.error);
 
-          // Optionally add logic here to clear tokens or perform other actions if retry fails
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          window.location.href = '/sign-in';
-        } else {
-          console.log("Retry with new access token successful.");
-        }
       } else {
         console.warn("Failed to refresh token. Redirecting to sign-in.");
-  
+
         // Clear tokens and redirect to sign-in as a fallback
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         window.location.href = '/sign-in';
       }
-    } else if (result.error) {
-      // Log other non-401 errors for further investigation
-      console.error("Request failed with error:", result.error);
-    }
-
+    } 
     return result;
   },
   tagTypes: ['BoxHistory'],
@@ -206,7 +190,52 @@ console.log(resultData?.errors?.[0]?.extensions?.response?.statusCode);
         },
       }),
     }),
+
+    // New `getBoxHistoryAdmin` endpoint for client history
+    getBoxHistoryAdmin: builder.query({
+      query: ({ searchString, page, pageSize }) => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query getBoxHistoryAdmin($searchString: String!, $page: Float!, $pageSize: Float!) {
+              getBoxHistoryAdmin(
+                searchString: $searchString
+                page: $page
+                pageSize: $pageSize
+               
+              ) {
+                total
+                boxes {
+                  _id
+                  user {
+                    _id
+                    name
+                    phone
+                  }
+                  created_at
+                  delivery_date
+                  status
+                  box_wines {
+                    name
+                  }
+                }
+              }
+            }
+          `,
+          variables: { searchString, page, pageSize },
+        },
+      }),
+      providesTags: ['BoxHistory'],
+      
+    }),
+    
   }),
 });
 
-export const { useLoginUserMutation, useGetBoxHistoryQuery, useGetSubscriptionStatusMutation } = authApi;
+export const {
+  useLoginUserMutation,
+  useGetBoxHistoryQuery,
+  useGetSubscriptionStatusMutation,
+  useGetBoxHistoryAdminQuery, // Export the new hook for the getBoxHistoryAdmin endpoint
+} = authApi;
