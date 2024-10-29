@@ -1,10 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useGetBoxHistoryAdminQuery } from '@/app/redux/authApi';
+import debounce from 'lodash.debounce';
 import { BsDownload } from 'react-icons/bs';
 import { FaEye, FaCheck, FaTimes, FaEdit, FaTruck } from 'react-icons/fa';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { Numbers } from '../../../../constants/numberconstants';
+
 interface User {
   name: string;
   phone: string;
@@ -24,12 +26,35 @@ interface Box {
 
 const HistoryPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [page, setPage] = useState(1);
   const pageSize = Numbers.page_size;
 
+  // Use the query with debouncedSearchTerm
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery(
-    { searchString: searchTerm, page, pageSize }
+    { searchString: debouncedSearchTerm, page, pageSize }
   );
+
+  // Debounce the search term update
+  const debouncedSetSearchTerm = useCallback(
+    debounce((term: string) => {
+      setDebouncedSearchTerm(term);
+      setPage(1); // Reset to the first page on a new search
+    }, 500),
+    []
+  );
+
+  // Update searchTerm and trigger debounced search term update
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
+    debouncedSetSearchTerm(newSearchTerm); // This will update debouncedSearchTerm after debounce delay
+  };
+
+  // Refetch data when debouncedSearchTerm or page changes
+  useEffect(() => {
+    refetch();
+  }, [debouncedSearchTerm, page]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
@@ -40,7 +65,6 @@ const HistoryPage: React.FC = () => {
 
   const handlePageClick = (newPage: number) => {
     setPage(newPage);
-    refetch();
   };
 
   const clientHistory = fetchedBoxes.map((box: Box, _index: number) => ({
@@ -126,11 +150,7 @@ const HistoryPage: React.FC = () => {
             placeholder="Search..."
             className="w-70 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={searchTerm}
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-              setPage(1);
-              refetch();
-            }}
+            onChange={onSearchChange}
           />
         </div>
 
