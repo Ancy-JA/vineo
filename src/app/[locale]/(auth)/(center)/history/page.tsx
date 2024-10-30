@@ -10,6 +10,11 @@ import { Numbers } from '../../../../constants/numberconstants';
 interface User {
   name: string;
   phone: string;
+  email?: string;
+  address?: string;
+  country?: string;
+  postalCode?: string;
+  city?: string;
 }
 
 interface Wine {
@@ -29,8 +34,12 @@ const HistoryPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [page, setPage] = useState(1);
+  const [selectedBox, setSelectedBox] = useState<Box | null>(null);
   const pageSize = Numbers.page_size;
 
+
+
+  
   // Fetch box history with debounced search term
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery(
     { searchString: debouncedSearchTerm, page, pageSize }
@@ -70,23 +79,20 @@ const HistoryPage: React.FC = () => {
 
   const handleDownload = async (boxId: string) => {
     try {
-      console.log(`Initiating download for box ID: ${boxId}`);
 
       // Fetch the response and assert the type
       const response = await getBoxWinePrintCard({ boxId: String(boxId) }).unwrap() as unknown as GetBoxWinePrintCardResponse;
-      
-
       // Extract the Base64 string from the nested object
       const base64Data = response.data.getBoxWinePrintCard;
-     
+
 
       // Normalize the Base64 data for URL-safe characters
       const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
-      
+
 
       // Decode the Base64 string
       const binaryString = window.atob(normalizedBase64);
-      
+
 
       // Convert binary string to byte array
       const len = binaryString.length;
@@ -95,23 +101,32 @@ const HistoryPage: React.FC = () => {
         bytes[i] = binaryString.charCodeAt(i);
       }
       const blob = new Blob([bytes], { type: 'application/pdf' });
-     
+
 
       // Create a URL for the Blob and trigger the download
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
       downloadLink.download = `box_${boxId}.pdf`;
-     
+
 
       downloadLink.click();
-    
+
 
       // Release the object URL after download to free memory
       URL.revokeObjectURL(downloadLink.href);
-      
+
     } catch (error) {
       console.error("Error fetching download data:", error);
     }
+  };
+
+
+  const handleView = (box: Box) => {
+    setSelectedBox(box);
+  };
+
+  const closeModal = () => {
+    setSelectedBox(null);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -247,9 +262,14 @@ const HistoryPage: React.FC = () => {
                   onClick={() => handleDownload(box._id)}>
                   <BsDownload />
                 </button>
-                <button className=" bg-orange-500 text-white p-2 rounded-full">
-                  <FaEye />
-                </button>
+                <div className="relative group">
+                  <button className="bg-orange-500 text-white p-2 rounded-full" onClick={() => handleView(box)}>
+                    <FaEye />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-orange-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    Details
+                  </span>
+                </div>
                 <button className=" bg-green-500 text-white p-2 rounded-full">
                   <AiOutlineWhatsApp />
                 </button>
@@ -271,6 +291,27 @@ const HistoryPage: React.FC = () => {
         ) : (
           <div className="text-gray-500 text-center p-4">No data available</div>
         )}
+
+        {selectedBox && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded shadow-lg max-w-lg w-full">
+              <h2 className="text-xl font-bold mb-4">Client Details</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div><label>Full Name</label><input type="text" value={selectedBox.user.name} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Full Address</label><input type="text" value={selectedBox.user.address || ''} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Email</label><input type="text" value={selectedBox.user.email || ''} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Country</label><input type="text" value={selectedBox.user.country || ''} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Postal Code</label><input type="text" value={selectedBox.user.postalCode || ''} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>City</label><input type="text" value={selectedBox.user.city || ''} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Phone</label><input type="text" value={selectedBox.user.phone} readOnly className="border p-2 w-full rounded" /></div>
+                <div><label>Password</label><input type="password" value="******" readOnly className="border p-2 w-full rounded" /></div>
+              </div>
+              <button onClick={closeModal} className="mt-4 bg-blue-500 text-white p-2 rounded">Close</button>
+            </div>
+          </div>
+        )}
+
+
 
         <div className="flex justify-between items-center mt-4">
           <span className="text-gray-700">{totalClients} Clientes</span>
