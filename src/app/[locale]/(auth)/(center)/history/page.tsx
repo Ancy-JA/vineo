@@ -6,6 +6,7 @@ import { BsDownload } from 'react-icons/bs';
 import { FaEye, FaCheck, FaTimes, FaEdit, FaTruck } from 'react-icons/fa';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { Numbers } from '../../../../constants/numberconstants';
+import { useTranslation } from 'react-i18next';
 
 interface User {
   name: string;
@@ -36,7 +37,7 @@ const HistoryPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [selectedBox, setSelectedBox] = useState<Box | null>(null);
   const pageSize = Numbers.page_size;
-
+  const { t } = useTranslation();
 
   // Fetch box history with debounced search term
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery(
@@ -120,8 +121,8 @@ const HistoryPage: React.FC = () => {
     setSelectedBox(null);
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching data</div>;
+  if (isLoading) return <div>{t('historyPage.loading')}</div>;
+  if (error) return <div>{t('historyPage.error')}</div>;
 
   const fetchedBoxes: Box[] = data?.data?.getBoxHistoryAdmin?.boxes || [];
   const totalClients = data?.data?.getBoxHistoryAdmin?.total || 0;
@@ -188,28 +189,28 @@ const HistoryPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-screen bg-gray-100 p-4">
-      <div className="w-full bg-white p-4 rounded-lg shadow-md">
-        <div className="mb-3 border-b font-bold">Wine box history</div>
+    <div className="min-h-screen w-screen bg-gray-100 ">
+      <div className="w-full min-h-screen bg-white  rounded-lg shadow-md">
+        <div className="mb-3 border-b font-bold">{t('historyPage.title')}</div>
 
         <div className="mb-4">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder={t('historyPage.searchPlaceholder')}
             className="w-70 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={searchTerm}
             onChange={onSearchChange}
           />
         </div>
-
-        <div className="hidden xl:grid grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr] gap-2 items-center p-2 border-b text-left font-semibold bg-gray-200">
-          <div>User details</div>
-          <div>Wine in box</div>
-          <div>Creation date</div>
-          <div>Delivery date</div>
-          <div>Box type</div>
-          <div>Status</div>
-          <div>Behavior/Actions</div>
+      
+        <div className="hidden xl:grid grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr]  gap-2 items-center p-2 border-b text-left font-semibold bg-gray-200  flex-grow">
+        <div>{t('historyPage.userDetails')}</div>
+          <div>{t('historyPage.wineInBox')}</div>
+          <div>{t('historyPage.creationDate')}</div>
+          <div>{t('historyPage.deliveryDate')}</div>
+          <div>{t('historyPage.boxType')}</div>
+          <div>{t('historyPage.status')}</div>
+          <div>{t('historyPage.actions')}</div>
         </div>
 
         {fetchedBoxes.length > 0 ? (
@@ -258,7 +259,7 @@ const HistoryPage: React.FC = () => {
                     <FaEye />
                   </button>
                   <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-orange-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                    Details
+                  {t('historyPage.details')}
                   </span>
                 </div>
                 <button
@@ -283,96 +284,98 @@ const HistoryPage: React.FC = () => {
             </div>
           ))
         ) : (
-          <div className="text-gray-500 text-center p-4">No data available</div>
+          <div className="text-gray-500 text-center p-4">{t('historyPage.noData')}</div>
         )}
+      
 
-        {selectedBox && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-            <div className="relative bg-white p-6 rounded shadow-lg max-w-lg w-full">
-              <button
-                onClick={closeModal}
-                className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
-              >
-                <FaTimes size={18} />
-              </button>
-              <h2 className="text-xl font-bold mb-4">Client Details</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label>Full Name</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.name}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Full Address</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.address || ''}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Email</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.email || ''}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Country</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.country || ''}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Postal Code</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.postalCode || ''}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>City</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.city || ''}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Phone</label>
-                  <input
-                    type="text"
-                    value={selectedBox.user.phone}
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-                <div>
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    value="******"
-                    readOnly
-                    className="border p-2 w-full rounded"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+
+      {selectedBox && (
+  <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+    <div className="relative bg-white p-6 rounded shadow-lg max-w-lg w-full">
+      <button
+        onClick={closeModal}
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+      >
+        <FaTimes size={18} />
+      </button>
+      <h2 className="text-xl font-bold mb-4">Client Details</h2>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label>Full Name</label>
+          <input
+            type="text"
+            value={selectedBox.user.name}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Full Address</label>
+          <input
+            type="text"
+            value={selectedBox.user.address || ''}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Email</label>
+          <input
+            type="text"
+            value={selectedBox.user.email || ''}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Country</label>
+          <input
+            type="text"
+            value={selectedBox.user.country || ''}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Postal Code</label>
+          <input
+            type="text"
+            value={selectedBox.user.postalCode || ''}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>City</label>
+          <input
+            type="text"
+            value={selectedBox.user.city || ''}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input
+            type="text"
+            value={selectedBox.user.phone}
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            value="******"
+            readOnly
+            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
 
 

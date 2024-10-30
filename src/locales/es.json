@@ -1,0 +1,50 @@
+{
+  "signIn": {
+    "welcomeTitle": "Bienvenido a Vineo",
+    "loginTitle": "Iniciar sesión",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "rememberMe": "Recuérdame",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "loginButton": "Iniciar sesión",
+    "loggingIn": "Iniciando sesión..."
+  },
+  "layout": {
+    "home": "Inicio",
+    "virtualCellar": "Bodega Virtual",
+    "subscription": "Suscripción",
+    "settings": "Configuración",
+    "history": "Historial",
+    "logout": "Cerrar sesión",
+    "username": "Carlos Bernabeu",
+    "coins": "{{count}} Monedas Vineo"
+  },
+  "historyPage": {
+    "title": "Historial de cajas de vino",
+    "searchPlaceholder": "Buscar...",
+    "userDetails": "Detalles del usuario",
+    "wineInBox": "Vino en caja",
+    "creationDate": "Fecha de creación",
+    "deliveryDate": "Fecha de entrega",
+    "boxType": "Tipo de caja",
+    "status": "Estado",
+    "actions": "Comportamiento/Acciones",
+    "noData": "No hay datos disponibles",
+    "clientDetails": "Detalles del cliente",
+    "fullName": "Nombre completo",
+    "fullAddress": "Dirección completa",
+    "email": "Correo electrónico",
+    "country": "País",
+    "postalCode": "Código postal",
+    "city": "Ciudad",
+    "phone": "Teléfono",
+    "password": "Contraseña",
+    "totalClients": "{{count}} Clientes",
+    "details": "Detalles",
+    "pages": {
+      "previous": "<",
+      "next": ">",
+      "details": "Detalles"
+    }
+  }
+}

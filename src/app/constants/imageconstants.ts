@@ -9,6 +9,8 @@ export const IMAGES = {
   virtualcellar: "/assets/images/virtualcellar.svg",
   subscription:"/assets/images/subscription.svg",
   settings:"/assets/images/settings.svg",
-  coins:"/assets/images/coins.svg"
+  coins:"/assets/images/coins.svg",
+  flag_America:"/assets/images/USA.svg",
+   flag_Spain:"/assets/images/Spain.svg",
   // Add more images as needed
 };

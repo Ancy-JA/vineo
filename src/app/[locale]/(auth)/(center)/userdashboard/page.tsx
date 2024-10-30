@@ -2,12 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { SlSettings } from "react-icons/sl";
-import { GrHomeRounded } from "react-icons/gr";
-import { MdHistory } from "react-icons/md";
-import { CiStar } from "react-icons/ci";
+
 import { useGetBoxHistoryQuery, useGetSubscriptionStatusMutation } from '@/app/redux/authApi';
 import { IMAGES } from '../../../../constants/imageconstants';
 import Lenis from '@studio-freight/lenis';
@@ -145,52 +140,7 @@ const DashboardPage: React.FC = () => {
   );
   return (
     <div className="flex min-h-screen" ref={scrollRef}>
-      {/* Container for Sidebar and Main Content */}
-      <div className="flex flex-grow w-full">
-        {/* Sidebar */}
-        <aside
-          className="fixed top-0 left-0 z-50 h-full md:h-150 w-16 md:w-64 bg-white shadow-lg transform md:z-20 transition-all duration-300 ease-in-out"
-        >
-          <div className="flex flex-col ml-1 py-8 md:ml-9">
-            <Image src={IMAGES.vineoLogo} alt="Vineo Logo" className="md:w-[100px] md:h-[40px]" width={60} height={32} />
-          </div>
-
-          <nav className="flex flex-col space-y-6 pl-2 md:px-4">
-            <Link href="/profile" className="flex items-center md:px-4 hover:bg-gray-100 md:border-r-4 border-customPink">
-              <GrHomeRounded className="mr-2 md:mr-4 text-customPink" size={19} />
-              <span className="text-customPink font-inter font-bold hidden md:inline-block">Home</span>
-            </Link>
-            <Link href="/dashboard" className="flex items-center md:px-3 hover:bg-gray-100 rounded-lg">
-              <Image src={IMAGES.virtualcellar} alt="Virtual Cellar" width={24} height={20} className="mr-2 md:mr-4" />
-              <span className="text-customGray font-inter hidden md:inline-block">Virtual Cellar</span>
-            </Link>
-            <Link href="/subscription" className="flex items-center md:px-3 hover:bg-gray-100 rounded-lg">
-              <CiStar className="mr-2 md:mr-4 text-customGray" size={25} />
-              <span className="text-customGray font-inter hidden md:inline-block">Subscription</span>
-            </Link>
-            <Link href="/settings" className="flex items-center md:px-4 hover:bg-gray-100 rounded-lg">
-              <SlSettings className="mr-2 md:mr-4 text-customGray" size={20} />
-              <span className="text-customGray font-inter hidden md:inline-block">Settings</span>
-            </Link>
-            <Link href="/history" className="flex items-center md:px-4 hover:bg-gray-100 rounded-lg">
-              <MdHistory className="mr-1 md:mr-4 text-customGray" size={23} />
-              <span className="text-customGray font-inter hidden md:inline-block">History</span>
-            </Link>
-            <Link href="/logout" className="flex items-center pt-5 pb-0 md:px-4 hover:bg-gray-100 rounded-lg">
-              <LogoutIcon className="mr-2 md:mr-4 text-customGray" />
-              <span className="text-customGray font-inter hidden md:inline-block">Logout</span>
-            </Link>
-
-            <div className="flex items-center md:px-3 py-1">
-              <Image src={IMAGES.coins} alt="Vineo coins" width={40} height={45} className="mr-2 md:mr-4 md:w-30 md:h-40" />
-              <div className="hidden md:block">
-                <div className="font-inter text-customGray text-lg mb-1.5">Carlos Bernabeu</div>
-                <div className="text-sm font-inter font-bold text-customGray">400 Vineo Coins</div>
-              </div>
-            </div>
-          </nav>
-        </aside>
-
+      
         {/* Main Content */}
         <main className="flex-grow flex flex-col pl-10 p-6 ml-6 lg:p-10 bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full overflow-hidden">
           {boxes.map((box, index) => (
@@ -285,7 +235,7 @@ const DashboardPage: React.FC = () => {
           {subscriptionError && <p>Error loading subscription status...</p>}
         </main>
 
-      </div>
+      
     </div>
   );
 

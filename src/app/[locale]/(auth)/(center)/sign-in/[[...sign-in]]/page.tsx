@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import { useLoginUserMutation } from '@/app/redux/authApi';
 import { IMAGES } from '../../../../../constants/imageconstants';
+import { useTranslation } from 'react-i18next';
+
 // Yup validation schema
 const validationSchema = Yup.object({
   email: Yup.string().email('Please enter a valid email').required('Email is required'),
@@ -20,6 +22,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [loginUser] = useLoginUserMutation();
   const router = useRouter();
+  const { t } = useTranslation();
 
   // Formik initialization
   const formik = useFormik({
@@ -64,16 +67,16 @@ export default function LoginPage() {
 
       <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
         <Typography variant="h4" className="mb-6 text-center font-inter !font-bold !text-2xl  text-[#303E63]">
-          Welcome to Vineo
+          {t('signIn.welcomeTitle')}
         </Typography>
         <Typography variant="h6" className="mb-6 text-center !text-xl font-inter text-[#394A59]">
-          Login
+          {t('signIn.loginTitle')}
         </Typography>
 
         <Box component="form" noValidate className="space-y-4" onSubmit={formik.handleSubmit}>
           {/* Email Input */}
           <div>
-            <label htmlFor="email" className="mb-2 block text-gray-700">Email</label>
+            <label htmlFor="email" className="mb-2 block text-gray-700">{t('signIn.emailLabel')}</label>
             <input
               id="email"
               name="email"
@@ -90,7 +93,7 @@ export default function LoginPage() {
 
           {/* Password Input */}
           <div>
-            <label htmlFor="password" className="mb-2 block text-[#394A59]">Password</label>
+            <label htmlFor="password" className="mb-2 block text-[#394A59]">{t('signIn.passwordLabel')}</label>
             <div className="relative">
               <input
                 id="password"
@@ -113,8 +116,8 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-[#303E63]">Remember Me</span>
-            <Link href="/forgot-password" className="text-sm text-[#303E63]">Forgot your password?</Link>
+            <span className="text-[#303E63]">{t('signIn.rememberMe')}</span>
+            <Link href="/forgot-password" className="text-sm text-[#303E63]">{t('signIn.forgotPassword')}</Link>
           </div>
 
           <button
@@ -122,7 +125,7 @@ export default function LoginPage() {
             disabled={loading}
             className={`mt-4 w-full rounded-lg bg-[#F78A79] px-4 py-3 font-bold text-white hover:bg-[#F66F65] focus:outline-none focus:ring-2 focus:ring-[#F78A79] ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? t('signIn.loggingIn') : t('signIn.loginButton')}
           </button>
 
           <div className="mt-4 flex justify-center">
