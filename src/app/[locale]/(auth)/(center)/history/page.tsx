@@ -38,15 +38,10 @@ const HistoryPage: React.FC = () => {
   const pageSize = Numbers.page_size;
 
 
-
-  
   // Fetch box history with debounced search term
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery(
     { searchString: debouncedSearchTerm, page, pageSize }
   );
-
-  // Mutation hook for fetching the download URL
-  const [getBoxWinePrintCard] = useGetBoxWinePrintCardMutation();
 
   // Debounce function for search term
   const debouncedSetSearchTerm = useCallback(
@@ -68,6 +63,8 @@ const HistoryPage: React.FC = () => {
     refetch();
   }, [debouncedSearchTerm, page]);
 
+  // Mutation hook for fetching the download URL
+  const [getBoxWinePrintCard] = useGetBoxWinePrintCardMutation();
 
   // Function to handle the download action
   // Define the expected response structure
@@ -88,8 +85,6 @@ const HistoryPage: React.FC = () => {
 
       // Normalize the Base64 data for URL-safe characters
       const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
-
-
       // Decode the Base64 string
       const binaryString = window.atob(normalizedBase64);
 
@@ -107,12 +102,8 @@ const HistoryPage: React.FC = () => {
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
       downloadLink.download = `box_${boxId}.pdf`;
-
-
       downloadLink.click();
-
-
-      // Release the object URL after download to free memory
+     // Release the object URL after download to free memory
       URL.revokeObjectURL(downloadLink.href);
 
     } catch (error) {
@@ -270,7 +261,10 @@ const HistoryPage: React.FC = () => {
                     Details
                   </span>
                 </div>
-                <button className=" bg-green-500 text-white p-2 rounded-full">
+                <button
+                  className="bg-green-500 text-white p-2 rounded-full"
+                  onClick={() => window.open(`https://wa.me/${box.user.phone}`, '_blank')}
+                >
                   <AiOutlineWhatsApp />
                 </button>
                 <button className=" bg-gray-200 text-gray-400 p-2 rounded-full">
@@ -294,19 +288,88 @@ const HistoryPage: React.FC = () => {
 
         {selectedBox && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded shadow-lg max-w-lg w-full">
+            <div className="relative bg-white p-6 rounded shadow-lg max-w-lg w-full">
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <FaTimes size={18} />
+              </button>
               <h2 className="text-xl font-bold mb-4">Client Details</h2>
               <div className="grid grid-cols-2 gap-4">
-                <div><label>Full Name</label><input type="text" value={selectedBox.user.name} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Full Address</label><input type="text" value={selectedBox.user.address || ''} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Email</label><input type="text" value={selectedBox.user.email || ''} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Country</label><input type="text" value={selectedBox.user.country || ''} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Postal Code</label><input type="text" value={selectedBox.user.postalCode || ''} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>City</label><input type="text" value={selectedBox.user.city || ''} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Phone</label><input type="text" value={selectedBox.user.phone} readOnly className="border p-2 w-full rounded" /></div>
-                <div><label>Password</label><input type="password" value="******" readOnly className="border p-2 w-full rounded" /></div>
+                <div>
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.name}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Full Address</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.address || ''}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.email || ''}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Country</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.country || ''}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Postal Code</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.postalCode || ''}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>City</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.city || ''}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Phone</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.phone}
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
+                <div>
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    value="******"
+                    readOnly
+                    className="border p-2 w-full rounded"
+                  />
+                </div>
               </div>
-              <button onClick={closeModal} className="mt-4 bg-blue-500 text-white p-2 rounded">Close</button>
             </div>
           </div>
         )}
