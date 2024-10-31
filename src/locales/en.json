@@ -41,12 +41,63 @@
     "password": "Password",
     "totalClients": "{{count}} Clients",
     "details": "Details",
+    "download": "Download",     
+    "contact": "Contact",
+    "approve": "Approve",
+    "reject": "Reject",
+    "edit": "Edit",
+    "delivery": "Delivery",
     "pages": {
       "previous": "<",
       "next": ">",
       "details": "Details"
     }
-  }
+  },
+  "subscriptionTitle": "Manage your subscription",
+  "subscriptions": {
+    "vineoGift": {
+      "title": "Vineo Gift",
+      "subTitle": "Vineo 6 months",
+      "description": "Your friend gifted you 6 months on Vineo.",
+      "features": [
+        "Customized profile",
+        "A box of 3 wines per month based on your tastes",
+        "Free cancellation anytime"
+      ],
+      "renewalDate": "Renews on {{date}}"
+    },
+    "vineoFree": {
+      "title": "Vineo Free",
+      "subTitle": "Ambassador subscription",
+      "description": "Customized profile, taste analysis every 3 months, and free tasting anytime.",
+      "features": [
+        "Customized profile",
+        "3 wine recommendations per month",
+        "Free cancellation anytime"
+      ]
+    },
+    "vineoAI": {
+      "title": "Vineo AI",
+      "subTitle": "Vineo AI subscription",
+      "description": "Customized profile, 3 wine recommendations per month based on your tastes, and free tasting anytime.",
+      "features": [
+        "Customized profile",
+        "3 wine recommendations per month",
+        "Free cancellation anytime"
+      ]
+    },
+    "vineoBox": {
+      "title": "Vineo Box",
+      "subTitle": "Monthly box subscription",
+      "description": "Customized profile, a box of 3 wines every month based on your tastes, and free tasting anytime.",
+      "features": [
+        "Customized profile",
+        "A box of 3 wines per month",
+        "Free cancellation anytime"
+      ]
+    }
+  },
+  "amount": "{{amount}}€/month",
+  "cancelSubscription": "Cancel subscription",
+  "subscribe": "Subscribe"
 }
-
- 

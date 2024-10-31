@@ -41,10 +41,63 @@
     "password": "Contraseña",
     "totalClients": "{{count}} Clientes",
     "details": "Detalles",
+    "download": "Descargar",
+    "contact": "Contacto",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "edit": "Editar",
+    "delivery": "Entrega",
     "pages": {
       "previous": "<",
       "next": ">",
       "details": "Detalles"
     }
-  }
+  },
+  "subscriptionTitle": "Gestiona tu suscripción",
+  "subscriptions": {
+    "vineoGift": {
+      "title": "Vineo Regalo",
+      "subTitle": "Vineo 6 meses",
+      "description": "Tu amigo te ha regalado 6 meses en Vineo.",
+      "features": [
+        "Perfilado a medida",
+        "1 caja de 3 vinos al mes según tus gustos",
+        "Cancelación gratuita en cualquier momento"
+      ],
+      "renewalDate": "Renueva el {{date}}"
+    },
+    "vineoFree": {
+      "title": "Vineo Free",
+      "subTitle": "Suscripción para embajadores",
+      "description": "Perfil a medida, 1 análisis de tus gustos cada 3 meses, y cata gratuita en cualquier momento.",
+      "features": [
+        "Perfilado a medida",
+        "Recomendación de 3 vinos al mes",
+        "Cancelación gratuita en cualquier momento"
+      ]
+    },
+    "vineoAI": {
+      "title": "Vineo IA",
+      "subTitle": "Suscripción a la IA de Vineo",
+      "description": "Perfil a medida, recomendación de 3 vinos al mes según tus gustos, y cata gratuita en cualquier momento.",
+      "features": [
+        "Perfilado a medida",
+        "Recomendación de 3 vinos al mes",
+        "Cancelación gratuita en cualquier momento"
+      ]
+    },
+    "vineoBox": {
+      "title": "Vineo Box",
+      "subTitle": "Suscripción con caja mensual",
+      "description": "Perfil a medida, 1 caja de 3 vinos según tus gustos cada mes, y cata gratuita en cualquier momento.",
+      "features": [
+        "Perfilado a medida",
+        "1 caja de 3 vinos al mes según tus gustos",
+        "Cancelación gratuita en cualquier momento"
+      ]
+    }
+  },
+  "amount": "{{amount}}€/mes",
+  "cancelSubscription": "Cancelar suscripción",
+  "subscribe": "Contratar"
 }

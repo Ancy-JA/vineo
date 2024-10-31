@@ -83,7 +83,6 @@ const HistoryPage: React.FC = () => {
       // Extract the Base64 string from the nested object
       const base64Data = response.data.getBoxWinePrintCard;
 
-
       // Normalize the Base64 data for URL-safe characters
       const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
       // Decode the Base64 string
@@ -104,7 +103,7 @@ const HistoryPage: React.FC = () => {
       downloadLink.href = URL.createObjectURL(blob);
       downloadLink.download = `box_${boxId}.pdf`;
       downloadLink.click();
-     // Release the object URL after download to free memory
+      // Release the object URL after download to free memory
       URL.revokeObjectURL(downloadLink.href);
 
     } catch (error) {
@@ -202,9 +201,9 @@ const HistoryPage: React.FC = () => {
             onChange={onSearchChange}
           />
         </div>
-      
+
         <div className="hidden xl:grid grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr]  gap-2 items-center p-2 border-b text-left font-semibold bg-gray-200  flex-grow">
-        <div>{t('historyPage.userDetails')}</div>
+          <div>{t('historyPage.userDetails')}</div>
           <div>{t('historyPage.wineInBox')}</div>
           <div>{t('historyPage.creationDate')}</div>
           <div>{t('historyPage.deliveryDate')}</div>
@@ -250,132 +249,174 @@ const HistoryPage: React.FC = () => {
               <div className="text-sm text-red-600">{box.status}</div>
 
               <div className="flex flex-wrap space-x-2 space-y-2">
-                <button className="bg-purple-500 text-white p-2 rounded-full"
-                  onClick={() => handleDownload(box._id)}>
-                  <BsDownload />
-                </button>
+                {/* Download Button */}
+                <div className="relative group">
+                  <button className="bg-purple-500 text-white p-2 rounded-full" onClick={() => handleDownload(box._id)}>
+                    <BsDownload />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-purple-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.download')}
+                  </span>
+                </div>
+
+                {/* View Details Button */}
                 <div className="relative group">
                   <button className="bg-orange-500 text-white p-2 rounded-full" onClick={() => handleView(box)}>
                     <FaEye />
                   </button>
                   <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-orange-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                  {t('historyPage.details')}
+                    {t('historyPage.details')}
                   </span>
                 </div>
-                <button
-                  className="bg-green-500 text-white p-2 rounded-full"
-                  onClick={() => window.open(`https://wa.me/${box.user.phone}`, '_blank')}
-                >
-                  <AiOutlineWhatsApp />
-                </button>
-                <button className=" bg-gray-200 text-gray-400 p-2 rounded-full">
-                  <FaCheck />
-                </button>
-                <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
-                  <FaTimes />
-                </button>
-                <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
-                  <FaEdit />
-                </button>
-                <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
-                  <FaTruck />
-                </button>
+
+                {/* WhatsApp Button */}
+                <div className="relative group">
+                  <button className="bg-green-500 text-white p-2 rounded-full" onClick={() => window.open(`https://wa.me/${box.user.phone}`, '_blank')}>
+                    <AiOutlineWhatsApp />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-green-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.contact')}
+                  </span>
+                </div>
+
+                {/* Approve Button */}
+                <div className="relative group">
+                  <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
+                    <FaCheck />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.approve')}
+                  </span>
+                </div>
+
+                {/* Reject Button */}
+                <div className="relative group">
+                  <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
+                    <FaTimes />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.reject')}
+                  </span>
+                </div>
+
+                {/* Edit Button */}
+                <div className="relative group">
+                  <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
+                    <FaEdit />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.edit')}
+                  </span>
+                </div>
+
+                {/* Delivery Button */}
+                <div className="relative group">
+                  <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
+                    <FaTruck />
+                  </button>
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('historyPage.delivery')}
+                  </span>
+                </div>
               </div>
+
+
+
             </div>
           ))
         ) : (
           <div className="text-gray-500 text-center p-4">{t('historyPage.noData')}</div>
         )}
-      
 
 
-      {selectedBox && (
-  <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-    <div className="relative bg-white p-6 rounded shadow-lg max-w-lg w-full">
-      <button
-        onClick={closeModal}
-        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
-      >
-        <FaTimes size={18} />
-      </button>
-      <h2 className="text-xl font-bold mb-4">Client Details</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label>Full Name</label>
-          <input
-            type="text"
-            value={selectedBox.user.name}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Full Address</label>
-          <input
-            type="text"
-            value={selectedBox.user.address || ''}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="text"
-            value={selectedBox.user.email || ''}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Country</label>
-          <input
-            type="text"
-            value={selectedBox.user.country || ''}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Postal Code</label>
-          <input
-            type="text"
-            value={selectedBox.user.postalCode || ''}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>City</label>
-          <input
-            type="text"
-            value={selectedBox.user.city || ''}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Phone</label>
-          <input
-            type="text"
-            value={selectedBox.user.phone}
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value="******"
-            readOnly
-            className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+
+        {selectedBox && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+            <div className="relative bg-white p-6 rounded shadow-lg max-w-lg w-full">
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <FaTimes size={18} />
+              </button>
+              <h2 className="text-xl font-bold mb-4">Client Details</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.name}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Full Address</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.address || ''}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.email || ''}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Country</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.country || ''}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Postal Code</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.postalCode || ''}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>City</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.city || ''}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Phone</label>
+                  <input
+                    type="text"
+                    value={selectedBox.user.phone}
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    value="******"
+                    readOnly
+                    className="border p-2 w-full rounded pointer-events-none bg-gray-100 focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
 
 

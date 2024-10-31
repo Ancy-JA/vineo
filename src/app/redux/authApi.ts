@@ -106,7 +106,7 @@ export const authApi = createApi({
         localStorage.removeItem('refreshToken');
         window.location.href = '/sign-in';
       }
-    } 
+    }
     return result;
   },
   tagTypes: ['BoxHistory'],
@@ -190,26 +190,53 @@ export const authApi = createApi({
         },
       }),
     }),
-// getBoxWine card mutation
+    // getBoxWine card mutation
 
-// In your authApi setup for getBoxWinePrintCard
-getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
-  query: ({ boxId }) => ({
-    url: '',
-    method: 'POST',
-    body: {
-      query: `
+    // In your authApi setup for getBoxWinePrintCard
+    getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
+      query: ({ boxId }) => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
         query getBoxWinePrintCard($box: String!) {
           getBoxWinePrintCard(box: $box)
         }
       `,
-      variables: { box: boxId }, // Pass boxId as `box`
-    },
-  }),
-}),
-
-
-
+          variables: { box: boxId }, // Pass boxId as `box`
+        },
+      }),
+    }),
+    loadSubscriptionListForUser: builder.query({
+      query: ({ type }) => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query loadSubscriptionListForUser($type: [Float!]!) {
+              loadSubscriptionListForUser(type: $type) {
+                _id
+                title
+                sub_title
+                amount
+                description
+                is_early_adaptor
+                display_order
+                payment_link
+                product_id
+                duration
+                type
+                status
+                is_current
+              }
+            }
+          `,
+          variables: { type },
+        },
+      }),
+    }),
+    
+    
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({
       query: ({ searchString, page, pageSize }) => ({
@@ -246,16 +273,19 @@ getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
         },
       }),
       providesTags: ['BoxHistory'],
-      
+
     }),
-    
+
   }),
+
+
 });
 
 export const {
   useLoginUserMutation,
   useGetBoxHistoryQuery,
   useGetSubscriptionStatusMutation,
-  useGetBoxHistoryAdminQuery, 
+  useGetBoxHistoryAdminQuery,
   useGetBoxWinePrintCardMutation,
+  useLoadSubscriptionListForUserQuery,
 } = authApi;

@@ -32,10 +32,7 @@ const DashboardPage: React.FC = () => {
 
   const isLoggedIn = Boolean(localStorage.getItem('accessToken'));
 
-  // Function to Navigate to History Page
-  //const navigateToHistory = () => {
-  //  router.push('/history'); // Adjust this path as per your structure (e.g., '/auth/center/history')
-  //};
+  
 
   const { data: boxHistoryData, error: boxHistoryError, isFetching } = useGetBoxHistoryQuery(
     { page, limit: 4 },
@@ -142,7 +139,7 @@ const DashboardPage: React.FC = () => {
     <div className="flex min-h-screen" ref={scrollRef}>
       
         {/* Main Content */}
-        <main className="flex-grow flex flex-col pl-10 p-6 ml-6 lg:p-10 bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full overflow-hidden">
+        <main className="flex-grow flex ">
           {boxes.map((box, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-6 w-full overflow-hidden" ref={index === boxes.length - 1 ? lastBoxElementRef : null}>
               <h4 className="text-xl md:text-2xl lg:text-3xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</h4>
