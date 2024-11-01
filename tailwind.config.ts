@@ -10,6 +10,7 @@ const config: Config = {
       
       backgroundImage: {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
+        'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', // From bottom to top
       },
       backgroundSize: {
         '39rem': '39rem', // Custom background size
@@ -23,10 +24,15 @@ const config: Config = {
         customGray: '#394A59',
         dotGray: '#555',  // Custom color for pagination dots
         dotActive: '#F78A79', // Custom color for active pagination dots
+        whiteBorder: '#FFFFFF0D',
+        cancelbackground: '#F4D3CE',
+        substext:'#FF0000',
+
       },
       screens: {
         xsm: '400px',  // Define an extra small breakpoint
       },
+      
     },
   },
   plugins: [

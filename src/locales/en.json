@@ -59,6 +59,7 @@
       "title": "Vineo Gift",
       "subTitle": "Vineo 6 months",
       "description": "Your friend gifted you 6 months on Vineo.",
+      
       "features": [
         "Customized profile",
         "A box of 3 wines per month based on your tastes",
@@ -97,7 +98,8 @@
       ]
     }
   },
-  "amount": "{{amount}}€/month",
+  "amount": "{{amount}}",
   "cancelSubscription": "Cancel subscription",
-  "subscribe": "Subscribe"
+  "subscribe": "Subscribe",
+  "month": "month"
 }

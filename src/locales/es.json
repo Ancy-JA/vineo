@@ -97,7 +97,8 @@
       ]
     }
   },
-  "amount": "{{amount}}€/mes",
+  "amount": "{{amount}}",
   "cancelSubscription": "Cancelar suscripción",
-  "subscribe": "Contratar"
+  "subscribe": "Contratar",
+  "month": "mes"
 }
