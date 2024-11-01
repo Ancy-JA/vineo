@@ -47,6 +47,7 @@
     "reject": "Reject",
     "edit": "Edit",
     "delivery": "Delivery",
+    "clients":"Clients",
     "pages": {
       "previous": "<",
       "next": ">",

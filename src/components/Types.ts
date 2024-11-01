@@ -1,0 +1,31 @@
+// types.ts
+
+export interface User {
+  name: string;
+  phone: string;
+  email?: string;
+  address?: string;
+  country?: string;
+  postalCode?: string;
+  city?: string;
+}
+
+export interface Wine {
+  name: string;
+}
+
+export interface Box {
+  _id: string;
+  user: User;
+  box_wines: Wine[];
+  created_at: string;
+  delivery_date: string;
+  status: string;
+}
+
+// Add the interface for the PDF download response
+export interface GetBoxWinePrintCardResponse {
+  data: {
+    getBoxWinePrintCard: string; // Assuming this is a Base64-encoded string for the PDF
+  };
+}
