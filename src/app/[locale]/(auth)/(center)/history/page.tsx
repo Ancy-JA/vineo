@@ -1,53 +1,22 @@
-// HistoryPage.tsx
 'use client';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/authApi';
-import debounce from 'lodash.debounce';
 import { Numbers } from '../../../../constants/numberconstants';
 import { useTranslation } from 'react-i18next';
 import BoxItem from '@/components/BoxItem';
 import ModalView from '@/components/ModalView';
 import SearchBar from '@/components/SearchBar';
 import Pagination from '@/components/pagination';
-
-interface User {
-  name: string;
-  phone: string;
-  email?: string;
-  address?: string;
-  country?: string;
-  postalCode?: string;
-  city?: string;
-}
-
-interface Wine {
-  name: string;
-}
-
-interface Box {
-  _id: string;
-  user: User;
-  box_wines: Wine[];
-  created_at: string;
-  delivery_date: string;
-  status: string;
-}
-interface GetBoxWinePrintCardResponse {
-  data: {
-    getBoxWinePrintCard: string; // Assuming this is a Base64-encoded string
-  };
-}
-
+import { Box, GetBoxWinePrintCardResponse } from '@/components/Types';
 
 const HistoryPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(Numbers.page_size); // Use state for pageSize
   const [selectedBox, setSelectedBox] = useState<Box | null>(null);
-  const pageSize = Numbers.page_size;
   const { t } = useTranslation();
 
-  // Fetch box history with debounced search term
+  // Fetch box history with debounced search term and dynamic pageSize
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery({
     searchString: debouncedSearchTerm,
     page,
@@ -55,28 +24,16 @@ const HistoryPage: React.FC = () => {
   });
   const [getBoxWinePrintCard] = useGetBoxWinePrintCardMutation<GetBoxWinePrintCardResponse>();
 
-
-  // Debounce function for search term
-  const debouncedSetSearchTerm = useCallback(
-    debounce((term: string) => {
-      setDebouncedSearchTerm(term);
-      setPage(1);
-    }, 500),
-    []
-  );
-
-  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm);
-    debouncedSetSearchTerm(newSearchTerm);
+  const onSearchChange = (debouncedTerm: string) => {
+    setDebouncedSearchTerm(debouncedTerm);
+    setPage(1);
   };
 
-  // Refetch data when search term or page changes
+  // Refetch data when search term, page, or pageSize changes
   useEffect(() => {
     refetch();
-  }, [debouncedSearchTerm, page]);
+  }, [debouncedSearchTerm, page, pageSize]);
 
-  
   const handleDownload = async (boxId: string) => {
     try {
       const response = await getBoxWinePrintCard({ boxId: String(boxId) }).unwrap();
@@ -97,7 +54,7 @@ const HistoryPage: React.FC = () => {
       console.error("Error fetching download data:", error);
     }
   };
-  
+
   const handleView = (box: Box) => {
     setSelectedBox(box);
   };
@@ -114,6 +71,12 @@ const HistoryPage: React.FC = () => {
     setPage(newPage);
   };
 
+  const handlePageSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSize = Number(event.target.value);
+    setPageSize(newSize); // Update pageSize state
+    setPage(1); // Reset to the first page
+  };
+
   if (isLoading) return <div>{t('historyPage.loading')}</div>;
   if (error) return <div>{t('historyPage.error')}</div>;
 
@@ -124,7 +87,6 @@ const HistoryPage: React.FC = () => {
 
         {/* Search Bar */}
         <SearchBar
-          searchTerm={searchTerm}
           onSearchChange={onSearchChange}
           placeholder={t('historyPage.searchPlaceholder')}
         />
@@ -162,21 +124,13 @@ const HistoryPage: React.FC = () => {
         {/* Pagination */}
         <div className="flex justify-between items-center mt-4">
           <span className="text-gray-700">{totalClients} {t('historyPage.clients')}</span>
-          <Pagination page={page} totalPages={totalPages} handlePageClick={handlePageClick} />
-          <div className="text-sm">
-            <select
-              className="border p-1 rounded"
-              value={pageSize}
-              onChange={() => {
-                setPage(1);
-                refetch();
-              }}
-            >
-              <option value={10}>10 / page</option>
-              <option value={20}>20 / page</option>
-              <option value={50}>50 / page</option>
-            </select>
-          </div>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            handlePageClick={handlePageClick}
+            handlePageSizeChange={handlePageSizeChange} // Pass handlePageSizeChange to Pagination
+          />
         </div>
       </div>
     </div>

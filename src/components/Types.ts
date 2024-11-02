@@ -29,3 +29,25 @@ export interface GetBoxWinePrintCardResponse {
     getBoxWinePrintCard: string; // Assuming this is a Base64-encoded string for the PDF
   };
 }
+export interface User {
+  name: string;
+  phone: string;
+  email?: string;
+  address?: string;
+  country?: string;
+  postalCode?: string;
+  city?: string;
+}
+
+export interface Wine {
+  name: string;
+}
+
+export interface Box {
+  _id: string;
+  user: User;
+  box_wines: Wine[];
+  created_at: string;
+  delivery_date: string;
+  status: string;
+}

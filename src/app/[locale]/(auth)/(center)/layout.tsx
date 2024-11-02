@@ -57,11 +57,11 @@ export default function CenteredLayout(props: { children: React.ReactNode }) {
         </div>
 
         <nav className="flex flex-col space-y-4 pl-2 md:px-4">
-          <Link href="/profile" className={`flex items-center md:px-4 py-2 hover:bg-gray-100 ${isActive('/profile')}`}>
+        <Link href="/userdashboard" className={`flex items-center md:px-4 py-2 hover:bg-gray-100 ${isActive('/userdashboard')}`}>
             <GrHomeRounded className="mr-2 md:mr-4" size={19} />
             <span className="font-inter hidden md:inline-block">{t('layout.home')}</span>
           </Link>
-          <Link href="/dashboard" className={`flex items-center md:px-3 py-2 hover:bg-gray-100 ${isActive('/dashboard')}`}>
+          <Link href="/virtualcellar" className={`flex items-center md:px-3 py-2 hover:bg-gray-100 ${isActive('/virtualcellar')}`}>
             <Image src={IMAGES.virtualcellar} alt="Virtual Cellar" width={24} height={20} className="mr-2 md:mr-4" />
             <span className="font-inter hidden md:inline-block">{t('layout.virtualCellar')}</span>
           </Link>
