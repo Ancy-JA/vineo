@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/authApi';
 import { Numbers } from '../../../../constants/numberconstants';
 import { useTranslation } from 'react-i18next';
-import BoxItem from '@/components/BoxItem';
-import ModalView from '@/components/ModalView';
-import SearchBar from '@/components/SearchBar';
-import Pagination from '@/components/pagination';
+import BoxItem from '@/components/History/BoxItem';
+import ModalView from '@/components/History/ModalView';
+import SearchBar from '@/components/History/SearchBar';
+import Pagination from '@/components/History/pagination';
 import { Box, GetBoxWinePrintCardResponse } from '@/components/Types';
 
 const HistoryPage: React.FC = () => {

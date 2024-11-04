@@ -1,6 +1,6 @@
 // BoxItem.tsx
 import React from 'react';
-import { Wine,BoxItemProps } from './Types';
+import { Wine,BoxItemProps } from '../Types';
 import ActionButtons from './ActionButtons';
 
 

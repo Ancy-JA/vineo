@@ -60,3 +60,27 @@ export interface SearchBarProps {
   onSearchChange: (debouncedTerm: string) => void;
   placeholder: string;
 }
+
+export interface TextFieldProps {
+  id: string;
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  error?: string | boolean;
+}
+export interface PasswordFieldProps {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  showPassword: boolean;
+  setShowPassword: (show: boolean) => void;
+  error?: string | boolean;
+}
+export interface Token {
+  accessToken: string;
+  refreshToken: string;
+}
