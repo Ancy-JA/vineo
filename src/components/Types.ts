@@ -51,3 +51,12 @@ export interface Box {
   delivery_date: string;
   status: string;
 }
+export interface BoxItemProps {
+  box: Box;
+  handleDownload: (boxId: string) => void;
+  handleView: (box: Box) => void;
+}
+export interface SearchBarProps {
+  onSearchChange: (debouncedTerm: string) => void;
+  placeholder: string;
+}

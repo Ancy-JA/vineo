@@ -12,7 +12,7 @@ import { Box, GetBoxWinePrintCardResponse } from '@/components/Types';
 const HistoryPage: React.FC = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(Numbers.page_size); // Use state for pageSize
+  const [pageSize, setPageSize] = useState(Numbers.page_size); 
   const [selectedBox, setSelectedBox] = useState<Box | null>(null);
   const { t } = useTranslation();
 

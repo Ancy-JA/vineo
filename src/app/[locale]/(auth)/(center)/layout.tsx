@@ -95,9 +95,9 @@ export default function CenteredLayout(props: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow flex flex-col pl-10 p-6 ml-6 lg:p-10 h-full bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full overflow-auto">
-        {props.children}
-      </main>
+      <main className="flex-grow flex flex-col p-6 lg:p-10 h-full bg-white-100 transition-all duration-300 scrollbar-rounded w-full overflow-auto">
+  {props.children}
+</main>
     </div>
   );
 }

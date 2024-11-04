@@ -1,13 +1,9 @@
 // BoxItem.tsx
 import React from 'react';
-import { Box, Wine } from './Types';
+import { Wine,BoxItemProps } from './Types';
 import ActionButtons from './ActionButtons';
 
-interface BoxItemProps {
-  box: Box;
-  handleDownload: (boxId: string) => void;
-  handleView: (box: Box) => void;
-}
+
 
 const BoxItem: React.FC<BoxItemProps> = ({ box, handleDownload, handleView }) => (
   <div className="grid grid-cols-1 xl:grid-cols-[3fr_4fr_1fr_1fr_1fr_1fr_3fr] gap-2 items-center p-2 border-b text-left">

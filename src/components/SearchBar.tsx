@@ -1,10 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
+import {SearchBarProps} from './Types';
 
-interface SearchBarProps {
-  onSearchChange: (debouncedTerm: string) => void;
-  placeholder: string;
-}
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange, placeholder }) => {
   const [searchTerm, setSearchTerm] = useState('');

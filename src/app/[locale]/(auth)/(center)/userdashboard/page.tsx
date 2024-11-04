@@ -7,9 +7,11 @@ import { useGetBoxHistoryQuery, useGetSubscriptionStatusMutation } from '@/app/r
 import { IMAGES } from '../../../../constants/imageconstants';
 import Lenis from '@studio-freight/lenis';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';  // Correctly import Pagination module
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+
 
 interface Wine {
   wine_name: string;
@@ -30,9 +32,8 @@ const DashboardPage: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
 
+  // Determine login status directly from token presence
   const isLoggedIn = Boolean(localStorage.getItem('accessToken'));
-
-  
 
   const { data: boxHistoryData, error: boxHistoryError, isFetching } = useGetBoxHistoryQuery(
     { page, limit: 4 },
@@ -45,7 +46,7 @@ const DashboardPage: React.FC = () => {
   const observer = useRef<IntersectionObserver | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  // Smooth Scrolling Initialization (Retained)
+  // Initialize Lenis for smooth scrolling
   useEffect(() => {
     let lenis: Lenis | null = null;
 
@@ -72,31 +73,31 @@ const DashboardPage: React.FC = () => {
     };
   }, []);
 
-  // Updated Infinite Scroll Observer from GitHub code
-  const lastBoxElementRef = useCallback(
+  // Infinite scrolling observer
+  const handleInfiniteScroll = useCallback(
     (node: HTMLDivElement | null) => {
-      if (isFetching || !hasMore) return; // Prevent multiple calls if already fetching or no more boxes
+      if (isFetching || !hasMore) return;
+      if (observer.current) observer.current.disconnect();
 
-      if (observer.current) observer.current.disconnect(); // Disconnect previous observer
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
-          setPage((prevPage) => prevPage + 1); // Fetch the next page
+        if (entries[0]?.isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
         }
       });
 
-      if (node) observer.current.observe(node); // Attach the observer to the last box element
+      if (node) observer.current.observe(node);
     },
     [isFetching, hasMore]
   );
 
-  // Subscription Status Handling (Unchanged)
+  // Handle subscription status
   useEffect(() => {
     if (subscriptionStatusData) {
       console.log('Subscription Status:', subscriptionStatusData);
     }
   }, [subscriptionStatusData]);
 
-  // Update Box Data Based on Fetched History (Adjusted Logic from GitHub)
+  // Update box data based on fetched history
   useEffect(() => {
     if (boxHistoryData) {
       const newBoxes = boxHistoryData?.data?.getBoxHistory?.boxes || [];
@@ -119,7 +120,7 @@ const DashboardPage: React.FC = () => {
     }
   }, [boxHistoryData, boxHistoryError]);
 
-  // Authentication Check (Unchanged)
+  // Authentication check
   useEffect(() => {
     if (!isLoggedIn) {
       router.push('/sign-in');
@@ -127,7 +128,8 @@ const DashboardPage: React.FC = () => {
       getSubscriptionStatus({});
     }
   }, [isLoggedIn, router, getSubscriptionStatus]);
-  console.log(boxHistoryData);
+
+  // Render rating stars
   const renderStars = (rating: number) => (
     <div>
       {Array.from({ length: 5 }, (_, i) => (
@@ -136,105 +138,109 @@ const DashboardPage: React.FC = () => {
     </div>
   );
   return (
-    <div className="flex min-h-screen" ref={scrollRef}>
+  <div className="flex min-h-screen" ref={scrollRef}>
+    {/* Container for Sidebar and Main Content */}
+    <div className="flex flex-grow w-full">
+      {/* Sidebar */}
+ 
+
+      {/* Main Content */}
+      <main className="flex-grow flex flex-col  p-6  lg:p-10 bg-white-100 transition-all duration-300 scrollbar-rounded md:ml-60 w-full overflow-hidden">
+  {boxes.map((box, index) => (
+    <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-6 w-full overflow-hidden" ref={index === boxes.length - 1 ? handleInfiniteScroll : null}>
+      <h4 className="text-xl md:text-2xl lg:text-3xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</h4>
       
-        {/* Main Content */}
-        <main className="flex-grow flex ">
-          {boxes.map((box, index) => (
-            <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-6 w-full overflow-hidden" ref={index === boxes.length - 1 ? lastBoxElementRef : null}>
-              <h4 className="text-xl md:text-2xl lg:text-3xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</h4>
-
-              {/* Flex Container with Default Row Layout on Larger Screens */}
-              <div className="flex flex-col lg:flex-row gap-4 min-w-0 w-full overflow-hidden">
-
-                {/* Swiper Component (Visible only below lg) */}
-                <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full lg:hidden overflow-hidden">
-                  <Swiper
-                    modules={[Pagination]}
-                    spaceBetween={16}
-                    slidesPerView={1} // Default to 1 slide
-                    pagination={{
-                      clickable: true,
-                      bulletClass: 'swiper-pagination-bullet',
-                      bulletActiveClass: 'swiper-pagination-bullet-active',
-                    }}
-                    breakpoints={{
-                      320: { slidesPerView: 1 },
-                      480: { slidesPerView: 1 },
-                      640: { slidesPerView: 2 },
-                    }}
-                    className="swiper-container mt-4 p-4"
-                    style={{ width: '100%' }} // Ensure Swiper respects the container's width
-                  >
-                    {box.wines.map((wine: Wine, wineIndex: number) => (
-                      <SwiperSlide key={wineIndex}>
-                        <div className="flex flex-col items-center">
-                          <Image
-                            src={wine.image}
-                            alt={wine.wine_name}
-                            width={150} // Larger for scaling
-                            height={150}
-                            className="rounded-lg shadow hover:scale-105 transition-transform duration-300 min-w-[100px] min-h-[100px]"
-                          />
-                          <div className="mt-2 text-center">
-                            <h3 className="text-customPink font-semibold text-base md:text-lg">{wine.wine_name}</h3>
-                            <p className="text-sm md:text-base text-customGray">{wine.area}</p>
-                            <p className="text-sm md:text-base text-customGray">{wine.store}</p>
-                            <p>{renderStars(wine.rating)}</p>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+      {/* Flex Container with Default Row Layout on Larger Screens */}
+      <div className="flex flex-col lg:flex-row gap-4 min-w-0 w-full overflow-hidden">
+        
+        {/* Swiper Component (Visible only below lg) */}
+        <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full lg:hidden overflow-hidden ">
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={16} 
+            slidesPerView={1} // Default to 1 slide
+            pagination={{
+              clickable: true,
+              bulletClass: 'swiper-pagination-bullet',
+              bulletActiveClass: 'swiper-pagination-bullet-active',
+            }}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              480: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+            }}
+            className="swiper-container mt-4 p-4"
+            style={{ width: '100%' }} // Ensure Swiper respects the container's width
+          >
+            {box.wines.map((wine: Wine, wineIndex: number) => (
+              <SwiperSlide key={wineIndex}>
+                <div className="flex flex-col items-center">
+                  <Image 
+                    src={wine.image} 
+                    alt={wine.wine_name} 
+                    width={150} // Larger for scaling
+                    height={150} 
+                    className="rounded-lg shadow hover:scale-105 transition-transform duration-300 min-w-[100px] min-h-[100px]" 
+                  />
+                  <div className="mt-2 text-center">
+                    <h3 className="text-customPink font-semibold text-base md:text-lg">{wine.wine_name}</h3>
+                    <p className="text-sm md:text-base text-customGray">{wine.area}</p>
+                    <p className="text-sm md:text-base text-customGray">{wine.store}</p>
+                    <p>{renderStars(wine.rating)}</p>
+                  </div>
                 </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
-                {/* Regular Flex Layout (Visible only lg and above) */}
-                <div className="bg-white shadow-md rounded-lg p-4 flex-1 flex-grow w-full hidden lg:flex overflow-x-auto space-x-4 min-w-0">
-                  {box.wines.map((wine: Wine, wineIndex: number) => (
-                    <div key={wineIndex} className="flex flex-col items-center w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1rem)]">
-                      <Image
-                        src={wine.image}
-                        alt={wine.wine_name}
-                        width={150}
-                        height={150}
-                        className="rounded-lg shadow hover:scale-105 transition-transform duration-300 min-w-[100px] min-h-[100px] max-w-full"
-                      />
-                      <div className="mt-2 text-center">
-                        <h3 className="text-customPink font-semibold text-base md:text-lg lg:text-xl">{wine.wine_name}</h3>
-                        <p className="text-sm md:text-base text-customGray">{wine.area}</p>
-                        <p className="text-sm md:text-base text-customGray">{wine.store}</p>
-                        <p>{renderStars(wine.rating)}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Graph Box - Visible only on 2xl screens */}
-                <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full  justify-center items-center hidden 2xl:flex min-w-0 max-w-none">
-                  <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full" />
-                </div>
-              </div>
-
-              {/* Graph Box - Visible on xl and smaller */}
-              <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full flex justify-center items-center mt-6 2xl:hidden min-w-0 max-w-none">
-                <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full" />
-              </div>
-
-              <div className="mt-4 text-center">
-                <button className="bg-customPink text-white px-6 md:px-8 lg:px-10 py-2 md:py-3 lg:py-4 rounded-lg hover:bg-hoverPink text-base md:text-lg lg:text-xl">View Box Details</button>
+        {/* Regular Flex Layout (Visible only lg and above) */}
+        <div className="bg-white  rounded-xl  shadow-xl p-4 flex-1 flex-grow w-full hidden lg:flex overflow-x-auto space-x-4 min-w-0">
+          {box.wines.map((wine: Wine, wineIndex: number) => (
+            <div key={wineIndex} className="flex flex-col items-center w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1rem)]">
+              <Image 
+                src={wine.image} 
+                alt={wine.wine_name} 
+                width={150} 
+                height={150} 
+                className="rounded-lg shadow hover:scale-105 transition-transform duration-300 min-w-[100px] min-h-[100px] max-w-full" 
+              />
+              <div className="mt-2 text-center">
+                <h3 className="text-customPink font-semibold text-base md:text-lg lg:text-xl">{wine.wine_name}</h3>
+                <p className="text-sm md:text-base text-customGray">{wine.area}</p>
+                <p className="text-sm md:text-base text-customGray">{wine.store}</p>
+                <p>{renderStars(wine.rating)}</p>
               </div>
             </div>
           ))}
+        </div>
 
-          {isFetching && <p>Loading...</p>}
-          {subscriptionLoading && <p>Loading Subscription Status...</p>}
-          {boxHistoryError && <p>Error loading box history</p>}
-          {subscriptionError && <p>Error loading subscription status...</p>}
-        </main>
+        {/* Graph Box - Visible only on 2xl screens */}
+        <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full justify-center items-center hidden 2xl:flex min-w-0 max-w-none border-t border-gray-300">
+          <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full"/>
+        </div>
+      </div>
 
-      
+      {/* Graph Box - Visible on xl and smaller */}
+      <div className="bg-white shadow-md rounded-lg p-4 lg:w-auto w-full flex justify-center items-center mt-6 2xl:hidden min-w-0 max-w-none border-t border-gray-300">
+        <Image src={IMAGES.graph} alt="Chart" width={250} height={350} className="max-w-full"/>
+      </div>
+
+      <div className="mt-4 text-center">
+        <button className="bg-customPink text-white px-6 md:px-8 lg:px-10 py-2 md:py-3 lg:py-4 rounded-lg hover:bg-hoverPink text-base md:text-lg lg:text-xl">View Box Details</button>
+      </div>
     </div>
-  );
+  ))}
+
+  {isFetching && <p>Loading...</p>}
+  {subscriptionLoading && <p>Loading Subscription Status...</p>}
+  {boxHistoryError && <p>Error loading box history</p>}
+  {subscriptionError && <p>Error loading subscription status...</p>}
+</main>
+
+    </div>
+  </div>
+);
 
 };
 
