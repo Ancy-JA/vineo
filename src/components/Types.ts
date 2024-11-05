@@ -84,3 +84,15 @@ export interface Token {
   accessToken: string;
   refreshToken: string;
 }
+export interface Wine {
+  wine_name: string;
+  image: string;
+  rating: number;
+  area: string;
+  store: string;
+}
+
+export interface Box {
+  date: string;
+  wines: Wine[];
+}

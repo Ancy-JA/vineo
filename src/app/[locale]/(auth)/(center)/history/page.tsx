@@ -8,6 +8,7 @@ import ModalView from '@/components/History/ModalView';
 import SearchBar from '@/components/History/SearchBar';
 import Pagination from '@/components/History/pagination';
 import { Box, GetBoxWinePrintCardResponse } from '@/components/Types';
+import useLenisScroll from '@/utils/useLenisScroll';
 
 const HistoryPage: React.FC = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
@@ -15,6 +16,8 @@ const HistoryPage: React.FC = () => {
   const [pageSize, setPageSize] = useState(Numbers.page_size); 
   const [selectedBox, setSelectedBox] = useState<Box | null>(null);
   const { t } = useTranslation();
+  const scrollRef = useLenisScroll();
+
 
   // Fetch box history with debounced search term and dynamic pageSize
   const { data, refetch, isLoading, error } = useGetBoxHistoryAdminQuery({
@@ -26,7 +29,7 @@ const HistoryPage: React.FC = () => {
 
   const onSearchChange = (debouncedTerm: string) => {
     setDebouncedSearchTerm(debouncedTerm);
-    setPage(1);
+    setPage(1); // Reset to first page on new search
   };
 
   // Refetch data when search term, page, or pageSize changes
@@ -81,7 +84,7 @@ const HistoryPage: React.FC = () => {
   if (error) return <div>{t('historyPage.error')}</div>;
 
   return (
-    <div className="min-h-screen w-screen bg-gray-100">
+    <div ref={scrollRef} className="min-h-screen w-screen bg-gray-100" >
       <div className="w-full min-h-screen bg-white rounded-lg shadow-md p-4">
         <div className="mb-3 border-b font-bold">{t('historyPage.title')}</div>
 
