@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '@/components/SignIn/LoginForm';
-import { IMAGES } from '../../../../../constants/imageconstants';
+import { IMAGES } from '@/app/constants/imageconstants';
 
 export default function LoginPage() {
   const { t } = useTranslation();

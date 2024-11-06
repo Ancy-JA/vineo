@@ -235,7 +235,28 @@ export const authApi = createApi({
         },
       }),
     }),
-    
+    fetchSubscriptionStatus: builder.mutation({ // Renamed mutation
+      query: () => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            mutation getSubscriptionStatus {
+              getSubscriptionStatus {
+                status
+                subscription_id
+                type
+                start_date
+                end_date
+                credit_balance
+                number_of_boxes
+                is_recommended_polling
+              }
+            }
+          `,
+        },
+      }),
+    }),
     
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({
@@ -288,4 +309,5 @@ export const {
   useGetBoxHistoryAdminQuery,
   useGetBoxWinePrintCardMutation,
   useLoadSubscriptionListForUserQuery,
+  useFetchSubscriptionStatusMutation,
 } = authApi;

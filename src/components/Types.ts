@@ -96,3 +96,12 @@ export interface Box {
   date: string;
   wines: Wine[];
 }
+export interface Subscription {
+  _id: string;
+  title: string;
+  sub_title: string;
+  amount: number;
+  description: string;
+  type: number;
+  is_current: boolean;
+}

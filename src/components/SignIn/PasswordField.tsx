@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import {PasswordFieldProps} from '../Types';
+import {PasswordFieldProps} from '@/components/Types';
 const PasswordField: React.FC<PasswordFieldProps> = ({
   id,
   label,

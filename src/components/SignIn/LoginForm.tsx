@@ -3,10 +3,11 @@ import { Box, Link } from '@mui/material';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
-import TextField from './TextField';
-import PasswordField from './PasswordField';
-import LoadingButton from '../LoadingButton';
-import SocialLoginButton from '../SocialLoginButton';
+import TextField from '@/components/SignIn/TextField';
+import PasswordField from '@/components/SignIn/PasswordField';
+import LoadingButton from '@/components/LoadingButton';
+import SocialLoginButton from '@/components/SocialLoginButton';
+
 import { loginValidationSchema } from '@/utils/validationSchemas';
 import { useLoginUserMutation } from '@/app/redux/authApi';
 import { saveTokens } from '@/utils/Token';

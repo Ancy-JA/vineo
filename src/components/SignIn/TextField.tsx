@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextFieldProps} from '../Types';
+import {TextFieldProps} from '@/components/Types';
 
 export default function TextField({
   id,

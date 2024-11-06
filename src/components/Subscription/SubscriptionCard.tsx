@@ -23,7 +23,9 @@ const SubscriptionPage: React.FC = () => {
       try {
         const result = await fetchSubscriptionStatus({}).unwrap();
         if (result?.getSubscriptionStatus?.end_date) {
-          setRenewalDate(result.getSubscriptionStatus.end_date);
+          // Format the end_date to a more readable format, e.g., "01/11/2024"
+          const formattedDate = new Date(result.getSubscriptionStatus.end_date).toLocaleDateString('en-GB');
+          setRenewalDate(formattedDate);
         }
       } catch (err) {
         console.error("Failed to fetch subscription status:", err);
@@ -59,7 +61,7 @@ const SubscriptionPage: React.FC = () => {
               ...subscription,
               renewalDate: subscription.is_current ? renewalDate : undefined, // Pass renewal date only for current subscription
               description: subscription.description || [], // Assume description is an array or fallback to an empty array if missing
-            }))} 
+            }))}
           />
         ) : (
           <p>{t('noSubscriptionData')}</p>
