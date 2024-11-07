@@ -101,7 +101,10 @@ export interface Subscription {
   title: string;
   sub_title: string;
   amount: number;
-  description: string;
+  description: string [];
   type: number;
   is_current: boolean;
+}
+export interface SubscriptionListProps {
+  subscriptions: Subscription[];
 }

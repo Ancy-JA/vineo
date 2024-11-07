@@ -1,11 +1,13 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoadSubscriptionListForUserQuery, useFetchSubscriptionStatusMutation } from '@/app/redux/authApi';
+import { useLoadSubscriptionListForUserQuery } from '@/app/redux/authApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
-import SubscriptionList from '@/components/Subscription/SubscriptionList';
 import { Subscription } from '@/components/Types';
+import SubscriptionList from '@/components/Subscription/SubscriptionList';
+import { useSubscriptionStatus } from '@/components/Hooks/useSubscriptionStatus';
+import CancelSubscriptionButton from '@/components/Subscription/CancelSubscriptionButton';
 
 const SubscriptionPage: React.FC = () => {
   const { t } = useTranslation();
@@ -13,36 +15,9 @@ const SubscriptionPage: React.FC = () => {
     type: [10, 40, 30],
   });
 
-  const [fetchSubscriptionStatus] = useFetchSubscriptionStatusMutation();
-  const [renewalDate, setRenewalDate] = useState<string | null>(null);
-  const [hasCurrentSubscription, setHasCurrentSubscription] = useState(false);
-
-  useEffect(() => {
-    // Fetch the subscription status to get the end date as renewal date
-    const getSubscriptionStatus = async () => {
-      try {
-        const result = await fetchSubscriptionStatus({}).unwrap();
-        if (result?.data?.getSubscriptionStatus?.end_date) {
-          setRenewalDate(result.data.getSubscriptionStatus.end_date); // Set end_date as renewal date
-          
-         
-        }
-      } catch (err) {
-        console.error("Failed to fetch subscription status:", err);
-      }
-    };
-
-    getSubscriptionStatus();
-  }, [fetchSubscriptionStatus]);
-
-  useEffect(() => {
-    // Check if there's a current subscription in the data
-    if (data?.data?.loadSubscriptionListForUser) {
-      setHasCurrentSubscription(
-        data.data.loadSubscriptionListForUser.some((subscription: Subscription) => subscription.is_current)
-      );
-    }
-  }, [data]);
+  // Type the subscriptions array
+  const subscriptions = data?.data?.loadSubscriptionListForUser as Subscription[] | undefined;
+  const { renewalDate, hasCurrentSubscription } = useSubscriptionStatus(subscriptions);
 
   if (isLoading) return <Loader />;
   if (error) return <Error />;
@@ -52,31 +27,20 @@ const SubscriptionPage: React.FC = () => {
       <h2 className="text-2xl font-inter mb-8 p-3 text-left w-full">{t('subscriptionTitle')}</h2>
 
       <div className="max-w-8xl w-full flex-grow relative">
-        {/* Render SubscriptionList with dynamically passed subscriptions */}
-        {data?.data?.loadSubscriptionListForUser ? (
-  <SubscriptionList
-    subscriptions={data.data.loadSubscriptionListForUser.map((subscription: Subscription) => {
-      const subscriptionWithRenewalDate = {
-        ...subscription,
-        renewalDate: subscription.is_current ? renewalDate : undefined, // Pass renewal date only for current subscription
-        description: subscription.description || [], // Fallback for description if missing
-      };
-     
-      return subscriptionWithRenewalDate;
-    })}
-  />
-) : (
-  <p>{t('noSubscriptionData')}</p>
-)}
-
+        {subscriptions ? (
+          <SubscriptionList
+            subscriptions={subscriptions.map((subscription: Subscription) => ({
+              ...subscription,
+              renewalDate: subscription.is_current ? renewalDate : undefined,
+              description: subscription.description || [],
+            }))}
+          />
+        ) : (
+          <p>{t('noSubscriptionData')}</p>
+        )}
       </div>
 
-      {/* Conditional Cancel Subscription Button */}
-      {hasCurrentSubscription && (
-        <button className="mt-8 mb-10 mr-4 bg-cancelbackground text-substext font-bold py-2 px-4 rounded self-end">
-          {t('cancelSubscription')}
-        </button>
-      )}
+      <CancelSubscriptionButton hasCurrentSubscription={hasCurrentSubscription} />
     </div>
   );
 };

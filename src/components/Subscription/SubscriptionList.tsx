@@ -3,19 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import SubscriptionCard from './SubscriptionCard';
+import {SubscriptionListProps} from '@/components/Types';
 
-interface Subscription {
-  _id: string;
-  title: string;
-  sub_title: string;
-  amount: number;
-  description: string;
-  is_current: boolean;
-}
 
-interface SubscriptionListProps {
-  subscriptions: Subscription[];
-}
 
 const SubscriptionList: React.FC<SubscriptionListProps> = ({ subscriptions }) => {
   return (
