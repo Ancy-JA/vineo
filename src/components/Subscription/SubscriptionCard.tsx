@@ -1,81 +1,84 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoadSubscriptionListForUserQuery, useFetchSubscriptionStatusMutation } from '@/app/redux/authApi';
-import Loader from '@/components/Loader';
-import Error from '@/components/Error';
-import SubscriptionList from '@/components/Subscription/SubscriptionList';
-import { Subscription } from '@/components/Types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-const SubscriptionPage: React.FC = () => {
+interface SubscriptionCardProps {
+  title: string;
+  sub_title: string;
+  amount: number;
+  description: string[];
+  is_current: boolean;
+  renewalDate?: string;
+}
+
+const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
+  title,
+  sub_title,
+  amount,
+  description,
+  is_current,
+  renewalDate,
+}) => {
   const { t } = useTranslation();
-  const { data, error, isLoading } = useLoadSubscriptionListForUserQuery({
-    type: [10, 40, 30],
-  });
 
-  const [fetchSubscriptionStatus] = useFetchSubscriptionStatusMutation();
-  const [renewalDate, setRenewalDate] = useState<string | null>(null);
-  const [hasCurrentSubscription, setHasCurrentSubscription] = useState(false);
-
-  useEffect(() => {
-    // Fetch the subscription status to get the end date
-    const getSubscriptionStatus = async () => {
-      try {
-        const result = await fetchSubscriptionStatus({}).unwrap();
-        if (result?.getSubscriptionStatus?.end_date) {
-          // Format the end_date to a more readable format, e.g., "01/11/2024"
-          const formattedDate = new Date(result.getSubscriptionStatus.end_date).toLocaleDateString('en-GB');
-          setRenewalDate(formattedDate);
-        }
-      } catch (err) {
-        console.error("Failed to fetch subscription status:", err);
-      }
-    };
-
-    getSubscriptionStatus();
-  }, [fetchSubscriptionStatus]);
-
-  useEffect(() => {
-    // Check if there's a current subscription in the data
-    if (data?.data?.loadSubscriptionListForUser) {
-      setHasCurrentSubscription(
-        data.data.loadSubscriptionListForUser.some((subscription: Subscription) => subscription.is_current)
-      );
-    }
-  }, [data]);
-
-  console.log('Subscription data:', data);
-
-  if (isLoading) return <Loader />;
-  if (error) return <Error />;
+  // Format the renewal date in day/month/year format
+  const formattedRenewalDate = renewalDate
+    ? new Date(renewalDate).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    })
+    : '';
 
   return (
-    <div className="min-h-screen p-3 flex flex-col items-center border-t rounded-lg shadow-lg">
-      <h2 className="text-2xl font-inter mb-8 p-3 text-left w-full">{t('subscriptionTitle')}</h2>
-
-      <div className="max-w-8xl w-full flex-grow relative">
-        {/* Render SubscriptionList with dynamically passed subscriptions */}
-        {data?.data?.loadSubscriptionListForUser ? (
-          <SubscriptionList
-            subscriptions={data.data.loadSubscriptionListForUser.map((subscription: Subscription) => ({
-              ...subscription,
-              renewalDate: subscription.is_current ? renewalDate : undefined, // Pass renewal date only for current subscription
-              description: subscription.description || [], // Assume description is an array or fallback to an empty array if missing
-            }))}
-          />
-        ) : (
-          <p>{t('noSubscriptionData')}</p>
-        )}
+    <div
+      className={`shadow-lg flex flex-col pt-5 w-full rounded-lg overflow-hidden min-h-[400px] ${is_current ? 'bg-customPink' : 'bg-white'
+        }`}
+    >
+      <div
+        className={`text-xl font-bold text-center py-2 w-full ${is_current ? 'bg-black text-white' : 'bg-white text-customGray'
+          }`}
+      >
+        {title}
       </div>
 
-      {/* Conditional Cancel Subscription Button */}
-      {hasCurrentSubscription && (
-        <button className="mt-8 mb-10 mr-4 bg-cancelbackground text-substext font-bold py-2 px-4 rounded self-end">
-          {t('cancelSubscription')}
-        </button>
-      )}
+      <div className="p-4 flex flex-col justify-between flex-grow rounded-b-lg">
+        <p className={`text-xl font-semibold mb-1 ${is_current ? 'text-white' : 'text-black'}`}>
+          {amount}€/ {t('month')}
+        </p>
+        <p className={`text-sm mb-2 ${is_current ? 'text-white' : 'text-gray-800'}`}>{sub_title}</p>
+
+        <ul className="text-sm mb-4">
+          {description.map((item, index) => (
+            <li key={index} className="flex items-center mb-1">
+              <FontAwesomeIcon
+                icon={faCheck}
+                className="mr-2"
+                style={{ color: is_current ? 'white' : '#ff6b6b' }} // Replace '#ff6b6b' with your desired color
+              />
+              <span className={is_current ? 'text-white' : 'text-gray-700'}>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+
+
+        {/* Subscription Button or Renewal Date */}
+        {is_current && renewalDate ? (
+          <div className="mt-auto">
+            <p className="text-xs text-white italic mt-2 text-center">
+              Renewal Date: {formattedRenewalDate}
+            </p>
+          </div>
+        ) : (
+          <button className="mt-4 w-3/4 bg-customGray text-white py-1.5 px-3 rounded mx-auto">
+            {t('subscribe')}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
 
-export default SubscriptionPage;
+export default SubscriptionCard;

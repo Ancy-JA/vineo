@@ -18,12 +18,14 @@ const SubscriptionPage: React.FC = () => {
   const [hasCurrentSubscription, setHasCurrentSubscription] = useState(false);
 
   useEffect(() => {
-    // Fetch the subscription status to get the end date
+    // Fetch the subscription status to get the end date as renewal date
     const getSubscriptionStatus = async () => {
       try {
         const result = await fetchSubscriptionStatus({}).unwrap();
-        if (result?.getSubscriptionStatus?.end_date) {
-          setRenewalDate(result.getSubscriptionStatus.end_date);
+        if (result?.data?.getSubscriptionStatus?.end_date) {
+          setRenewalDate(result.data.getSubscriptionStatus.end_date); // Set end_date as renewal date
+          
+         
         }
       } catch (err) {
         console.error("Failed to fetch subscription status:", err);
@@ -42,8 +44,6 @@ const SubscriptionPage: React.FC = () => {
     }
   }, [data]);
 
-  console.log('Subscription data:', data);
-
   if (isLoading) return <Loader />;
   if (error) return <Error />;
 
@@ -54,16 +54,21 @@ const SubscriptionPage: React.FC = () => {
       <div className="max-w-8xl w-full flex-grow relative">
         {/* Render SubscriptionList with dynamically passed subscriptions */}
         {data?.data?.loadSubscriptionListForUser ? (
-          <SubscriptionList
-            subscriptions={data.data.loadSubscriptionListForUser.map((subscription: Subscription) => ({
-              ...subscription,
-              renewalDate: subscription.is_current ? renewalDate : undefined, // Pass renewal date only for current subscription
-              description: subscription.description || [], // Assume description is an array or fallback to an empty array if missing
-            }))} 
-          />
-        ) : (
-          <p>{t('noSubscriptionData')}</p>
-        )}
+  <SubscriptionList
+    subscriptions={data.data.loadSubscriptionListForUser.map((subscription: Subscription) => {
+      const subscriptionWithRenewalDate = {
+        ...subscription,
+        renewalDate: subscription.is_current ? renewalDate : undefined, // Pass renewal date only for current subscription
+        description: subscription.description || [], // Fallback for description if missing
+      };
+     
+      return subscriptionWithRenewalDate;
+    })}
+  />
+) : (
+  <p>{t('noSubscriptionData')}</p>
+)}
+
       </div>
 
       {/* Conditional Cancel Subscription Button */}
