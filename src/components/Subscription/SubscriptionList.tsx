@@ -13,7 +13,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ subscriptions }) =>
       spaceBetween={16}
       pagination={{ clickable: true }}
       breakpoints={{
-        580: { slidesPerView: 2 },
+        550: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
         1280: { slidesPerView: 4 },
       }}

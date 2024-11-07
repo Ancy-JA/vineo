@@ -17,6 +17,7 @@ const config: Config = {
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
+        domine:['Domine','sans-serif']
       },
       colors: {
         customPink: '#F78A79',
@@ -27,6 +28,7 @@ const config: Config = {
         whiteBorder: '#FFFFFF0D',
         cancelbackground: '#F4D3CE',
         substext:'#FF0000',
+        cardcolour:'#F8F8F8',
 
       },
       screens: {

@@ -141,6 +141,20 @@ export const authApi = createApi({
         }
       },
     }),
+
+    logoutUser: builder.mutation<void, void>({
+      queryFn: async () => {
+        // Clear tokens from local storage
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+
+        // Optional: Redirect to sign-in page
+        window.location.href = '/sign-in';
+
+        return { data: undefined };
+      },
+    }),
+
     getBoxHistory: builder.query({
       query: (payload) => ({
         url: '',
@@ -257,7 +271,24 @@ export const authApi = createApi({
         },
       }),
     }),
-    
+    // Add the `getLatestUserGift` query to fetch the latest gift for the user
+// Add the `getLatestUserGift` query with `void` as the argument type
+getLatestUserGift: builder.query<any, void>({ // <any, void> specifies that no argument is required
+  query: () => ({
+    url: '',
+    method: 'POST',
+    body: {
+      query: `
+        query LatestGiftsofUser {
+          getLatestUserGift {
+            
+          }
+        }
+      `,
+    },
+  }),
+}),
+
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({
       query: ({ searchString, page, pageSize }) => ({
@@ -304,10 +335,12 @@ export const authApi = createApi({
 
 export const {
   useLoginUserMutation,
+  useLogoutUserMutation,
   useGetBoxHistoryQuery,
   useGetSubscriptionStatusMutation,
   useGetBoxHistoryAdminQuery,
   useGetBoxWinePrintCardMutation,
   useLoadSubscriptionListForUserQuery,
   useFetchSubscriptionStatusMutation,
+  useGetLatestUserGiftQuery,
 } = authApi;

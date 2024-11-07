@@ -33,18 +33,18 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
 
   return (
     <div
-      className={`shadow-lg flex flex-col pt-5 w-full rounded-lg overflow-hidden min-h-[400px] ${is_current ? 'bg-customPink' : 'bg-white'
+      className={`shadow-xl flex flex-col pt-4 w-full rounded-lg overflow-hidden min-h-[400px] ${is_current ? 'bg-customPink' : 'bg-cardcolour'
         }`}
     >
       <div
-        className={`text-xl font-bold text-center py-2 w-full ${is_current ? 'bg-black text-white' : 'bg-white text-customGray'
+        className={`text-xl font-bold text-center py-2 w-full ${is_current ? 'bg-black text-white' : 'bg-cardcolour text-customGray'
           }`}
       >
         {title}
       </div>
 
-      <div className="p-4 flex flex-col justify-between flex-grow rounded-b-lg">
-        <p className={`text-xl font-semibold mb-1 ${is_current ? 'text-white' : 'text-black'}`}>
+      <div className="p-4 flex flex-col  justify-between flex-grow rounded-b-lg">
+        <p className={`text-xl font-domine font-semibold mb-1 ${is_current ? 'text-white' : 'text-black'}`}>
           {amount}€/ {t('month')}
         </p>
         <p className={`text-sm mb-2 ${is_current ? 'text-white' : 'text-gray-800'}`}>{sub_title}</p>
@@ -55,7 +55,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
               <FontAwesomeIcon
                 icon={faCheck}
                 className="mr-2"
-                style={{ color: is_current ? 'white' : '#ff6b6b' }} // Replace '#ff6b6b' with your desired color
+                style={{ color: is_current ? 'white' : '#E5535D' }} 
               />
               <span className={is_current ? 'text-white' : 'text-gray-700'}>{item}</span>
             </li>
@@ -67,12 +67,12 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
         {/* Subscription Button or Renewal Date */}
         {is_current && renewalDate ? (
           <div className="mt-auto">
-            <p className="text-xs text-white italic mt-2 text-center">
+            <p className="text-xs text-white font-inter italic mt-2 text-center">
               Renewal Date: {formattedRenewalDate}
             </p>
           </div>
         ) : (
-          <button className="mt-4 w-3/4 bg-customGray text-white py-1.5 px-3 rounded mx-auto">
+          <button className="mt-4 w-3/4 bg-customGray font-domine text-white py-1.5 px-3 rounded mx-auto">
             {t('subscribe')}
           </button>
         )}
