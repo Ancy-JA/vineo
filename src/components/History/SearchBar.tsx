@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
-import {SearchBarProps} from './Types';
+import {SearchBarProps} from '@/components/Types';
 
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange, placeholder }) => {

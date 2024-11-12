@@ -1,7 +1,7 @@
 // ModalView.tsx
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { Box } from './Types';
+import { Box } from '@/components/Types';
 
 interface ModalViewProps {
   selectedBox: Box | null;

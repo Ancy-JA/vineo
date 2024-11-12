@@ -1,3 +1,4 @@
+import type { GetBoxWinePrintCardResponse } from '@/components/Types';
 import { createApi, fetchBaseQuery, FetchArgs } from '@reduxjs/toolkit/query/react';
 
 // Function to refresh the access token
@@ -207,17 +208,17 @@ export const authApi = createApi({
     // getBoxWine card mutation
 
     // In your authApi setup for getBoxWinePrintCard
-    getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
+    getBoxWinePrintCard: builder.mutation<GetBoxWinePrintCardResponse, { boxId: string }>({
       query: ({ boxId }) => ({
         url: '',
         method: 'POST',
         body: {
           query: `
-        query getBoxWinePrintCard($box: String!) {
-          getBoxWinePrintCard(box: $box)
-        }
-      `,
-          variables: { box: boxId }, // Pass boxId as `box`
+            query getBoxWinePrintCard($box: String!) {
+              getBoxWinePrintCard(box: $box)
+            }
+          `,
+          variables: { box: boxId },
         },
       }),
     }),
