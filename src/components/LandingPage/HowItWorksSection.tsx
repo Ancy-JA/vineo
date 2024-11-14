@@ -21,7 +21,7 @@ const cards = [
 
 export default function HowItWorksSection() {
   return (
-    <div className="h-full max-h-screen overflow-y-auto bg-[#f0f0e9] flex flex-col items-center px-4 py-10">
+    <div className=" bg-[#f0f0e9] flex flex-col items-center px-4 py-10">
       {/* Top Section with Email Input */}
       <div className="flex flex-col items-center mb-6">
         <h2 className="text-lg md:text-xl font-semibold text-[#2f2f2f] mb-2 text-center">

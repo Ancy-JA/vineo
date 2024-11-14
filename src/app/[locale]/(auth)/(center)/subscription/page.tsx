@@ -5,7 +5,7 @@ import { useLoadSubscriptionListForUserQuery } from '@/app/redux/authApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 import { Subscription } from '@/components/Types';
-import SubscriptionList from '@/components/Subscription/SubscriptionList';
+import SubscriptionList from '@/components/CardList';
 import { useSubscriptionStatus } from '@/components/Hooks/useSubscriptionStatus';
 import CancelSubscriptionButton from '@/components/Subscription/CancelSubscriptionButton';
 
@@ -29,13 +29,20 @@ const SubscriptionPage: React.FC = () => {
       <div className="max-w-8xl w-full flex-grow relative">
         {subscriptions ? (
           <SubscriptionList
-            subscriptions={subscriptions.map((subscription: Subscription) => ({
-              ...subscription,
-              renewalDate: subscription.is_current ? renewalDate : undefined,
-              description: subscription.description || [],
-              type: subscription.type, 
-            }))}
-          />
+          items={subscriptions.map((subscription: Subscription) => ({
+            id: subscription._id,
+            title: subscription.title,
+            subTitle: subscription.sub_title,
+            amount: subscription.amount,
+            description: subscription.description || [],
+            isCurrent: subscription.is_current,
+            renewalDate: subscription.is_current && renewalDate ? renewalDate : undefined,
+            buttonText: 'Subscribe',
+          }))}
+        />
+        
+        
+        
         ) : (
           <p>{t('noSubscriptionData')}</p>
         )}

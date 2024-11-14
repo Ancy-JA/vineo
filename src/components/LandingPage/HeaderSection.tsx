@@ -2,27 +2,59 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { AiOutlineWhatsApp } from 'react-icons/ai';
 
 export default function HeaderSection() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-        <div className="bg-white  w-full shadow-md overflow-hidden">
-          {/* Top Section - Logo and Headline */}
-          <div className="p-6">
+    <div className="relative">
+      {/* Fixed Top Bar */}
+      <div className="fixed top-0 left-0 w-full bg-opacity-80 bg-gray-900 backdrop-blur-lg z-50 shadow-md">
+        <div className="flex items-center justify-between p-4">
+          {/* Logo Section */}
+          <div className="flex items-center">
             <Image
               src="/vineo.png" // Update with your actual logo path
               alt="Vineo Logo"
               width={120}
               height={40}
             />
-            <h1 className="mt-4 text-3xl md:text-4xl font-domine font-bold text-customGray">
-              Discover the perfect wine for you
-            </h1>
           </div>
+
+          {/* Button Section */}
+          <div className="flex items-center space-x-4">
+            <Link href="/gift">
+              <p className="text-customPink font-semibold cursor-pointer">
+                Give Vineo as a gift
+              </p>
+            </Link>
+            <button
+              type="button"
+              className="bg-customPink hover:bg-[#e55e5e] text-white font-semibold py-2 px-4 rounded-md"
+            >
+              Begin
+            </button>
+            <button
+              type="button"
+              className="border border-customPink text-customPink font-semibold py-2 px-4 rounded-md"
+            >
+              Access
+            </button>
+            <Link href="https://wa.me">
+            <AiOutlineWhatsApp />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Section */}
+      <div className="pt-[80px] flex min-h-screen items-center justify-center">
+        <div className="bg-white w-full pt-2 shadow-md overflow-hidden">
+          {/* Top Section - Logo and Headline */}
+          
 
           {/* Middle Section - Background Image with Text Overlay */}
           <div
-            className="relative w-full h-[300px] md:h-[350px] lg:h-[400px] bg-cover bg-center"
+            className="relative w-full h-[300px] md:h-[350px] lg:h-[450px] bg-cover bg-center"
             style={{ backgroundImage: "url('/banner.png')" }} // Update with your image path
           >
             {/* Overlay Content */}
@@ -48,6 +80,6 @@ export default function HeaderSection() {
           </div>
         </div>
       </div>
-
+    </div>
   );
 }

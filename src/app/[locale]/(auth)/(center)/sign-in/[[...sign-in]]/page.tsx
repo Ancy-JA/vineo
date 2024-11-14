@@ -17,7 +17,7 @@ export default function LoginPage() {
       </div>
       {/* Background Image Container */}
       <div className="absolute bottom-0 left-0 right-20 top-24 bg-glass-bottle bg-39rem bg-no-repeat md:bg-center lg:bg-left">
-        <span className="sr-only">Wine illustration</span>
+       
       </div>
       <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
         <Typography variant="h4" className="mb-6 text-center font-inter !font-bold !text-2xl text-[#303E63]">
