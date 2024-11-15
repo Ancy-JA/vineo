@@ -1,14 +1,15 @@
 import type { GetBoxWinePrintCardResponse } from '@/components/Types';
 import { createApi, fetchBaseQuery, FetchArgs } from '@reduxjs/toolkit/query/react';
+const GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URL || '';
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
   const refreshToken = localStorage.getItem('refreshToken');
   const accessToken = localStorage.getItem('accessToken');
-
+  
   try {
     console.log("Attempting to refresh access token...");
-    const response = await fetch('https://vineoback-gh-qa.caprover2.innogenio.com/graphql', {
+    const response = await fetch( GRAPHQL_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +62,7 @@ export const authApi = createApi({
 
     // Make the first attempt to use the access token
     let result = await fetchBaseQuery({
-      baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql',
+      baseUrl:  GRAPHQL_URL,
       prepareHeaders: (headers) => {
         if (initialToken) {
           console.log("Setting Authorization header for request. Token:", initialToken);
@@ -87,7 +88,7 @@ export const authApi = createApi({
 
         // Retry the request with the new access token
         result = await fetchBaseQuery({
-          baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql',
+          baseUrl: GRAPHQL_URL,
           prepareHeaders: (headers) => {
             if (newAccessToken) {
               headers.set('Authorization', `Bearer ${newAccessToken}`);
@@ -250,7 +251,7 @@ export const authApi = createApi({
         },
       }),
     }),
-    fetchSubscriptionStatus: builder.mutation({ // Renamed mutation
+    fetchSubscriptionStatus: builder.mutation({ 
       query: () => ({
         url: '',
         method: 'POST',
@@ -272,23 +273,22 @@ export const authApi = createApi({
         },
       }),
     }),
-    // Add the `getLatestUserGift` query to fetch the latest gift for the user
-// Add the `getLatestUserGift` query with `void` as the argument type
-getLatestUserGift: builder.query<any, void>({ // <any, void> specifies that no argument is required
-  query: () => ({
-    url: '',
-    method: 'POST',
-    body: {
-      query: `
+    
+    getLatestUserGift: builder.query<any, void>({ 
+      query: () => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
         query LatestGiftsofUser {
           getLatestUserGift {
             
           }
         }
       `,
-    },
-  }),
-}),
+        },
+      }),
+    }),
 
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({

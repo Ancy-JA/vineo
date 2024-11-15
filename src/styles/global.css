@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Inter Font - Regular */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -9,9 +10,30 @@
   src: url('/assets/fonts/Inter_18pt-Regular.ttf') format('truetype');
 }
 
+/* Inter Font - Bold */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   src: url('/assets/fonts/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+/* Domine Variable Font */
+@font-face {
+  font-family: 'Domine';
+  font-style: normal;
+  font-weight: 100 900; /* Supports a range of weights */
+  src: url('/assets/fonts/Domine-VariableFont_wght.ttf') format('truetype');
+}
+
+.logo {
+  width: 100px;
+  height: 30px;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    width: 120px;
+    height: 40px;
+  }
 }

@@ -69,6 +69,7 @@ export interface TextFieldProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   error?: string | boolean;
+  helperText?: string;
 }
 export interface PasswordFieldProps {
   id: string;
@@ -79,6 +80,7 @@ export interface PasswordFieldProps {
   showPassword: boolean;
   setShowPassword: (show: boolean) => void;
   error?: string | boolean;
+  helperText?: string;
 }
 export interface Token {
   accessToken: string;

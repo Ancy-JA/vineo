@@ -1,3 +1,5 @@
+
+
 export const IMAGES = {
   vineoLogo: "/assets/images/vineo.svg" ,
   BANNER: '/images/banner.png',
@@ -11,6 +13,14 @@ export const IMAGES = {
   settings:"/assets/images/settings.svg",
   coins:"/assets/images/coins.svg",
   flag_America:"/assets/images/USA.svg",
-   flag_Spain:"/assets/images/Spain.svg",
+  flag_Spain:"/assets/images/Spain.svg",
+  WhatsApp:"/assets/images/whatsapp.svg",
+  LandingImg:"/assets/images/landingimage1.svg",
+  paperbg:"/assets/images/paper.png",
+  learning:"/assets/images/learning.svg",
+  winepack:"/assets/images/winebottles.svg",
+ square:"/assets/images/squares.svg",
+ graphdetails:"/assets/images/graphDt.svg",
+ winedroping:"/assets/images/winedroping.svg",
   // Add more images as needed
 };

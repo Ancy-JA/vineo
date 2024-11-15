@@ -1,25 +1,31 @@
+// src/app/(auth)/AuthLayout.tsx
+'use client';
+
 import { enUS, frFR } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
-
 import { AppConfig } from '@/utils/AppConfig';
+import ClientLanguageSwitcher from '@/components/LSwitcher';
 
-export default function AuthLayout(props: {
+export default function AuthLayout({
+  children,
+  params,
+}: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
   let clerkLocale = enUS;
   let signInUrl = '/sign-in';
   let signUpUrl = '/sign-up';
-  //let dashboardUrl = '/dashboard';
 
-  if (props.params.locale === 'fr') {
+  // Set French localization if the locale is 'fr'
+  if (params.locale === 'fr') {
     clerkLocale = frFR;
   }
 
-  if (props.params.locale !== AppConfig.defaultLocale) {
-    signInUrl = `/${props.params.locale}${signInUrl}`;
-    signUpUrl = `/${props.params.locale}${signUpUrl}`;
-    //dashboardUrl = `/${props.params.locale}${dashboardUrl}`;
+  // Update URLs based on the locale
+  if (params.locale !== AppConfig.defaultLocale) {
+    signInUrl = `/${params.locale}${signInUrl}`;
+    signUpUrl = `/${params.locale}${signUpUrl}`;
   }
 
   return (
@@ -27,10 +33,11 @@ export default function AuthLayout(props: {
       localization={clerkLocale}
       signInUrl={signInUrl}
       signUpUrl={signUpUrl}
-      //signInFallbackRedirectUrl={dashboardUrl}
-      //signUpFallbackRedirectUrl={dashboardUrl}
     >
-      {props.children}
+      {/* Include ClientLanguageSwitcher for authenticated pages */}
+      <ClientLanguageSwitcher>
+        {children}
+      </ClientLanguageSwitcher>
     </ClerkProvider>
   );
 }

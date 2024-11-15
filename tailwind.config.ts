@@ -10,17 +10,19 @@ const config: Config = {
       
       backgroundImage: {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
-        'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', // From bottom to top
+        'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', 
+        
       },
       backgroundSize: {
         '39rem': '39rem', // Custom background size
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
-        domine:['Domine','sans-serif']
+        domine:['Domine','serif']
       },
       colors: {
         customPink: '#F78A79',
+        darkPink:'#E5535D',
         hoverPink:  '#D4695B',
         customGray: '#394A59',
         dotGray: '#555',  // Custom color for pagination dots
@@ -29,6 +31,8 @@ const config: Config = {
         cancelbackground: '#F4D3CE',
         substext:'#FF0000',
         cardcolour:'#F8F8F8',
+        description:'#18191A',
+        bgshade:'#F3EFEA',
 
       },
       screens: {
