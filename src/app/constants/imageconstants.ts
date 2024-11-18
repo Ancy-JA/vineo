@@ -22,5 +22,6 @@ export const IMAGES = {
  square:"/assets/images/squares.svg",
  graphdetails:"/assets/images/graphDt.svg",
  winedroping:"/assets/images/winedroping.svg",
+ letter:"/assets/images/letter.svg",
   // Add more images as needed
 };

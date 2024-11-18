@@ -35,9 +35,11 @@ const config: Config = {
         bgshade:'#F3EFEA',
 
       },
+      
       screens: {
         xsm: '400px',  // Define an extra small breakpoint
       },
+      
       
     },
   },
@@ -114,6 +116,16 @@ const config: Config = {
         '.swiper-pagination-bullet-active': {
           backgroundColor: '#87CEEB!important', // Custom active dot color (can be dotActive)
           opacity: '1 !important',
+        },
+        '.landing-button-base': {
+          width: '90%',
+          maxWidth: '320px',
+          borderRadius: '12px',
+          padding: '0.5rem 0',
+          position: 'absolute',
+          bottom: '1rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
         },
       };
       addUtilities(newUtilities);

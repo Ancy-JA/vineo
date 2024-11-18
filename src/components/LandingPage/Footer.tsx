@@ -11,7 +11,7 @@ export default function Footer() {
         </div>
 
         {/* Links Section */}
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-6 md:mb-0">
+        <div className="flex flex-row items-center gap-8 mb-6 md:mb-0">
           <a href="/terms-of-use" className="hover:text-customPink font-semibold text-sm">
             Terms of Use
           </a>
@@ -39,7 +39,7 @@ export default function Footer() {
 
       {/* Copyright and Back to Top */}
       <div className="flex flex-col md:flex-row justify-between items-center mt-6">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-customGray text-center">
           © 2023 Vineo. All rights reserved.
         </p>
         <button

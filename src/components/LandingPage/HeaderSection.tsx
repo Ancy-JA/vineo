@@ -111,7 +111,7 @@ export default function HeaderSection() {
             style={{backgroundImage: `url(${IMAGES.LandingImg})`}}
           >
             {/* Overlay Content */}
-            <div className="absolute mt-0 md:mt-6 text-customGray inset-0 flex flex-col font-inter items-start pl-6 bg-opacity-20 ">
+            <div className="absolute mt-0 md:mt-6 text-customGray inset-0 flex flex-col font-inter items-start pl-6 lg-items-center bg-opacity-20 ">
               <h2 className="text-2xl md:text-3xl font-bold font-domine text-customGray mb-4">
                 Discover the perfect wine for you
               </h2>

@@ -1,18 +1,9 @@
-// SharedCard.tsx
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { SharedCardProps } from './Types';
 
-interface SharedCardProps {
-  title: string;
-  subTitle?: string;
-  amount: number;
-  description: string[];
-  isCurrent?: boolean;
-  renewalDate?: string;
-  buttonText?: string;
-  onButtonClick?: () => void;
-}
+
 
 const SharedCard: React.FC<SharedCardProps> = ({
   title,
@@ -34,27 +25,34 @@ const SharedCard: React.FC<SharedCardProps> = ({
 
   return (
     <div
-      className={`shadow-xl flex flex-col pt-4 w-full rounded-lg overflow-hidden min-h-[400px] ${
-        isCurrent ? 'bg-customPink' : 'bg-cardcolour'
-      }`}
-    >
+  className={`shadow-xl flex flex-col w-full  md:w-[360px] max-w-[360px] h-[520px] mx-auto  rounded-lg overflow-hidden ${
+    isCurrent ? 'bg-customPink' : 'bg-white'
+  }`}
+>
+
+      {/* Card Header */}
       <div
-        className={`text-xl font-bold text-center py-2 w-full ${
-          isCurrent ? 'bg-black text-white' : 'bg-cardcolour text-customGray'
+        className={`text-lg font-bold font-domine text-center mt-3 py-3 w-full ${
+          isCurrent ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
         {title}
       </div>
 
-      <div className="p-4 flex flex-col justify-between flex-grow rounded-b-lg">
-        <p className={`text-xl font-semibold mb-1 ${isCurrent ? 'text-white' : 'text-black'}`}>
-          {amount}€
+      {/* Card Content */}
+      <div className="p-6 flex flex-col text-left justify-between font-inter flex-grow">
+        <p className={`text-2xl font-domine font-semibold mb-2 ${isCurrent ? 'text-white' : 'text-black'}`}>
+          {amount}€/mes
         </p>
-        {subTitle && <p className={`text-sm mb-2 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</p>}
 
-        <ul className="text-sm mb-4">
-          {description.map((item, index) => (
-            <li key={index} className="flex items-center mb-1">
+        {subTitle && (
+          <p className={`text-sm mb-4 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</p>
+        )}
+
+        <ul className="text-sm mb-6">
+        {(description ?? []).map((item, index) => (
+
+            <li key={index} className="flex items-center mb-2">
               <FontAwesomeIcon
                 icon={faCheck}
                 className="mr-2"
@@ -65,12 +63,16 @@ const SharedCard: React.FC<SharedCardProps> = ({
           ))}
         </ul>
 
+        {/* Conditional Rendering for Renewal Date or Button */}
         {isCurrent && renewalDate ? (
-          <p className="text-xs text-white italic text-center">Renewal Date: {formattedRenewalDate}</p>
+          <p className="text-xs text-white italic text-center">
+            Renovación el: {formattedRenewalDate}
+          </p>
         ) : (
           <button
-            className="mt-4 w-3/4 bg-customGray text-white py-1.5 px-3 rounded mx-auto"
+            className="mt-4 w-full bg-black text-white py-2 mb-3 rounded-lg"
             onClick={onButtonClick}
+            aria-label={buttonText}
           >
             {buttonText}
           </button>

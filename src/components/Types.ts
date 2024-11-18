@@ -110,3 +110,15 @@ export interface Subscription {
 export interface SubscriptionListProps {
   subscriptions: Subscription[];
 }
+export interface SharedCardProps {
+  id?: string;
+  title: string;
+  subTitle?: string;
+  amount: number;
+  description: string[];
+  isCurrent?: boolean;
+  renewalDate?: string;
+  buttonText?: string;
+  onButtonClick?: () => void;
+  variant?: string;
+}

@@ -47,29 +47,34 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="py-16 bg-[#f5f5f5] flex flex-col items-center text-center px-6 md:px-12 lg:px-20">
-      <h3 className="text-xl md:text-2xl font-bold text-customGray mb-4">
+    <div className="py-16 bg-white flex flex-col  items-center text-center px-6 md:px-12 lg:px-20">
+      <h3 className="text-xl md:text-2xl font-bold font-domine items-center text-center text-customGray mb-4">
         Frequently Asked Questions
       </h3>
-      <p className="text-sm md:text-base text-customGray mb-8">
+      <p className="text-sm md:text-base font-inter text-center text-description mb-8">
         We answer your questions here, but if you still have any that are not resolved in this section, do not hesitate to contact us via WhatsApp.
       </p>
 
       {/* FAQ Items */}
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-4xl">
         {faqItems.map((item, index) => (
           <div key={index} className="border-b border-gray-300 mb-4">
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center py-4 text-left text-customGray font-semibold text-lg"
+              className="w-full flex justify-between items-center py-4 text-customGray font-semibold text-lg transition-all duration-300"
             >
               {item.question}
-              <span className="text-customGray">
-                {activeIndex === index ? '×' : '+'}
+              <span
+                className={`font-domine text-customGray transform transition-transform duration-500 ${activeIndex === index ? 'rotate-45' : 'rotate-0'
+                  }`}
+              >
+                +
               </span>
             </button>
+
+
             {activeIndex === index && (
-              <div className="text-sm text-customGray mb-4">
+              <div className="text-sm font-inter text-description mb-4">
                 {item.answer}
               </div>
             )}

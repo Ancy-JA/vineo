@@ -16,11 +16,11 @@ export default function VineoCoinsSection() {
       </div>
 
       {/* Right Side - Text Content */}
-      <div className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left">
+      <div className="w-full md:w-1/2 lg:w-1/3 ml-5 text-center md:text-left">
         <h3 className="text-xl md:text-2xl font-domine text-customGray mb-2">
           Your Benefits
         </h3>
-        <h4 className="text-lg md:text-xl font-semibold font-domine text-customGray mb-4">
+        <h4 className="text-lg md:text-2xl font-semibold font-domine text-customGray mb-4">
           Vineo Coins
         </h4>
         <p className="text-sm md:text-base font-inter text-description mb-6">
