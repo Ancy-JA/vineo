@@ -25,14 +25,14 @@ const SharedCard: React.FC<SharedCardProps> = ({
 
   return (
     <div
-  className={`shadow-xl flex flex-col w-full  md:w-[360px] max-w-[360px] h-[520px] mx-auto  rounded-lg overflow-hidden ${
+  className={`shadow-xl flex flex-col w-full  md:w-[25rem] max-w-[25rem] h-[35rem] mx-auto  rounded-lg overflow-hidden ${
     isCurrent ? 'bg-customPink' : 'bg-white'
   }`}
 >
 
       {/* Card Header */}
       <div
-        className={`text-lg font-bold font-domine text-center mt-3 py-3 w-full ${
+        className={`text-2xl font-bold font-domine text-center mt-3 py-3 w-full ${
           isCurrent ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
@@ -41,7 +41,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
 
       {/* Card Content */}
       <div className="p-6 flex flex-col text-left justify-between font-inter flex-grow">
-        <p className={`text-2xl font-domine font-semibold mb-2 ${isCurrent ? 'text-white' : 'text-black'}`}>
+        <p className={`text-xl font-domine font-semibold mb-2 ${isCurrent ? 'text-white' : 'text-black'}`}>
           {amount}€/mes
         </p>
 

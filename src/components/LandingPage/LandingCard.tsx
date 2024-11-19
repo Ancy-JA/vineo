@@ -55,8 +55,9 @@ const LandingCard: React.FC<LandingCardProps> = ({ items }) => {
         observeParents={true}
         resizeObserver={true}
         breakpoints={{
-          0: { slidesPerView: 1 },
+         
           600: { slidesPerView: 1 },
+          800:{ slidesPerView: 1 },
           900: { slidesPerView: 2 },
         }}
         className="w-full h-auto"

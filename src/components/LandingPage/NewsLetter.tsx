@@ -2,18 +2,18 @@ import { IMAGES } from '@/app/constants/imageconstants';
 
 export default function NewsletterSection() {
   return (
-    <div
-      className="py-16 bg-white flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-12 lg:px-20 relative"
-      style={{
-        backgroundImage: `url(${IMAGES.letter})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: window.innerWidth > 1200 ? ' center' : 'left ',
-      }}
-    >
+    <div className="pt-7 pb-16 md-py-16 bg-white flex flex-col md:flex-row items-center justify-center  px-6 md:px-12 lg:px-20 relative">
+      {/* Left Side - Image */}
+      <div className="w-full  flex justify-center md:justify-start">
+        <img
+          src={IMAGES.letter}
+          alt="Newsletter Graphic"
+          className="max-w-65  object-contain"
+        />
+      </div>
 
       {/* Right Side - Text and Input */}
-      <div className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left">
+      <div className="w-full  text-center md:text-left">
         <h3 className="text-xl md:text-2xl font-bold font-domine text-customGray mb-4">
           Don't miss a thing
         </h3>
@@ -33,7 +33,6 @@ export default function NewsletterSection() {
           subscribe
           </button>
         </div>
-
       </div>
     </div>
   );
