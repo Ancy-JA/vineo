@@ -1,15 +1,15 @@
-// src/components/CenteredLayout.tsx
 import React from 'react';
 import AuthGuard from '@/components/Authentication';
 import Sidebar from '@/components/Sidebar';
 
 export default function CenteredLayout({
   children,
-  isSignInPage = false,
 }: {
   children: React.ReactNode;
-  isSignInPage?: boolean;
 }) {
+  // Dynamically check if the current page is the sign-in page
+  const isSignInPage = (children as any).type?.name === 'LoginPage';
+
   return (
     <AuthGuard>
       <div className={`flex min-h-screen ${isSignInPage ? '' : 'ml-16 md:ml-64'}`}>

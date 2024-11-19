@@ -1,4 +1,6 @@
+// src/app/unauth/layout.tsx
 import { unstable_setRequestLocale } from 'next-intl/server';
+import ClientProvider from '@/app/redux/ClientProvider'; // Path to your ClientProvider component
 
 export default function Layout(props: {
   children: React.ReactNode;
@@ -7,6 +9,8 @@ export default function Layout(props: {
   unstable_setRequestLocale(props.params.locale);
 
   return (
-    <div className="">{props.children}</div>
+    <ClientProvider>
+      <div className="">{props.children}</div>
+    </ClientProvider>
   );
 }

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Link, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 import TextField from '@/components/SignIn/TextField';
 import PasswordField from '@/components/SignIn/PasswordField';
 import LoadingButton from '@/components/LoadingButton';
 import SocialLoginButton from '@/components/SocialLoginButton';
-
 import { loginValidationSchema } from '@/utils/validationSchemas';
 import { useLoginUserMutation } from '@/app/redux/authApi';
 import { saveTokens } from '@/utils/Token';
@@ -18,7 +16,7 @@ export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loginUser] = useLoginUserMutation();
   const router = useRouter();
-  const { t } = useTranslation();
+
 
   const formik = useFormik({
     initialValues: { email: '', password: '' },
@@ -34,11 +32,11 @@ export default function LoginForm() {
           router.push('/userdashboard');
         } else {
           // Set error message for incorrect email or password
-          setErrorMessage(t('signIn.validation.incorrectCredentials'));
+          setErrorMessage("Email and password do not match");
         }
       } catch (error) {
         // Handle login failure and show error message
-        setErrorMessage(t('signIn.validation.incorrectCredentials'));
+        setErrorMessage('Email and password do not match');
       } finally {
         setLoading(false);
       }
@@ -49,7 +47,7 @@ export default function LoginForm() {
     <Box component="form" noValidate className="space-y-4" onSubmit={formik.handleSubmit}>
       <TextField
   id="email"
-  label={t('signIn.emailLabel')}
+  label={ "Email"}
   value={formik.values.email}
   onChange={formik.handleChange}
   onBlur={formik.handleBlur}
@@ -59,7 +57,7 @@ export default function LoginForm() {
 
 <PasswordField
   id="password"
-  label={t('signIn.passwordLabel')}
+  label={"Password"}
   value={formik.values.password}
   onChange={formik.handleChange}
   onBlur={formik.handleBlur}
@@ -77,13 +75,13 @@ export default function LoginForm() {
       )}
 
       <div className="mt-4 flex items-center justify-between">
-        <span className="text-[#303E63]">{t('signIn.rememberMe')}</span>
+        <span className="text-[#303E63]">{"Remember Me"}</span>
         <Link href="/forgot-password" className="text-sm text-[#303E63]">
-          {t('signIn.forgotPassword')}
+          {"Forgot your password?"}
         </Link>
       </div>
 
-      <LoadingButton isLoading={loading} text={t('signIn.loginButton')} loadingText={t('signIn.loggingIn')} type="submit" />
+      <LoadingButton isLoading={loading} text={"Login"} loadingText={"Logging in..."} type="submit" />
 
       <div className="flex justify-center mt-4">
         <SocialLoginButton

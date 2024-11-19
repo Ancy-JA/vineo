@@ -1,17 +1,5 @@
 {
-  "signIn": {
-    "welcomeTitle": "Bienvenido a Vineo",
-    "loginTitle": "Iniciar sesión",
-    "emailLabel": "Correo electrónico",
-    "passwordLabel": "Contraseña",
-    "rememberMe": "Recuérdame",
-    "forgotPassword": "¿Olvidaste tu contraseña?",
-    "loginButton": "Iniciar sesión",
-    "loggingIn": "Iniciando sesión...",
-    "validation": {
-      "incorrectCredentials": "El correo electrónico y la contraseña no coinciden"
-    }
-  },
+  
   "layout": {
     "home": "Inicio",
     "virtualCellar": "Bodega Virtual",

@@ -1,19 +1,5 @@
 {
-  "signIn": {
-    "welcomeTitle": "Welcome to Vineo",
-    "loginTitle": "Login",
-    "emailLabel": "Email",
-    "passwordLabel": "Password",
-    "rememberMe": "Remember Me",
-    "forgotPassword": "Forgot your password?",
-    "loginButton": "Login",
-    "loggingIn": "Logging in...",
-    "validation": {
-        "incorrectCredentials": "Email and password do not match"
-      }
-  },
-  
-  
+    
   "layout": {
     "home": "Home",
     "virtualCellar": "Virtual Cellar",

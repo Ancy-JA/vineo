@@ -3,12 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+
 import LoginForm from '@/components/SignIn/LoginForm';
 import { IMAGES } from '@/app/constants/imageconstants';
 
 export default function LoginPage() {
-  const { t } = useTranslation();
+
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center bg-gray-50 font-inter">
@@ -21,10 +21,10 @@ export default function LoginPage() {
       </div>
       <div className="relative bottom-40 top-0 z-10 w-full max-w-lg rounded-lg px-6 py-4 font-inter shadow-2xl lg:left-40">
         <Typography variant="h4" className="mb-6 text-center font-inter !font-bold !text-2xl text-[#303E63]">
-          {t('signIn.welcomeTitle')}
+        Welcome to Vineo
         </Typography>
         <Typography variant="h6" className="mb-6 text-center !text-xl font-inter text-[#394A59]">
-          {t('signIn.loginTitle')}
+        Login
         </Typography>
         <LoginForm />
       </div>
