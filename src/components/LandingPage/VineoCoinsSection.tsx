@@ -1,4 +1,5 @@
 import { IMAGES } from '@/app/constants/imageconstants';
+import Image from 'next/image';
 
 export default function VineoCoinsSection() {
   return (
@@ -11,7 +12,15 @@ export default function VineoCoinsSection() {
       {/* Left Side - Image Placeholder */}
       <div className="w-full md:w-1/2 lg:w-1/3 flex justify-center">
         <div className="border-2 flex items-center justify-center">
-          
+        <Image
+  src={IMAGES.gif2} // Ensure this resolves to a valid URL string
+  alt="vineo coins"
+  width={300} // Specify width
+  height={300} // Specify height
+  className="rounded-lg"
+  unoptimized // This is required to preserve GIF animations
+/>
+
         </div>
       </div>
 

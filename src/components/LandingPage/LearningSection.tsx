@@ -3,7 +3,7 @@ import { IMAGES} from '@/app/constants/imageconstants';
 
 export default function LearningSection() {
   return (
-    <div className="py-16  flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-12 lg:px-20">
+    <div className="py-16  flex flex-col md:flex-row items-center justify-center  px-6 md:px-12 lg:px-20 transform md:-translate-x-12">
         {/* Left Side - Image and Card */}
         <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
           {/* Image */}
@@ -12,7 +12,7 @@ export default function LearningSection() {
             alt="Wine Learning Image"
             width={300}
             height={450}
-            className="rounded-lg shadow-md mb-6"
+            className="rounded-lg  mb-6"
           />
 
           {/* Card Section */}

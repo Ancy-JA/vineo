@@ -18,7 +18,7 @@ export default function HeaderSection() {
     <div className="relative">
       {/* Fixed Top Bar */}
       <div className="fixed top-0 left-0 w-full bg-opacity-20 bg-gray-500 backdrop-blur-lg z-50 shadow-md">
-        <div className="flex items-center justify-between p-2 md:p-4">
+        <div className="max-w-[108rem] mx-auto px-4 flex items-center justify-between p-2 md:p-4">
           {/* Logo Section */}
           <div className="flex items-center">
             <Image
@@ -105,22 +105,24 @@ export default function HeaderSection() {
       {/* Main Content Section */}
       <div className="pt-[5rem] flex items-center justify-center">
         <div className="bg-white w-full pt-2 shadow-md overflow-hidden">
+          {/* Text Above the Background Image */}
+          <h2 className="text-2xl md:text-3xl font-bold font-domine text-customGray mb-2 text-left pl-6 pt-8">
+            Discover the perfect wine for you
+          </h2>
+
           {/* Middle Section - Background Image with Text Overlay */}
           <div
-            className="relative h-[18.75rem] md:h-[21.875rem] lg:h-[31.25rem] bg-cover bg-no-repeat bg-top"
-            style={{backgroundImage: `url(${IMAGES.LandingImg})`}}
+            className="relative h-[20rem] md:h-[25rem] lg:h-[35rem] bg-cover bg-no-repeat bg-right-top"
+            style={{ backgroundImage: `url(${IMAGES.LandingImg})` }}
           >
             {/* Overlay Content */}
-            <div className="absolute mt-0 md:mt-6 text-customGray inset-0 flex flex-col font-inter items-start pl-6 lg-items-center bg-opacity-20 ">
-              <h2 className="text-2xl md:text-3xl font-bold font-domine text-customGray mb-4">
-                Discover the perfect wine for you
-              </h2>
-              <p>Join Vineo to match with wines that</p>
-              <p>fit your taste thanks to our</p>
-              <p>personalized recommendations.</p>
+            <div className="absolute mt-0 md:mt-6 text-customGray inset-0 flex flex-col font-inter items-start pl-6 lg-items-center bg-opacity-20">
+              <p>Join Vineo to match with wines that<br />
+                fit your taste thanks to our<br />
+                personalized recommendations.</p>
               <p className="mt-5">Be surprised with new flavors and</p>
               <p>unforgettable experiences.</p>
-              <Link href="/sign-in">
+              <Link href="/sign-in" className='mt-6'>
                 <button
                   type="button"
                   className="bg-customPink border-darkPink hover:bg-darkPink text-white font-inter mt-6 py-2 px-6 rounded-xl shadow-lg"
@@ -132,6 +134,8 @@ export default function HeaderSection() {
           </div>
         </div>
       </div>
+
+
     </div>
   );
 }

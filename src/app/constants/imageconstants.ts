@@ -23,5 +23,7 @@ export const IMAGES = {
  graphdetails:"/assets/images/graphDt.svg",
  winedroping:"/assets/images/winedroping.svg",
  letter:"/assets/images/letter.svg",
+ gif1:"/assets/images/gif1.gif",
+ gif2:"/assets/images/gif2.gif"
   // Add more images as needed
 };

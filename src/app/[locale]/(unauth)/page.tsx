@@ -19,20 +19,25 @@ import LevelUpSection from '@/components/LevelUpSection';
 export default function Welcome() {
   return (
     <div className="bg-white">
-
-      <HeaderSection />
-      <HowItWorksSection />
-      <ProcessSection />
-      <EssenceOfVineoSection />
-      <AlgorithmSection />
-      <LearningSection />
-      <LevelUpSection />
-      <VineoCoinsSection />
-      <PricingSection />
-      <FAQSection />
-      <NewsletterSection />
-      <Footer />
-
+      <div className="max-w-[108rem] mx-auto px-4">
+        <HeaderSection />
+      </div>
+      <div className="max-w-[108rem] mx-auto px-4">
+        <HowItWorksSection />
+        <ProcessSection />
+        <EssenceOfVineoSection />
+        <AlgorithmSection />
+        <LearningSection />
+        <LevelUpSection />
+        <VineoCoinsSection />
+        <PricingSection />
+        <FAQSection />
+        <NewsletterSection />
+        <Footer />
+      </div>
     </div>
   );
 }
+
+  
+

@@ -23,7 +23,7 @@ const cards = [
 export default function HowItWorksSection() {
   return (
     <div
-      className="flex flex-col items-center px-4 py-10 bg-cover bg-center"
+      className="flex flex-col items-center px-4 p-10 bg-cover bg-center"
       style={{
         backgroundImage: `url(${IMAGES.paperbg})`,
       }}
@@ -34,12 +34,12 @@ export default function HowItWorksSection() {
           Join the list and take advantage of the launch offer
         </h2>
         <p className="text-xs md:text-sm font-inter text-customGray mb-7 text-center">5€ discount FOREVER</p>
-        <div className="flex items-center border border-customGray rounded-2xl p-2 w-50">
+        <div className="flex items-center border border-customGray rounded-2xl p-1 ">
 
           <input
             type="email"
             placeholder="email"
-            className="flex-1 bg-transparent px-4 outline-none text-sm"
+            className="flex-1 bg-transparent  px-4 md:px-9 outline-none text-sm"
           />
           <button className="bg-customPink text-white rounded-xl font-inter px-4 py-2 shadow-md hover:bg-darkPink text-sm">
             Join Now
@@ -48,19 +48,20 @@ export default function HowItWorksSection() {
       </div>
 
       {/* "How It Works" Section */}
+      <div className='mt-12'>
       <h2 className="text-center text-xl md:text-2xl font-domine font-bold text-customGray mb-12">
         How It Works
       </h2>
-
+      </div>
       {/* Card Container */}
-      <div className="flex flex-col md:flex-row w-45 mt-5 justify-center items-stretch gap-9 md:gap-8">
+      <div className="flex flex-col md:flex-row w-full mt-5 justify-center items-center gap-6">
         {cards.map((card, index) => (
           <div
             key={index}
-            className="relative bg-white p-4 md:p-6 rounded-lg shadow-md text-center flex flex-col items-center w-full md:w-1/3 max-w-xs"
+            className="relative bg-custom-gradient1 p-6 rounded-lg shadow-all-sides text-center flex flex-col items-center w-full md:w-[18.75rem] h-auto"
           >
             {/* Image positioned half inside and half outside */}
-            <div className="absolute -top-12 md:-top-13">
+            <div className="absolute -top-12 md:-top-14">
               <Image
                 src={card.image}
                 alt={card.title}
@@ -69,20 +70,28 @@ export default function HowItWorksSection() {
                 className="mb-4"
               />
             </div>
-            <p className="font-semibold font-domine text-customGray text-base md:text-lg mb-2 mt-10">{card.title}</p>
-            <p className="text-xs md:text-sm font-inter text-description">{card.description}</p>
+            <p className="font-semibold font-domine text-customGray text-base md:text-lg mb-2 mt-10">
+              {card.title}
+            </p>
+            <p className="text-xs md:text-sm font-inter text-description">
+              {card.description}
+            </p>
           </div>
         ))}
       </div>
 
+
+
+
       {/* Call to Action Button */}
-      <div className="flex justify-center mt-8 mb-4">
-        <Link href="/[locale]/unauth/sign-in" as="/sign-in">
-          <button className="bg-customPink hover:bg-darkPink text-white font-inter py-2 px-8 rounded-xl shadow-lg text-sm">
-            Answer the Questionaire
-          </button>
-        </Link>
-      </div>
+      <div className="flex justify-center mt-8 mb-11 w-full">
+  <Link href="/[locale]/unauth/sign-in" as="/sign-in">
+    <button className="bg-customPink hover:bg-darkPink text-white font-inter py-2 px-8 rounded-xl shadow-lg text-sm w-full max-w-xs">
+      Answer the Questionnaire
+    </button>
+  </Link>
+</div>
+
     </div>
   );
 }

@@ -6,12 +6,12 @@ import { IMAGES } from '@/app/constants/imageconstants';
 
 export default function ProcessSection() {
   return (
-    <div className="py-12 bg-white flex flex-col items-center justify-center">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-6 md:px-12 lg:px-20">
+    <div className="pt-12 pb-16 bg-white flex flex-col items-center justify-center">
+      <div className="flex flex-col md:flex-row items-center justify-center  px-6 md:px-12 lg:px-20 gap-10">
         {/* Image Section */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        <div className=" flex justify-center">
           <Image
-            src={IMAGES.square}
+            src={IMAGES.gif1}
             alt="Wine Selection Process"
             width={300}
             height={300}

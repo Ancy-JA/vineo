@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { SharedCardProps } from './Types';
 
-
-
 const SharedCard: React.FC<SharedCardProps> = ({
   title,
   subTitle,
@@ -15,21 +13,12 @@ const SharedCard: React.FC<SharedCardProps> = ({
   buttonText = 'Subscribe',
   onButtonClick,
 }) => {
-  const formattedRenewalDate = renewalDate
-    ? new Date(renewalDate).toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-      })
-    : '';
-
   return (
     <div
-  className={`shadow-xl flex flex-col w-full  md:w-[25rem] max-w-[25rem] h-[35rem] mx-auto  rounded-lg overflow-hidden ${
-    isCurrent ? 'bg-customPink' : 'bg-white'
-  }`}
->
-
+      className={`shadow-xl flex flex-col w-full md:w-[21.5rem] max-w-[21.5rem] h-[30.5rem] mx-auto rounded-lg overflow-hidden ${
+        isCurrent ? 'bg-customPink' : 'bg-white'
+      }`}
+    >
       {/* Card Header */}
       <div
         className={`text-2xl font-bold font-domine text-center mt-3 py-3 w-full ${
@@ -50,8 +39,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
         )}
 
         <ul className="text-sm mb-6">
-        {(description ?? []).map((item, index) => (
-
+          {(description ?? []).map((item, index) => (
             <li key={index} className="flex items-center mb-2">
               <FontAwesomeIcon
                 icon={faCheck}
@@ -63,14 +51,28 @@ const SharedCard: React.FC<SharedCardProps> = ({
           ))}
         </ul>
 
-        {/* Conditional Rendering for Renewal Date or Button */}
-        {isCurrent && renewalDate ? (
-          <p className="text-xs text-white italic text-center">
-            Renovación el: {formattedRenewalDate}
-          </p>
+        {/* Conditional Rendering for Current State */}
+        {isCurrent ? (
+          renewalDate ? (
+            <p className="text-xs text-white italic text-center">
+              Renovación el: {new Date(renewalDate).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+              })}
+            </p>
+          ) : (
+            <button
+              className="mt-4 w-full bg-white text-black py-2 mb-3 rounded-lg shadow-lg hover:opacity-90"
+              onClick={onButtonClick}
+              aria-label={buttonText}
+            >
+              {buttonText}
+            </button>
+          )
         ) : (
           <button
-            className="mt-4 w-full bg-black text-white py-2 mb-3 rounded-lg"
+            className="mt-4 w-full bg-black text-white py-2 mb-3 rounded-lg hover:opacity-90"
             onClick={onButtonClick}
             aria-label={buttonText}
           >

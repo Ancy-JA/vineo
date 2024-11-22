@@ -11,10 +11,11 @@ const config: Config = {
       backgroundImage: {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
         'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', 
-        
+        'custom-gradient1': 'linear-gradient(174.8deg, rgba(249, 249, 249, 0) -171.86%, rgba(244, 244, 244, 0.1) -30.43%, rgba(255, 255, 255, 0.61) 56.34%, #FFFFFF 119.41%)',
       },
-      backgroundSize: {
-        '39rem': '39rem', // Custom background size
+      
+      boxShadow: {
+        'all-sides': '0 0 10px rgba(0, 0, 0, 0.15)', // Custom shadow on all sides
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
