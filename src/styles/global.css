@@ -37,3 +37,15 @@
     height: 40px;
   }
 }
+.swiper {
+  overflow: visible; /* Ensure cards are visible */
+}
+
+.swiper-wrapper {
+  display: flex; /* Ensure proper alignment */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center; /* Center cards */
+}

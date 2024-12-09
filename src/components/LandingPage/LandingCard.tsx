@@ -39,7 +39,7 @@ const LandingCard: React.FC<LandingCardProps> = ({ items }) => {
   }
 
   return (
-    <div ref={containerRef} className="w-full max-w-screen-lg mx-auto overflow-x-hidden">
+    <div ref={containerRef} className="w-full max-w-screen  overflow-x-hidden">
       <Swiper
         modules={[Pagination]}
         pagination={{ clickable: true }}
