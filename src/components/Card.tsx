@@ -15,27 +15,28 @@ const SharedCard: React.FC<SharedCardProps> = ({
 }) => {
   return (
     <div
-      className={`shadow-xl flex flex-col w-full md:w-[21.5rem] max-w-[21.5rem] h-[30.5rem] mx-auto rounded-lg overflow-hidden ${
-        isCurrent ? 'bg-customPink' : 'bg-white'
-      }`}
-    >
+  className={`shadow-2xl flex flex-col w-full md:w-[19.5rem] max-w-[19.5rem] h-[30.5rem] mx-auto rounded-xl overflow-hidden ${
+    isCurrent ? 'bg-card-gradient' : 'bg-white'
+  }`}
+>
       {/* Card Header */}
       <div
-        className={`text-2xl font-bold font-domine text-center mt-3 py-3 w-full ${
-          isCurrent ? 'bg-black text-white' : 'bg-white text-black'
+        className={`text-3xl font-bold font-domine text-center mt-3 py-3 w-full ${
+          isCurrent ? 'bg-cardBlack text-white' : 'bg-white text-customGray'
         }`}
       >
         {title}
       </div>
 
       {/* Card Content */}
-      <div className="p-6 flex flex-col text-left justify-between font-inter flex-grow">
-        <p className={`text-xl font-domine font-semibold mb-2 ${isCurrent ? 'text-white' : 'text-black'}`}>
+      <div className="p-6  flex flex-col text-left justify-between font-inter flex-grow">
+        <div className='pl-8'>
+        <p className={`text-3xl pb-3 font-domine font-semibold  ${isCurrent ? 'text-white' : 'text-customGray'}`}>
           {amount}€/mes
         </p>
 
         {subTitle && (
-          <p className={`text-sm mb-4 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</p>
+          <p className={`text-sm pb-8 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</p>
         )}
 
         <ul className="text-sm mb-6">
@@ -50,7 +51,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
             </li>
           ))}
         </ul>
-
+        </div>
         {/* Conditional Rendering for Current State */}
         {isCurrent ? (
           renewalDate ? (
@@ -63,7 +64,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
             </p>
           ) : (
             <button
-              className="mt-4 w-full bg-white text-black py-2 mb-3 rounded-lg shadow-lg hover:opacity-90"
+              className="mt-4 w-full md:w-[14.5rem] bg-white text-customGray py-3 mb-3 rounded-xl shadow-lg hover:opacity-90 mx-auto"
               onClick={onButtonClick}
               aria-label={buttonText}
             >
@@ -72,7 +73,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
           )
         ) : (
           <button
-            className="mt-4 w-full bg-black text-white py-2 mb-3 rounded-lg hover:opacity-90"
+            className="mt-4 w-full md:w-[14.5rem] bg-customPink text-white py-3 mb-3 rounded-xl hover:opacity-90 mx-auto"
             onClick={onButtonClick}
             aria-label={buttonText}
           >

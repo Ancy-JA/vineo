@@ -7,7 +7,7 @@ interface HeadingProps {
 }
 
 const Heading: React.FC<HeadingProps> = ({ title, className }) => {
-  return <h3 className={`text-lg md:text-xl font-semibold font-domine text-customGray mb-4 ${className}`}>{title}</h3>;
+  return <h3 className={`text-lg md:text-xl font-semibold font-domine text-customGray  ${className}`}>{title}</h3>;
 };
 
 export default Heading;

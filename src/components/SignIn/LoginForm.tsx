@@ -74,19 +74,20 @@ export default function LoginForm() {
         </Typography>
       )}
 
-      <div className="mt-4 flex items-center justify-between">
+      <div className="pb-12 flex items-center justify-between">
         <span className="text-[#303E63]">{"Remember Me"}</span>
-        <Link href="/forgot-password" className="text-sm text-[#303E63]">
+        <Link href="/forgot-password" className="text-md text-[#303E63]">
           {"Forgot your password?"}
         </Link>
       </div>
 
       <LoadingButton isLoading={loading} text={"Login"} loadingText={"Logging in..."} type="submit" />
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center scale-150 mt-4">
         <SocialLoginButton
           iconSrc="/flat-color-icons_google.svg"
           altText="Google Icon"
+          
           onClick={() => {
             // Add Google login logic if needed
           }}

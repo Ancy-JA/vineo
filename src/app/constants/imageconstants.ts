@@ -24,6 +24,11 @@ export const IMAGES = {
  winedroping:"/assets/images/winedroping.svg",
  letter:"/assets/images/letter.svg",
  gif1:"/assets/images/gif1.gif",
- gif2:"/assets/images/gif2.gif"
+ gif2:"/assets/images/gif2.gif",
+ winegif:"/assets/images/winegif.gif",
+ whatsappFooter:'/assets/images/whatsappFooter.svg',
+ facebookFooter:'/assets/images/facebookFooter.svg',
+ instaFooter:'/assets/images/instaFooter.svg',
+ top:'/assets/images/top.svg',
   // Add more images as needed
 };

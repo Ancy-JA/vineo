@@ -1,3 +1,4 @@
+
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -12,11 +13,22 @@ const config: Config = {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
         'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', 
         'custom-gradient1': 'linear-gradient(174.8deg, rgba(249, 249, 249, 0) -171.86%, rgba(244, 244, 244, 0.1) -30.43%, rgba(255, 255, 255, 0.61) 56.34%, #FFFFFF 119.41%)',
+        'card-gradient':'linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%)',
+        
+       'footer-gradient': 'linear-gradient(176.41deg, #FEFDFC 25.27%, #E0DBD2 50.73%, #E0DBD2 89.52%)',
+
+        'bgshade': 'linear-gradient(100.27deg, #F3EFEA 19.85%, #E1DCD3 195.67%)',
       },
       
       boxShadow: {
-        'all-sides': '0 0 10px rgba(0, 0, 0, 0.15)', // Custom shadow on all sides
+       'all-sides-2xl': '0 0 1.8rem 0.625rem rgba(0, 0, 0, 0.079)',
+       'two-sides-xl': '0 -0.3rem 0.5rem rgba(0, 0, 0, 0.1), 0 0.3rem 2.5rem rgba(0, 0, 0, 0.1)',
+       'all-sides-xl': '0 0 1.5rem 0.2rem rgba(0, 0, 0, 0.079)',
+
+
+
       },
+      
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
         domine:['Domine','serif']
@@ -33,15 +45,30 @@ const config: Config = {
         substext:'#FF0000',
         cardcolour:'#F8F8F8',
         description:'#18191A',
-        bgshade:'#F3EFEA',
+        pluscolor:' #82858C',
+        borderColor: '#958974',
+        cardBlack:'#384A59',
+        borderBottom:'#A9AAAA80',
+        topButtonbackground: '#E0DBD2',
+
 
       },
       
       screens: {
         xsm: '400px',  // Define an extra small breakpoint
       },
-      
-      
+      backgroundSize: {
+        'custom-sm': '100%',
+        'custom-md': '80%',
+        'custom-lg': '80%',
+        'custom-xl': '60%',
+      },
+      backgroundPosition: {
+        'custom-sm': 'center',
+        'custom-md': 'center',
+        'custom-lg': 'center',
+        'custom-xl': 'left center', // Adjusts for larger screens if needed
+      },
     },
   },
   plugins: [

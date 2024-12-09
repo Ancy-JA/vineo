@@ -13,7 +13,7 @@ export default function TextField({
 }: TextFieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-gray-700">
+      <label htmlFor={id} className="mt-[3rem] mb-2 block text-gray-700">
         {label}
       </label>
       <input
@@ -23,7 +23,7 @@ export default function TextField({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className={`w-full border bg-gray-100/60 p-3 ${
+        className={`w-full border shadow-all-sides-xl bg-gray-100/60 p-4 ${
           error ? 'border-red-500' : 'border-gray-300'
         } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
       />

@@ -16,10 +16,10 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[#394A59]">
+      <label htmlFor={id} className="mt-12 mb-2 block text-[#394A59]">
         {label}
       </label>
-      <div className="relative">
+      <div className="relative mb-1 shadow-all-sides-xl">
         <input
           id={id}
           name={id}
@@ -27,7 +27,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className={`w-full border bg-gray-100/60 p-3 ${
+          className={`w-full border bg-gray-100/60 p-4 ${
             error ? 'border-red-500' : 'border-gray-300'
           } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
         />
@@ -38,7 +38,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
         </div>
       </div>
       {/* Display helper text if provided */}
-      {helperText && <p className={`mt-1 text-sm ${error ? 'text-red-500' : 'text-gray-500'}`}>{helperText}</p>}
+      {helperText && <p className={`mt-1 text-md ${error ? 'text-red-500' : 'text-gray-500'}`}>{helperText}</p>}
     </div>
   );
 };
