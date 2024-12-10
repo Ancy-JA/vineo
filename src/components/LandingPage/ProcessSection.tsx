@@ -23,13 +23,13 @@ export default function ProcessSection() {
             How do we find the perfect wines for you?
           </h3>
 
-          <p className="text-customGray text-xl md:text-2xl font-inter mt-7">
+          <p className="text-customGray text-xl md:text-2xl font-domine mt-7">
             We analyze your wine preferences based on <br /> 18 key aspects.
           </p>
-          <p className="text-customGray text-xl md:text-2xl font-inter mt-7">
+          <p className="text-customGray text-xl md:text-2xl font-domine mt-7">
             Then, our algorithm determines the probability that <br /> you will enjoy each bottle  <br />we include in your box.
           </p>
-          <p className="text-customGray text-xl md:text-2xl font-inter mt-9">
+          <p className="text-customGray text-xl md:text-2xl font-domine mt-9">
             This value is used to carefully select <br /> the wine bottles that we include <br /> in your box.
           </p>
 

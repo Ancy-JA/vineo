@@ -23,7 +23,7 @@ export default function EssenceOfVineoSection() {
           <h3 className="text-2xl md:text-3xl text-center font-domine font-bold text-customGray mb-10">
             The Essence of Vineo
           </h3>
-          <p className="text-xl md:text-2xl text-description font-inter ">
+          <p className="text-xl md:text-2xl text-description font-domine ">
             Receive a box with 3 wines: 2 carefully selected based on your preferences, <br />
             and 1 that will surprise you with new flavors and experiences.
           </p>

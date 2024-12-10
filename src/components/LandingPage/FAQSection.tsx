@@ -51,7 +51,7 @@ export default function FAQSection() {
       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-domine items-center text-center text-customGray mb-4">
         Frequently Asked Questions
       </h3>
-      <p className="text-lg md:text-xl lg:text-2xl font-inter text-center text-description mb-8 max-w-[60rem]">
+      <p className="text-lg md:text-xl lg:text-2xl font-domine text-center text-description mb-8 max-w-[60rem]">
         We answer your questions here, but if you still have any that are not resolved in this section, do not hesitate to contact us via WhatsApp.
       </p>
 
@@ -74,7 +74,7 @@ export default function FAQSection() {
 
 
             {activeIndex === index && (
-              <div className="text-lg font-inter text-description text-left  mb-4">
+              <div className="text-lg font-domine text-description text-left  mb-4">
                 {item.answer}
               </div>
             )}

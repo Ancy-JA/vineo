@@ -59,7 +59,7 @@ export default function HowItWorksSection() {
             <p className="font-semibold font-domine text-customGray text-xl md:text-2xl mb-2 mt-16">
               {card.title}
             </p>
-            <p className="text-lg md:text-xl font-inter text-description max-w-[25rem]">
+            <p className="text-lg md:text-xl font-domine text-description max-w-[25rem]">
               {card.description}
             </p>
           </div>
@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
       {/* Call to Action Button */}
       <div className="flex justify-center mt-11 mb-11 w-full">
         <Link href="/[locale]/unauth/sign-in" as="/sign-in">
-          <button className="bg-customPink hover:bg-darkPink text-white font-inter py-5 px-12 rounded-xl shadow-lg text-lg md:text-2xl  max-w-md">
+          <button className="bg-customPink hover:bg-darkPink text-white font-domine py-5 px-12 rounded-xl shadow-lg text-lg md:text-2xl  max-w-md">
             Answer the Questionnaire
           </button>
         </Link>

@@ -27,10 +27,10 @@ export default function LearningSection() {
           <h4 className="text-xl md:text-2xl lg:text-3xl font-bold font-domine text-customGray mb-6">
             Learn about wines with every box
           </h4>
-          <p className="text-lg md:text-xl lg:text-2xl text-description font-inter mb-12">
+          <p className="text-lg md:text-xl lg:text-2xl text-description font-domine mb-12">
             Our goal is to offer you a varied selection of wines, including a wide range of types, flavors, and regions.
           </p>
-          <p className="text-lg md:text-xl lg:text-2xl font-inter text-description ">
+          <p className="text-lg md:text-xl lg:text-2xl font-domine text-description ">
             Each box is an opportunity to explore and discover new experiences in the wonderful world of wine. Learn and enjoy at the same time!
           </p>
         </div>

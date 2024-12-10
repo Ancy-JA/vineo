@@ -18,6 +18,21 @@ const config: Config = {
        'footer-gradient': 'linear-gradient(176.41deg, #FEFDFC 25.27%, #E0DBD2 50.73%, #E0DBD2 89.52%)',
 
         'bgshade': 'linear-gradient(100.27deg, #F3EFEA 19.85%, #E1DCD3 195.67%)',
+
+        'login-gradient': `linear-gradient(
+          180deg,
+          rgba(227, 227, 226, 0) 40%,
+          rgba(227, 227, 226, 0.9) 68.5%, 
+          rgba(227, 227, 226, 0.5) 68.5%, 
+          rgba(227, 227, 226, 0.5) 76%, 
+          rgba(227, 227, 226, 2) 76%, 
+          rgba(227, 227, 226, 1) 83.5%, 
+          rgba(227, 227, 226, 0.5) 83.5%, 
+          rgba(227, 227, 226, 0.5) 90%, 
+          rgba(227, 227, 226, 1) 90%
+        )`,
+
+        'sidebar-gradient': 'linear-gradient(90.84deg, rgba(255, 255, 255, 0.05) 9.17%, rgba(255, 255, 255, 0.11) 40.14%, rgba(255, 255, 255, 0) 73.54%, #FFFFFF 151.02%)',
       },
       
       boxShadow: {

@@ -47,7 +47,7 @@ export default function VineoCoinsSection() {
         <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold font-domine text-customGray mb-6">
           Vineo Coins
         </h4>
-        <p className="text-lg md:text-xl lg:text-2xl font-inter text-description mb-14">
+        <p className="text-lg md:text-xl lg:text-2xl font-domine text-description mb-14">
           Vineo Coins will allow you to access exclusive discounts, premium wines, and unique experiences.
         </p>
         <button className="bg-customPink hover:bg-darkPink text-white text-xl md:text-2xl font-semibold py-4 px-11 rounded-xl shadow-lg">

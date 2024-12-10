@@ -20,7 +20,7 @@ export default function NewsletterSection() {
         <h3 className="text-2xl md:text-3xl font-bold font-domine text-customGray mb-9">
           Don't miss a thing
         </h3>
-        <p className="text-lg md:text-xl lg:text-2xl font-inter pb-10 mb-12 ">
+        <p className="text-lg md:text-xl lg:text-2xl font-domine pb-10 mb-12 ">
           Sign up for the newsletter to stay updated on all the news,
           <br />
           benefits, and discounts from Vineo.

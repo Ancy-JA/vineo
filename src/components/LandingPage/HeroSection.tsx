@@ -24,7 +24,7 @@ export default function Header() {
             style={{ backgroundImage: `url(${IMAGES.LandingImg})`}}
           >
             {/* Overlay Content */}
-            <div className="absolute text-sm xsm:text-xl md:text-2xl mt-0 md:mt-3 lg:mt-9 text-customGray inset-0 flex flex-col font-inter items-start pl-3 lg:pl-14 md:pl-5 lg-items-center bg-opacity-20 max-w-[20rem], xsm:max-w-[30rem] md:max-w-[19rem] lg:max-w-[30rem]">
+            <div className="absolute text-sm xsm:text-xl md:text-2xl mt-0 md:mt-3 lg:mt-9 leading-[2.28rem] text-customGray inset-0 flex flex-col font-domine items-start pl-3 lg:pl-14 md:pl-5 lg-items-center bg-opacity-20 max-w-[20rem], xsm:max-w-[30rem] md:max-w-[19rem] lg:max-w-[30rem]">
               <p>
                 Join Vineo to match with wines that
                 <br />
@@ -37,7 +37,7 @@ export default function Header() {
               <Link href="/sign-in" className="mt-3 xsm:mt-6   md:mt-3 lg:mt-6">
                 <button
                   type="button"
-                  className="bg-customPink border-darkPink hover:bg-darkPink text-white font-inter mt-0 lg:mt-9 py-4 px-12 rounded-xl shadow-lg"
+                  className="bg-customPink border-darkPink hover:bg-darkPink text-white font-domine mt-0 lg:mt-9 py-4 px-12 rounded-xl shadow-lg"
                 >
                   Get Started
                 </button>
