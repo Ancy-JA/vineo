@@ -24,7 +24,7 @@ export default function Sidebar() {
     pathname === path ? 'text-customPink md:border-r-4 border-customPink' : 'text-customGray rounded-lg';
 
   return (
-    <div className="h-[38rem] m-3 rounded-xl w-[14rem] flex flex-col bg-white shadow-all-sides-xl bg-sidebar-gradient">
+    <div className="h-[38rem] m-3 rounded-xl w-[14rem] flex flex-col  shadow-all-sides-xl bg-sidebar-gradient">
       {/* Logo Section */}
       <div className="flex flex-col pl-8 py-8">
         <Image

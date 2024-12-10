@@ -47,7 +47,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="md:py-16 py-10 bg-white flex flex-col  items-center  px-6 md:px-12 lg:px-20 ">
+    <div className="md:py-16 py-10 bg-white flex flex-col items-center  px-6 md:px-12 lg:px-20 ">
       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-domine items-center text-center text-customGray mb-4">
         Frequently Asked Questions
       </h3>
@@ -61,7 +61,7 @@ export default function FAQSection() {
           <div key={index} className="border-b border-borderBottom mb-4">
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center py-4 text-customGray font-semibold text-xl transition-all duration-300"
+              className="w-full flex justify-between items-center text-left  py-4 text-customGray font-semibold text-xl transition-all duration-300"
             >
               {item.question}
               <span

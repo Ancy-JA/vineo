@@ -11,7 +11,7 @@ export default function AlgorithmSection() {
           <h3 className="text-xl md:text-2xl lg:text-3xl font-domine text-customGray mb-6">
             The Algorithm
           </h3>
-          <h4 className="text-xl md:text-2xl lg:text-3xl font-domine font-semibold text-customGray mb-8">
+          <h4 className="text-xl max-w-[28rem] md:text-2xl lg:text-3xl font-domine font-semibold text-customGray mb-8">
             Each time you rate a wine, the algorithm improves
           </h4>
           <p className="text-lg md:text-xl lg:text-2xl font-domine text-description mb-4">

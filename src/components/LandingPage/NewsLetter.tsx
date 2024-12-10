@@ -5,7 +5,7 @@ export default function NewsletterSection() {
   return (
     <div className=" pt-7  bg-white  flex flex-col md:flex-row items-center justify-center  px-6 md:px-12 lg:px-20 ">
       {/* Left Side - Image */}
-      <div className="relative  flex justify-center md:translate-x-[-50px]">
+      <div className="relative  flex justify-center translate-x-9 md:translate-x-[-50px]">
         <Image
           src={IMAGES.letter}
           alt="Newsletter Graphic"

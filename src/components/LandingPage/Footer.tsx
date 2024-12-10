@@ -12,11 +12,11 @@ export default function Footer() {
       <div className="flex flex-col gap-6 text-center border-t border-borderColor mb-5">
         {/* Logo Section */}
         <div className=' pt-12 '>
-          <Image src="/vineo.png" alt="Vineo Logo" width={200} height={50} />
+          <Image src="/vineo.png" alt="Vineo Logo" width={150} height={50} />
         </div>
 
         {/* Links Section */}
-        <div className="flex items-center justify-center text:lg md:text-xl gap-12 ">
+        <div className="flex items-center justify-center text:lg md:text-xl gap-7 xsm:gap-12 ">
           <a href="/terms-of-use" className="hover:text-customPink font-semibold ">
             Terms of Use
           </a>
@@ -85,7 +85,7 @@ export default function Footer() {
       {/* Back to Top Button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className=" rounded-full  absolute bottom-6 right-10 "
+        className=" rounded-full w-[7rem] absolute bottom-6 right-10 "
       >
         <Image
           src="/assets/images/top.svg"

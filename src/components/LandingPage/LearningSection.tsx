@@ -20,7 +20,7 @@ export default function LearningSection() {
         </div>
 
         {/* Right Side - Text Content */}
-        <div className="w-full md:w-1/2 lg:w-1/2  text-center md:text-left transform md:translate-x-9 lg:translate-x-20 pr-8">
+        <div className="w-full md:w-1/2 max-w-[45rem] lg:w-1/2  text-center md:text-left transform md:translate-x-9 lg:translate-x-13 pr-8">
           <h3 className="text-xl md:text-2xl lg:text-3xl font-domine text-customGray mb-6">
             Your Learning
           </h3>
