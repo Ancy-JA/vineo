@@ -11,7 +11,7 @@ interface BoxCardProps {
 
 const BoxCard: React.FC<BoxCardProps> = ({ box }) => (
   <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-    <h4 className="text-xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</h4>
+    <div className="text-xl font-inter text-customGray mb-4">Box from {new Date(box.date).toLocaleDateString()}</div>
     
     <div className="flex flex-col lg:flex-row gap-4">
       {/* Swiper Carousel for smaller screens */}
@@ -25,9 +25,9 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => (
           <div key={index} className="flex flex-col items-center w-full lg:w-[calc(33%-1rem)]">
             <img src={wine.image} alt={wine.wine_name} width={150} height={150} className="rounded-lg shadow" />
             <div className="mt-2 text-center">
-              <h3 className="text-customPink font-semibold">{wine.wine_name}</h3>
-              <p className="text-sm text-customGray">{wine.area}</p>
-              <p className="text-sm text-customGray">{wine.store}</p>
+              <div className="text-customPink font-semibold">{wine.wine_name}</div>
+              <div className="text-sm text-customGray">{wine.area}</div>
+              <div className="text-sm text-customGray">{wine.store}</div>
               <RatingStars rating={wine.rating} />
             </div>
           </div>

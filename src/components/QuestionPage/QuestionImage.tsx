@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { IMAGES } from '@/app/constants/imageconstants';
 
 const QuestionImage: React.FC = () => (
-  <div className="mb-[4rem]">
+  <div className="mb-[4rem] mt-[2rem]">
     <Image
       src={IMAGES.qn}
       alt="Question Illustration"

@@ -17,7 +17,7 @@ export default function NavigationWrapper() {
     <nav className="flex flex-col space-y-4 pl-2 md:px-4">
       <Link href="/userdashboard" className={isActive('/userdashboard')}>
         <GrHomeRounded size={19} />
-        <span className="hidden md:inline">{t('layout.home')}</span>
+        <div className="hidden md:inline">{t('layout.home')}</div>
       </Link>
       {/* Add other navigation links here */}
     </nav>

@@ -14,7 +14,7 @@ export default function CenteredLayout({
     <AuthGuard>
       <div className={`flex min-h-screen ${isSignInPage ? '' : 'ml-16 md:ml-64'}`}>
         {!isSignInPage && (
-          <aside className="fixed top-0 left-0 ">
+          <aside className="fixed top-0 left-0 z-50 h-full w-16 md:w-64 bg-white shadow-lg ">
             <Sidebar />
           </aside>
         )}

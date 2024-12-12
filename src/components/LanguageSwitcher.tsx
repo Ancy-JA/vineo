@@ -18,7 +18,7 @@ const LanguageSwitcher: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative right-3 top-4">
       {/* Button to toggle dropdown */}
       <button onClick={toggleDropdown} className="flex items-center space-x-2 p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none">
         <Image
@@ -28,7 +28,7 @@ const LanguageSwitcher: React.FC = () => {
           height={24}
           className="rounded-full"
         />
-        <span>{i18n.language === 'en' ? 'English' : 'Español'}</span>
+        <div>{i18n.language === 'en' ? 'English' : 'Español'}</div>
       </button>
 
       {/* Dropdown menu */}
@@ -45,7 +45,7 @@ const LanguageSwitcher: React.FC = () => {
               height={24}
               className="rounded-full"
             />
-            <span>English</span>
+            <div>English</div>
           </button>
           <button
             onClick={() => changeLanguage('es')}
@@ -58,7 +58,7 @@ const LanguageSwitcher: React.FC = () => {
               height={24}
               className="rounded-full"
             />
-            <span>Español</span>
+            <div>Español</div>
           </button>
         </div>
       )}

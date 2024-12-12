@@ -18,20 +18,20 @@ export default function ProcessSection() {
         </div>
 
         <div className="w-full md:w-1/2 text-center md:text-left mb-3 xsm:mb-14 transform md:translate-x-14">
-          <h2 className="text-2xl md:text-3xl text-customGray font-domine mb-7">The Process</h2>
-          <h3 className="text-2xl md:text-3xl text-customGray font-domine font-semibold">
+          <div className="text-2xl md:text-3xl text-customGray font-domine mb-7">The Process</div>
+          <div className="text-2xl md:text-3xl text-customGray font-domine font-semibold">
             How do we find the perfect wines for you?
-          </h3>
+          </div>
 
-          <p className="text-customGray text-xl md:text-2xl font-domine mt-7">
+          <div className="text-customGray text-xl md:text-2xl font-domine mt-7">
             We analyze your wine preferences based on <br /> 18 key aspects.
-          </p>
-          <p className="text-customGray text-xl md:text-2xl font-domine mt-7">
+          </div>
+          <div className="text-customGray text-xl md:text-2xl font-domine mt-7">
             Then, our algorithm determines the probability that <br /> you will enjoy each bottle  <br />we include in your box.
-          </p>
-          <p className="text-customGray text-xl md:text-2xl font-domine mt-9">
+          </div>
+          <div className="text-customGray text-xl md:text-2xl font-domine mt-9">
             This value is used to carefully select <br /> the wine bottles that we include <br /> in your box.
-          </p>
+          </div>
 
           <div className="mt-9 md:mt-5 text-xl md:text-2xl">
             <Link href="/[locale]/unauth/sign-in" as="/sign-in">

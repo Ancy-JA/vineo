@@ -48,12 +48,12 @@ export default function FAQSection() {
 
   return (
     <div className="md:py-16 py-10 bg-white flex flex-col items-center  px-6 md:px-12 lg:px-20 ">
-      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-domine items-center text-center text-customGray mb-4">
+      <div className="text-xl md:text-2xl lg:text-3xl font-bold font-domine items-center text-center text-customGray mb-4">
         Frequently Asked Questions
-      </h3>
-      <p className="text-lg md:text-xl lg:text-2xl font-domine text-center text-description mb-8 max-w-[60rem]">
+      </div>
+      <div className="text-lg md:text-xl lg:text-2xl font-domine text-center text-description mb-8 max-w-[60rem]">
         We answer your questions here, but if you still have any that are not resolved in this section, do not hesitate to contact us via WhatsApp.
-      </p>
+      </div>
 
       {/* FAQ Items */}
       <div className="w-full max-w-[80rem]">

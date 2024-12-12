@@ -31,12 +31,12 @@ const SharedCard: React.FC<SharedCardProps> = ({
       {/* Card Content */}
       <div className="p-6  flex flex-col text-left justify-between font-inter flex-grow">
         <div className='pl-8'>
-        <p className={`text-3xl pb-3 font-domine font-semibold  ${isCurrent ? 'text-white' : 'text-customGray'}`}>
+        <div className={`text-3xl pb-3 font-domine font-semibold  ${isCurrent ? 'text-white' : 'text-customGray'}`}>
           {amount}€/mes
-        </p>
+        </div>
 
         {subTitle && (
-          <p className={`text-sm pb-8 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</p>
+          <div className={`text-sm pb-8 ${isCurrent ? 'text-white' : 'text-gray-800'}`}>{subTitle}</div>
         )}
 
         <ul className="text-sm mb-6">
@@ -47,7 +47,7 @@ const SharedCard: React.FC<SharedCardProps> = ({
                 className="mr-2"
                 style={{ color: isCurrent ? 'white' : '#E5535D' }}
               />
-              <span className={isCurrent ? 'text-white' : 'text-gray-700'}>{item}</span>
+              <div className={isCurrent ? 'text-white' : 'text-gray-700'}>{item}</div>
             </li>
           ))}
         </ul>
@@ -55,13 +55,13 @@ const SharedCard: React.FC<SharedCardProps> = ({
         {/* Conditional Rendering for Current State */}
         {isCurrent ? (
           renewalDate ? (
-            <p className="text-xs text-white italic text-center">
+            <div className="text-xs text-white italic text-center">
               Renovación el: {new Date(renewalDate).toLocaleDateString('en-GB', {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',
               })}
-            </p>
+            </div>
           ) : (
             <button
               className="mt-4 w-full md:w-[14.5rem] bg-white text-customGray py-3 mb-3 rounded-xl shadow-lg hover:opacity-90 mx-auto"

@@ -24,48 +24,48 @@ export default function Sidebar() {
     pathname === path ? 'text-customPink md:border-r-4 border-customPink' : 'text-customGray rounded-lg';
 
   return (
-    <div className="h-[38rem] m-3 rounded-xl w-[14rem] flex flex-col  shadow-all-sides-xl bg-sidebar-gradient">
+    <div className="h-[38rem] m-3 rounded-xl w-[9rem] md:w-[14rem] flex flex-col  md:shadow-all-sides-xl bg-sidebar-gradient">
       {/* Logo Section */}
-      <div className="flex flex-col pl-8 py-8">
+      <div className="flex flex-col md:pl-8 py-8">
         <Image
           src={IMAGES.vineoLogo}
           alt="Vineo Logo"
-          className="w-[100px] h-[40px]"
-          width={100}
-          height={40}
+          className="md:w-[100px] md:h-[40px]"
+          width={50}
+          height={20}
         />
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex flex-col space-y-4 px-4">
+      <nav className="flex flex-col space-y-4 md:px-4">
         <Link href="/userdashboard" className={`flex items-center py-2 hover:bg-gray-100 ${isActive('/userdashboard')}`}>
           <GrHomeRounded className="mr-4" size={19} />
-          <span className="font-inter hidden md:inline-block">{t('layout.home')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.home')}</div>
         </Link>
         <Link href="/virtualcellar" className={`flex items-center py-2 hover:bg-gray-100 ${isActive('/virtualcellar')}`}>
           <Image src={IMAGES.virtualcellar} alt="Virtual Cellar" width={24} height={20} className="mr-4" />
-          <span className="font-inter hidden md:inline-block">{t('layout.virtualCellar')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.virtualCellar')}</div>
         </Link>
         <Link href="/subscription" className={`flex items-center py-2 hover:bg-gray-100 ${isActive('/subscription')}`}>
           <CiStar className="mr-4" size={25} />
-          <span className="font-inter hidden md:inline-block">{t('layout.subscription')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.subscription')}</div>
         </Link>
         <Link href="/settings" className={`flex items-center py-2 hover:bg-gray-100 ${isActive('/settings')}`}>
           <SlSettings className="mr-4" size={20} />
-          <span className="font-inter hidden md:inline-block">{t('layout.settings')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.settings')}</div>
         </Link>
         <Link href="/history" className={`flex items-center py-2 hover:bg-gray-100 ${isActive('/history')}`}>
           <MdHistory className="mr-4" size={23} />
-          <span className="font-inter hidden md:inline-block">{t('layout.history')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.history')}</div>
         </Link>
         <Link href="/logout" className="flex items-center py-2 hover:bg-gray-100 rounded-lg">
           <LogoutIcon className="mr-4" />
-          <span className="font-inter hidden md:inline-block">{t('layout.logout')}</span>
+          <div className="font-inter hidden md:inline-block">{t('layout.logout')}</div>
         </Link>
       </nav>
 
       {/* User Info Section */}
-      <div className="flex items-center px-4 mt-auto py-6">
+      <div className="flex items-center md:px-4 mt-auto py-6">
         <Image src={IMAGES.coins} alt="Vineo coins" width={40} height={45} className="mr-4" />
         <div className="hidden md:block">
           <div className="font-inter text-lg">{t('layout.username')}</div>

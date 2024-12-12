@@ -7,7 +7,7 @@ interface TextProps {
 }
 
 const Text: React.FC<TextProps> = ({ content, className }) => {
-  return <p className={`text-sm md:text-base text-description font-inter ${className}`}>{content}</p>;
+  return <div className={`text-sm md:text-base text-description font-inter ${className}`}>{content}</div>;
 };
 
 export default Text;

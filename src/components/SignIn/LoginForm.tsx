@@ -75,7 +75,7 @@ export default function LoginForm() {
       )}
 
       <div className="pb-12 flex items-center justify-between">
-        <span className="text-[#303E63]">{"Remember Me"}</span>
+        <div className="text-[#303E63]">{"Remember Me"}</div>
         <Link href="/forgot-password" className="text-md text-[#303E63]">
           {"Forgot your password?"}
         </Link>

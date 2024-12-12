@@ -21,9 +21,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-purple-500 text-white p-2 rounded-full" onClick={onDownload}>
           <BsDownload />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-purple-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-purple-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.download')}
-        </span>
+        </div>
       </div>
 
       {/* View Details Button */}
@@ -31,9 +31,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-orange-500 text-white p-2 rounded-full" onClick={onView}>
           <FaEye />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-orange-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-orange-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.details')}
-        </span>
+        </div>
       </div>
 
       {/* WhatsApp Button */}
@@ -41,9 +41,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-green-500 text-white p-2 rounded-full" onClick={() => window.open(`https://wa.me/${phone}`, '_blank')}>
           <AiOutlineWhatsApp />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-green-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-green-400 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.contact')}
-        </span>
+        </div>
       </div>
 
       {/* Approve Button */}
@@ -51,9 +51,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
           <FaCheck />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.approve')}
-        </span>
+        </div>
       </div>
 
       {/* Reject Button */}
@@ -61,9 +61,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
           <FaTimes />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.reject')}
-        </span>
+        </div>
       </div>
 
       {/* Edit Button */}
@@ -71,9 +71,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
           <FaEdit />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.edit')}
-        </span>
+        </div>
       </div>
 
       {/* Delivery Button */}
@@ -81,9 +81,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
         <button className="bg-gray-200 text-gray-400 p-2 rounded-full">
           <FaTruck />
         </button>
-        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-sm bg-gray-300 text-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity">
           {t('historyPage.delivery')}
-        </span>
+        </div>
       </div>
     </div>
   );

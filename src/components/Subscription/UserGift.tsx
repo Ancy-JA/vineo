@@ -9,8 +9,8 @@ const UserGift: React.FC<UserGiftProps> = ({ type }) => {
   // Conditionally call the query only if the type is 20
   const { data, error, isLoading } = type === 20 ? useGetLatestUserGiftQuery() : { data: null, error: null, isLoading: false };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading gift data</p>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading gift data</div>;
 
   const latestGift = data?.getLatestUserGift;
 
@@ -18,11 +18,11 @@ const UserGift: React.FC<UserGiftProps> = ({ type }) => {
     <div>
       {latestGift ? (
         <div>
-          <h3>Latest Gift:</h3>
-          <p>{latestGift}</p>
+          <div>Latest Gift:</div>
+          <div>{latestGift}</div>
         </div>
       ) : (
-        <p>No latest gift found</p>
+        <div>No latest gift found</div>
       )}
     </div>
   );

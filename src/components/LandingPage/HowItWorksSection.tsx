@@ -33,9 +33,9 @@ export default function HowItWorksSection() {
 
       {/* "How It Works" Section */}
       <div className="mt-12">
-        <h2 className="text-center text-2xl md:text-3xl font-domine font-bold text-customGray mb-12 pb-12 mt-12 pt-12">
+        <div className="text-center text-2xl md:text-3xl font-domine font-bold text-customGray mb-12 pb-12 mt-12 pt-12">
           How It Works
-        </h2>
+        </div>
       </div>
 
       {/* Card Container */}
@@ -56,12 +56,12 @@ export default function HowItWorksSection() {
                
               />
             </div>
-            <p className="font-semibold font-domine text-customGray text-xl md:text-2xl mb-2 mt-16">
+            <div className="font-semibold font-domine text-customGray text-xl md:text-2xl mb-2 mt-16">
               {card.title}
-            </p>
-            <p className="text-lg md:text-xl font-domine text-description max-w-[25rem]">
+            </div>
+            <div className="text-lg md:text-xl font-domine text-description max-w-[25rem]">
               {card.description}
-            </p>
+            </div>
           </div>
         ))}
       </div>

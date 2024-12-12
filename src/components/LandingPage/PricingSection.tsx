@@ -44,12 +44,12 @@ export default function PricingSection() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-domine text-customGray mt-8 mb-4">
+      <div className="text-xl md:text-2xl lg:text-3xl font-bold font-domine text-customGray mt-8 mb-4">
         Choose the service that best suits you
-      </h3>
-      <p className="text-lg md:text-xl lg:text-2xl font-domine text-description pb-12 mb-12">
+      </div>
+      <div className="text-lg md:text-xl lg:text-2xl font-domine text-description pb-12 mb-12">
         Vineo tailored to you
-      </p>
+      </div>
       <div className="container pb-11 mb-6">
         <LandingCard items={pricingPlans} />
       </div>
