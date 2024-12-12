@@ -30,5 +30,6 @@ export const IMAGES = {
  facebookFooter:'/assets/images/facebookFooter.svg',
  instaFooter:'/assets/images/instaFooter.svg',
  top:'/assets/images/top.svg',
+ qn:'/assets/images/qn.svg'
   // Add more images as needed
 };

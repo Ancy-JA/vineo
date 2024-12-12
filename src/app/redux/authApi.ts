@@ -289,7 +289,28 @@ export const authApi = createApi({
         },
       }),
     }),
-
+    getQuestions: builder.query({
+      query: () => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query getQuestions {
+              getQuestions {
+                question
+                question_id
+                options {
+                  id
+                  option
+                  description
+                }
+              }
+            }
+          `,
+        },
+      }),
+    }),
+    
     // New `getBoxHistoryAdmin` endpoint for client history
     getBoxHistoryAdmin: builder.query({
       query: ({ searchString, page, pageSize }) => ({
@@ -344,4 +365,5 @@ export const {
   useLoadSubscriptionListForUserQuery,
   useFetchSubscriptionStatusMutation,
   useGetLatestUserGiftQuery,
+  useGetQuestionsQuery, 
 } = authApi;

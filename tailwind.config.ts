@@ -39,7 +39,7 @@ const config: Config = {
        'all-sides-2xl': '0 0 1.8rem 0.625rem rgba(0, 0, 0, 0.079)',
        'two-sides-xl': '0 -0.3rem 0.5rem rgba(0, 0, 0, 0.1), 0 0.3rem 2.5rem rgba(0, 0, 0, 0.1)',
        'all-sides-xl': '0 0 1.5rem 0.2rem rgba(0, 0, 0, 0.079)',
-
+       'optionCardShadow': '0px 12px 30px 0px #00000040',
 
 
       },
@@ -65,7 +65,9 @@ const config: Config = {
         cardBlack:'#384A59',
         borderBottom:'#A9AAAA80',
         topButtonbackground: '#E0DBD2',
-
+        qnColor: '#303E63',
+        optionHead: '#232323',
+        option: '#000000',
 
       },
       

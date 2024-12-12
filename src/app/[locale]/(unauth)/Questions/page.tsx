@@ -1,66 +1,76 @@
 'use client';
 import React, { useState } from 'react';
-import ChoiceCard from '@/components/LandingPage/ChoiceCard';
-import Image from 'next/image';
-
-const coffeeChoices = [
-  { title: 'Black and strong', description: 'Embracing the intensity of the dark side, with every galactic sip.' },
-  { title: 'With milk and without sugar', description: 'Dairy balance in my cup, but always maintaining the natural sweetness.' },
-  { title: 'With cream and/or sugar', description: 'Because life is short and there is always room for a little sweetness.' },
-  { title: "I don't drink coffee", description: 'I am more into recharging energy with photosynthesis and good humor.' },
-];
+import { IMAGES } from '@/app/constants/imageconstants';
+import Logo from '@/components/QuestionPage/Logo';
+import ProgressBar from '@/components/QuestionPage/ProgressBar';
+import QuestionTitle from '@/components/QuestionPage/QuestionTitle';
+import QuestionImage from '@/components/QuestionPage/QuestionImage';
+import OptionsSection from '@/components/QuestionPage/OptionsSection';
+import NavigationButtons from '@/components/QuestionPage/NavigationButtons';
+import { useGetQuestionsQuery } from '@/app/redux/authApi';
 
 const CoffeeChoicePage: React.FC = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { data, error, isLoading } = useGetQuestionsQuery(undefined);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState<(number | null)[]>([]);
+
+  if (isLoading || !data) return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  if (error) return <div className="flex items-center justify-center min-h-screen">Error loading questions</div>;
+
+  const questions = data.data.getQuestions || [];
+  if (questions.length === 0) return <div className="flex items-center justify-center min-h-screen">No questions available</div>;
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const selectedOptionIndex = selectedAnswers[currentQuestionIndex] || null;
+  const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+
+  const handleOptionSelect = (index: number) => {
+    const updatedAnswers = [...selectedAnswers];
+    updatedAnswers[currentQuestionIndex] = index;
+    setSelectedAnswers(updatedAnswers);
+
+    setTimeout(() => {
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else {
+        alert('Thank you for completing the survey!');
+      }
+    }, 300); // 300ms delay
+  };
+
+  const handlePrevious = () => setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
+    selectedOptionIndex !== null && setCurrentQuestionIndex((prev) => Math.min(prev + 1, questions.length - 1));
+  const handleSubmit = () => alert('Thank you for completing the survey!');
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[url('/path/to/background.png')] bg-cover bg-center">
-      {/* Title Section */}
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-[#303E63]">
-  How do you take your coffee?
-</h2>
-
-
-      {/* Image Section */}
-      <div className="mb-8">
-        <Image
-          src="/path/to/coffee-image.png"
-          alt="Coffee Illustration"
-          width={150}
-          height={150}
-          className="mx-auto"
-        />
-      </div>
-
-      {/* Choices Section */}
-      <div className="flex flex-wrap justify-center gap-4 px-4">
-        {coffeeChoices.map((choice, index) => (
-          <ChoiceCard
-            key={index}
-            title={choice.title}
-            description={choice.description}
-            isSelected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index)}
+    <div
+      className="flex justify-center items-center min-h-screen px-4 bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${IMAGES.paperbg})`, // Background image from constants
+      }}
+    >
+      {/* Fixed container width */}
+      <div className="relative max-w-[1728px] w-full flex flex-col items-center">
+        <Logo />
+        <div className="flex flex-col items-center w-full mt-[6rem]">
+          <ProgressBar progressPercentage={progressPercentage} />
+          <QuestionTitle questionText={currentQuestion.question} currentIndex={currentQuestionIndex} />
+          <QuestionImage />
+          <OptionsSection
+            options={currentQuestion.options}
+            selectedOptionIndex={selectedOptionIndex}
+            onOptionSelect={handleOptionSelect}
           />
-        ))}
-      </div>
-
-      {/* Navigation Arrows */}
-      <div className="flex items-center justify-center mt-8 gap-6">
-        <button
-          type="button"
-          className="text-2xl text-customGray hover:text-customPink"
-          aria-label="Previous"
-        >
-          &lt;
-        </button>
-        <button
-          type="button"
-          className="text-2xl text-customGray hover:text-customPink"
-          aria-label="Next"
-        >
-          &gt;
-        </button>
+          <NavigationButtons
+            currentIndex={currentQuestionIndex}
+            totalQuestions={questions.length}
+            selectedOptionIndex={selectedOptionIndex}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            onSubmit={handleSubmit}
+          />
+        </div>
       </div>
     </div>
   );

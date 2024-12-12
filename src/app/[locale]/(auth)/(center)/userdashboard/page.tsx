@@ -57,7 +57,7 @@ const DashboardPage: React.FC = () => {
   return (
     <div className="flex min-h-screen  bg-gray-100 overflow-x-hidden" ref={scrollRef}>
       
-      <main className="flex-grow p-6 md:p-8 lg:p-10 bg-white shadow-md rounded-lg max-w-screen-lg mx-auto overflow-hidden">
+      <main className="flex-grow p-6 md:p-8 lg:p-10 bg-white shadow-md rounded-lg max-w-screen  overflow-hidden">
       <SubscriptionStatusLoader loading={subscriptionLoading} />
         {boxes.map((box, index) => (
           <BoxCard key={index} box={box} />
