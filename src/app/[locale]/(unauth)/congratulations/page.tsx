@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
+//import Image from 'next/image';
+import Logo from '@/components/QuestionPage/Logo';
 import { IMAGES } from '@/app/constants/imageconstants';
 
 const CongratulationsPage: React.FC = () => {
@@ -28,23 +29,14 @@ const CongratulationsPage: React.FC = () => {
       }}
     >
       {/* Transparent Header */}
-      <div className="w-full fixed top-0 left-0 bg-blurgradient  shadow-md z-10">
-        <div className="max-w-[108rem] mx-auto flex items-center p-4">
-          <Image
-            src={IMAGES.vineoLogo}
-            alt="Vineo Logo"
-            width={200}
-            height={40}
-            className="object-contain"
-          />
-        </div>
-      </div>
+      <Logo paddingBottom="pb-4" />
+
 
       {/* Main Content */}
       <div className="flex flex-col items-center mt-20 px-4 font-domine relative">
         {/* Header Section */}
         <div className="text-center max-w-4xl">
-          <div className="text-4xl font-bold mt-[2rem] text-gray-800">¡Enhorabuena!</div>
+          <div className="text-4xl font-bold mt-[4rem] text-gray-800">¡Enhorabuena!</div>
           <div className="text-2xl max-w-[53rem] text-gray-600 mt-6">
             Ya sabemos tus gustos, ahora aprende sobre vinos cada mes con las cajas de Vineo.
             Suscríbete, disfruta y aprende sobre el vino.

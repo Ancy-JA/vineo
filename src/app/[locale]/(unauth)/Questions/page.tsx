@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { IMAGES } from '@/app/constants/imageconstants';
 import Logo from '@/components/QuestionPage/Logo';
-import ProgressBar from '@/components/QuestionPage/ProgressBar';
+//import ProgressBar from '@/components/QuestionPage/ProgressBar';
 import QuestionTitle from '@/components/QuestionPage/QuestionTitle';
 import QuestionImage from '@/components/QuestionPage/QuestionImage';
 import OptionsSection from '@/components/QuestionPage/OptionsSection';
@@ -24,7 +24,7 @@ const CoffeeChoicePage: React.FC = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const selectedOptionIndex = selectedAnswers[currentQuestionIndex] || null;
-  const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+  //const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   const handleOptionSelect = (index: number) => {
     const updatedAnswers = [...selectedAnswers];
@@ -55,9 +55,10 @@ const CoffeeChoicePage: React.FC = () => {
     >
       {/* Fixed container width */}
       <div className="relative max-w-[1728px] w-full flex flex-col items-center">
-        <Logo />
+      <Logo showProgressBar={true} progressPercentage={((currentQuestionIndex + 1) / questions.length) * 100} />
+
         <div className="flex flex-col items-center w-full mt-[6rem] md:mt-[6rem] lg:mt-[6rem] xl:mt-[6rem] 2xl:mt-[12rem]">
-          <ProgressBar progressPercentage={progressPercentage} />
+          
           <QuestionTitle questionText={currentQuestion.question} currentIndex={currentQuestionIndex} />
           <QuestionImage />
           <OptionsSection
