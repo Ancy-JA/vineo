@@ -15,13 +15,13 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   selectedOptionIndex,
   onPrevious,
   onNext,
-  onSubmit,
+  
 }) => (
-  <div className="flex flex-col items-center  gap-6">
-    <div className="flex gap-8 mt-[4rem]">
+ 
+    <div className="flex  gap-8 mt-[3rem] mb-[1srem]">
       <button
         type="button"
-        className={`text-4xl ${currentIndex > 0 ? 'text-customPink hover:text-darkPink' : 'text-gray-300 cursor-not-allowed'}`}
+        className={`text-7xl ${currentIndex > 0 ? 'text-customPink hover:text-darkPink' : 'text-gray-300 cursor-not-allowed'}`}
         aria-label="Previous Question"
         onClick={onPrevious}
         disabled={currentIndex === 0}
@@ -31,7 +31,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
 
       <button
         type="button"
-        className={`text-4xl ${
+        className={`text-7xl ${
           selectedOptionIndex !== null && currentIndex < totalQuestions - 1
             ? 'text-customPink hover:text-darkPink'
             : 'text-gray-300 cursor-not-allowed'
@@ -45,7 +45,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
     </div>
 
     
-  </div>
+  
 );
 
 export default NavigationButtons;

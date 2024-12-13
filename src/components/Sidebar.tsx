@@ -24,7 +24,7 @@ export default function Sidebar() {
     pathname === path ? 'text-customPink md:border-r-4 border-customPink' : 'text-customGray rounded-lg';
 
   return (
-    <div className="h-[38rem] m-3 rounded-xl w-[9rem] md:w-[14rem] flex flex-col  md:shadow-all-sides-xl bg-sidebar-gradient">
+    <div className="h-[38rem] md:h-[48rem] m-3 rounded-xl w-[9rem] md:w-[14rem] flex flex-col  md:shadow-all-sides-xl md:bg-sidebar-gradient">
       {/* Logo Section */}
       <div className="flex flex-col md:pl-8 py-8">
         <Image
@@ -58,7 +58,7 @@ export default function Sidebar() {
           <MdHistory className="mr-4" size={23} />
           <div className="font-inter hidden md:inline-block">{t('layout.history')}</div>
         </Link>
-        <Link href="/logout" className="flex items-center py-2 hover:bg-gray-100 rounded-lg">
+        <Link href="/logout" className="flex items-center py-2 md:py-[5rem] hover:bg-gray-100 rounded-lg">
           <LogoutIcon className="mr-4" />
           <div className="font-inter hidden md:inline-block">{t('layout.logout')}</div>
         </Link>

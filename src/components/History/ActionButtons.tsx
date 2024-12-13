@@ -17,7 +17,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onView, phone
   return (
     <div className="flex flex-wrap space-x-2 space-y-2">
       {/* Download Button */}
-      <div className="relative group">
+      <div className="relative group translate-y-2">
         <button className="bg-purple-500 text-white p-2 rounded-full" onClick={onDownload}>
           <BsDownload />
         </button>

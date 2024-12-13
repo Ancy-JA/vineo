@@ -8,14 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      
+
       backgroundImage: {
         'glass-bottle': 'url(\'/glass-bottle.png\')', // Background image configuration
-        'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);', 
+        'custom-gradient': ' linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%);',
         'custom-gradient1': 'linear-gradient(174.8deg, rgba(249, 249, 249, 0) -171.86%, rgba(244, 244, 244, 0.1) -30.43%, rgba(255, 255, 255, 0.61) 56.34%, #FFFFFF 119.41%)',
-        'card-gradient':'linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%)',
-        
-       'footer-gradient': 'linear-gradient(176.41deg, #FEFDFC 25.27%, #E0DBD2 50.73%, #E0DBD2 89.52%)',
+        'card-gradient': 'linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%)',
+
+        'footer-gradient': 'linear-gradient(176.41deg, #FEFDFC 25.27%, #E0DBD2 50.73%, #E0DBD2 89.52%)',
 
         'bgshade': 'linear-gradient(100.27deg, #F3EFEA 19.85%, #E1DCD3 195.67%)',
 
@@ -33,44 +33,54 @@ const config: Config = {
         )`,
 
         'sidebar-gradient': 'linear-gradient(90.84deg, rgba(255, 255, 255, 0.05) 9.17%, rgba(255, 255, 255, 0.11) 40.14%, rgba(255, 255, 255, 0) 73.54%, #FFFFFF 151.02%)',
+        'selectedOptiongradient': 'linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.15) 15.79%, rgba(255, 210, 203, 0.29) 67%, rgba(247, 138, 121, 0.46) 100.7%)',
+        'unselectedOptiongradient': 'linear-gradient(174.04deg, #FBF9F6 -9.19%, #FFFFFF 18.02%, #FBF9F6 46.92%, #FFFFFF 69.43%, #FBF9F6 91.85%)',
+
+
       },
-      
+      backdropBlur: {
+        // Add custom blur values
+        'xs': '0.125rem', // Unselected option blur
+        'lg': '1.8075rem', // Selected option blur
+        
+      },
+      backdropFilter: ['responsive'],
       boxShadow: {
-       'all-sides-2xl': '0 0 1.8rem 0.625rem rgba(0, 0, 0, 0.079)',
-       'two-sides-xl': '0 -0.3rem 0.5rem rgba(0, 0, 0, 0.1), 0 0.3rem 2.5rem rgba(0, 0, 0, 0.1)',
-       'all-sides-xl': '0 0 1.5rem 0.2rem rgba(0, 0, 0, 0.079)',
-       'optionCardShadow': '0px 12px 30px 0px #00000040',
+        'all-sides-2xl': '0 0 1.8rem 0.625rem rgba(0, 0, 0, 0.079)',
+        'two-sides-xl': '0 -0.3rem 0.5rem rgba(0, 0, 0, 0.1), 0 0.3rem 2.5rem rgba(0, 0, 0, 0.1)',
+        'all-sides-xl': '0 0 1.5rem 0.2rem rgba(0, 0, 0, 0.079)',
+        'optionCardShadow': '0px 12px 30px 0px #00000040',
 
 
       },
-      
+
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Custom font family
-        domine:['Domine','serif']
+        domine: ['Domine', 'serif']
       },
       colors: {
         customPink: '#F78A79',
-        darkPink:'#E5535D',
-        hoverPink:  '#D4695B',
+        darkPink: '#E5535D',
+        hoverPink: '#D4695B',
         customGray: '#394A59',
         dotGray: '#555',  // Custom color for pagination dots
         dotActive: '#F78A79', // Custom color for active pagination dots
         whiteBorder: '#FFFFFF0D',
         cancelbackground: '#F4D3CE',
-        substext:'#FF0000',
-        cardcolour:'#F8F8F8',
-        description:'#18191A',
-        pluscolor:' #82858C',
+        substext: '#FF0000',
+        cardcolour: '#F8F8F8',
+        description: '#18191A',
+        pluscolor: ' #82858C',
         borderColor: '#958974',
-        cardBlack:'#384A59',
-        borderBottom:'#A9AAAA80',
+        cardBlack: '#384A59',
+        borderBottom: '#A9AAAA80',
         topButtonbackground: '#E0DBD2',
         qnColor: '#303E63',
         optionHead: '#232323',
         option: '#000000',
 
       },
-      
+
       screens: {
         xsm: '400px',  // Define an extra small breakpoint
       },
@@ -86,6 +96,7 @@ const config: Config = {
         'custom-lg': 'center',
         'custom-xl': 'left center', // Adjusts for larger screens if needed
       },
+      
     },
   },
   plugins: [

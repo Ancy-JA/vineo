@@ -23,7 +23,7 @@ const SubscriptionPage: React.FC = () => {
   if (error) return <Error />;
 
   return (
-    <div className="min-h-screen p-3 flex flex-col items-center border-t bg-white rounded-lg shadow-lg">
+    <div className="max-h-screen pb-[6rem] flex flex-col items-center border-t bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-inter mb-8 p-3 text-left w-full">{t('subscriptionTitle')}</h2>
 
       <div className="max-w-8xl w-full flex-grow relative">
