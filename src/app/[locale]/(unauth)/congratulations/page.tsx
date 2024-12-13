@@ -7,11 +7,16 @@ const CongratulationsPage: React.FC = () => {
   const [isBlurred, setIsBlurred] = useState(true); // Initially blurred
   const [email, setEmail] = useState(''); // Track email input
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = () => {
-    if (email) {
-      setIsBlurred(false); // Remove blur on valid email submission
+    if (isValidEmail(email)) {
+      setIsBlurred(false); // Remove blur on valid email
     } else {
-      alert('Please enter a valid email.');
+      alert('Please enter a valid email address.');
     }
   };
 
@@ -23,7 +28,7 @@ const CongratulationsPage: React.FC = () => {
       }}
     >
       {/* Transparent Header */}
-      <div className="w-full fixed top-0 left-0 bg-transparent backdrop-blur-md shadow-md z-10">
+      <div className="w-full fixed top-0 left-0 bg-blurgradient  shadow-md z-10">
         <div className="max-w-[108rem] mx-auto flex items-center p-4">
           <Image
             src={IMAGES.vineoLogo}
@@ -48,7 +53,7 @@ const CongratulationsPage: React.FC = () => {
 
         {/* Email Form */}
         <div className="mt-8 w-full text-xl max-w-[40rem]">
-          <div className="flex items-center gap-3 font-domine">
+          <div className="flex xsm:flex-row flex-col items-center gap-3 font-domine">
             <input
               type="email"
               placeholder="Correo electrónico"
@@ -58,25 +63,32 @@ const CongratulationsPage: React.FC = () => {
             />
             <button
               className="bg-customPink text-white px-10 py-4 w-full max-w-[15rem] rounded-xl"
-              onClick={handleSubmit} // Remove blur on click
+              onClick={handleSubmit} // Validate email and remove blur
             >
               Crear cuenta
             </button>
           </div>
         </div>
 
-        {/* Blurred Section */}
-        <div className="relative w-full max-w-3xl mt-16">
+        {/* Profile and Wine Preferences Section */}
+        <div className="relative w-full max-w-4xl mt-16">
           {/* Blur Layer */}
           {isBlurred && (
-            <div className="absolute inset-0 bg-customGray/5  rounded-xl z-10 pointer-events-none"></div>
-          )}
+  <div
+    className="absolute inset-0 backdrop-blur-sm rounded-xl z-10 pointer-events-none bg-blurgradient"
+    
+  ></div>
+)}
           {/* Content */}
-          <div className={`relative z-20 ${isBlurred ? 'opacity-15' : 'opacity-100'} transition-opacity duration-300`}>
+          <div
+            className={`relative z-20 ${
+              isBlurred ? 'filter blur-sm ' : 'filter blur-none '
+            } transition-all duration-300`}
+          >
             {/* Profile Section */}
             <div className="text-center">
-              <div className="text-3xl mb-[2rem] font-bold text-gray-800">Este es tu perfil</div>
-              <div className="w-[20rem] h-[20rem] mx-auto bg-transparent rounded-2xl shadow-all-sides-2xl" />
+              <div className="text-3xl mb-[2rem] pt-7 font-bold text-gray-800">Este es tu perfil</div>
+              <div className="w-[18rem] xsm:w-[20rem] h-[20rem] mx-auto bg-transparent rounded-2xl shadow-all-sides-2xl" />
             </div>
 
             {/* Wine Preferences Section */}
@@ -85,15 +97,15 @@ const CongratulationsPage: React.FC = () => {
                 Estas son el estilo de vinos que te gustan:
               </div>
               <div className="mt-4 flex flex-col text-2xl justify-center items-center gap-6">
-                <div className=" bg-white p-6 shadow-lg rounded-2xl flex flex-row gap-4 w-[40rem] h-[15rem] items-center justify-center">
+                <div className="bg-transparent p-6 shadow-all-sides-xl rounded-2xl flex flex-row gap-4 w-[18rem] xsm:w-[28rem] md:w-[40rem] h-[15rem] items-center justify-center">
                   <div className="text-customGray">Vino Blanco</div>
                   <button className="bg-customPink text-white mt-4 px-6 py-2 rounded-lg">Seleccionar</button>
                 </div>
-                <div className="bg-white p-6 shadow-lg rounded-2xl flex flex-row gap-4 w-[40rem] h-[15rem] items-center justify-center">
+                <div className="bg-transparent p-6 shadow-all-sides-xl rounded-2xl flex flex-row gap-4 w-[18rem] xsm:w-[28rem] md:w-[40rem] h-[15rem] items-center justify-center">
                   <div className="text-customGray">Vino Tinto</div>
                   <button className="bg-customPink text-white mt-4 px-6 py-2 rounded-lg">Seleccionar</button>
                 </div>
-                <div className="bg-white p-6 shadow-lg  rounded-2xl flex flex-row gap-4 w-[40rem] h-[15rem] items-center justify-center">
+                <div className="bg-transparent p-6 mb-7 shadow-all-sides-xl  rounded-2xl flex flex-row gap-4 w-[18rem] xsm:w-[28rem] md:w-[40rem] h-[15rem] items-center justify-center">
                   <div className="text-customGray">Vino Rosado</div>
                   <button className="bg-customPink text-white mt-4 px-6 py-2 rounded-lg">Seleccionar</button>
                 </div>
@@ -105,7 +117,7 @@ const CongratulationsPage: React.FC = () => {
         {/* Call to Action */}
         <div className="mt-16 text-center text-2xl">
           <div className="font-semibold mb-[1rem] text-customGray">Comienza hoy y descubre tu primera caja</div>
-          <button className="bg-customPink text-white mt-4 mb-[2rem] px-8 py-3 rounded-md ">Suscribirme</button>
+          <button className="bg-customPink text-white mt-4 mb-[2rem] px-8 py-3 rounded-md">Suscribirme</button>
         </div>
       </div>
     </div>

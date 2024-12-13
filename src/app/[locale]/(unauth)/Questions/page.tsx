@@ -36,7 +36,7 @@ const CoffeeChoicePage: React.FC = () => {
         setCurrentQuestionIndex((prev) => prev + 1);
       } else {
         // Navigate to another page after survey completion
-        router.push('/congratulations'); 
+        router.push('./congratulations'); 
       }
     }, 300); // 300ms delay
   };
@@ -44,7 +44,7 @@ const CoffeeChoicePage: React.FC = () => {
   const handlePrevious = () => setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0));
   const handleNext = () =>
     selectedOptionIndex !== null && setCurrentQuestionIndex((prev) => Math.min(prev + 1, questions.length - 1));
-  const handleSubmit = () => router.push('/congratulations'); // Redirect on submit
+  const handleSubmit = () => router.push('./congratulations'); // Redirect on submit
 
   return (
     <div
@@ -56,7 +56,7 @@ const CoffeeChoicePage: React.FC = () => {
       {/* Fixed container width */}
       <div className="relative max-w-[1728px] w-full flex flex-col items-center">
         <Logo />
-        <div className="flex flex-col items-center w-full mt-[6rem] md:mt-[3rem] lg:mt-[4rem]">
+        <div className="flex flex-col items-center w-full mt-[6rem] md:mt-[6rem] lg:mt-[6rem] xl:mt-[6rem] 2xl:mt-[12rem]">
           <ProgressBar progressPercentage={progressPercentage} />
           <QuestionTitle questionText={currentQuestion.question} currentIndex={currentQuestionIndex} />
           <QuestionImage />

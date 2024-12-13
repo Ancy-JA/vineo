@@ -11,7 +11,7 @@ const OptionsSection: React.FC<OptionsSectionProps> = ({ options, selectedOption
     {options.map((option, index) => (
       <div
         key={option.id}
-        className={`cursor-pointer flex flex-col items-center  text-center px-4 py-6 rounded-3xl  transition-transform duration-300  h-[21rem] w-[20rem] ${
+        className={`cursor-pointer flex flex-col items-center  text-center px-4 py-6 rounded-3xl  transition-transform duration-300  h-[22rem] w-[17rem] md:h-[21rem] md:w-[20rem] ${
           selectedOptionIndex === index
             ? 'bg-selectedOptiongradient shadow-optionCardShadow backdrop-blur-lg'
             : 'bg-unselectedOptiongradient border-customGray border backdrop-blur-xs'

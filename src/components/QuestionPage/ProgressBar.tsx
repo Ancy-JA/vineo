@@ -5,7 +5,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ progressPercentage }) => (
-  <div className="w-full md:mt-[5rem] mb-7 h-2 bg-gray-200">
+  <div className="w-full 2xl:-translate-y-[6rem]  mb-7 h-2 bg-gray-200">
     <div
       className="h-full transition-all duration-300"
       style={{

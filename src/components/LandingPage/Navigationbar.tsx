@@ -15,7 +15,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-opacity-20 bg-gray-500 backdrop-blur-lg z-50 shadow-md">
+    <div className="fixed top-0 left-0 w-full bg-opacity-20 bg-blurgradient z-50 shadow-md">
       <div className="w-[108rem] max-w-full mx-auto px-4 flex items-center justify-between p-2 md:p-4">
         {/* Logo Section */}
         <div className="flex items-center pl-5 ">
