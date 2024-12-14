@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex flex-col gap-6 text-center border-t border-borderColor mb-5">
         {/* Logo Section */}
         <div className=' pt-12 '>
-          <Image src="/vineo.png" alt="Vineo Logo" width={150} height={50} />
+          <Image src="/vineo.png" alt="Vineo Logo" width={260} height={50} />
         </div>
 
         {/* Links Section */}

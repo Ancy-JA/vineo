@@ -17,10 +17,10 @@ export default function NewsletterSection() {
 
       {/* Right Side - Text and Input */}
       <div className=" text-center md:text-center  md:-translate-x-[150px] lg:-translate-x-[250px]  ">
-        <div className="text-2xl md:text-3xl font-bold font-domine text-customGray mb-9">
+        <div className="text-4xl md:text-5xl font-bold font-domine text-customGray mb-12">
           Don't miss a thing
         </div>
-        <div className="text-lg md:text-xl lg:text-2xl max-w-[55rem] font-domine pb-10 mb-12 ">
+        <div className="text-xl md:text-2xl lg:text-3xl max-w-[55rem] font-domine pb-10 mb-12 ">
           Sign up for the newsletter to stay updated on all the news,
           
           benefits, and discounts from Vineo.

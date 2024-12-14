@@ -20,10 +20,10 @@ export default function EssenceOfVineoSection() {
 
         {/* Text Section */}
         <div className="w-full md:w-1/2 text-center  md:text-left py-6 md:py-10 -translate-y-20">
-          <div className="text-2xl md:text-3xl text-center font-domine font-bold text-customGray mb-10">
+          <div className="text-3xl md:text-4xl text-center font-domine font-bold text-customGray mb-10">
             The Essence of Vineo
           </div>
-          <div className="text-xl md:text-2xl text-description font-domine ">
+          <div className="text-2xl md:text-3xl text-description font-domine ">
             Receive a box with 3 wines: 2 carefully selected based on your preferences, <br />
             and 1 that will surprise you with new flavors and experiences.
           </div>

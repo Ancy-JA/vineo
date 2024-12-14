@@ -22,13 +22,13 @@ export default function Navbar() {
           <Image
             src={IMAGES.vineoLogo}
             alt="Vineo Logo"
-            width={100}
-            height={30}
+            width={200}
+            height={40}
           />
         </div>
 
         {/* Button Section for md and above */}
-        <div className="hidden md:flex items-center space-x-2 md:space-x-4 xsm:text-xl text-sm">
+        <div className="hidden md:flex items-center space-x-2 md:space-x-4 xsm:text-2xl text-lg">
           <Link href="/gift">
             <p className="text-customPink font-semibold cursor-pointer">
               Give Vineo as a gift
@@ -48,7 +48,7 @@ export default function Navbar() {
             Access
           </button>
           <Link href="https://wa.me" target="_blank" rel="noopener noreferrer">
-            <Image src={IMAGES.WhatsApp} alt="WhatsApp Icon" width={24} height={24} />
+            <Image src={IMAGES.WhatsApp} alt="WhatsApp Icon" width={40} height={40} />
           </Link>
         </div>
 
@@ -64,7 +64,7 @@ export default function Navbar() {
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-20 bg-white shadow-lg rounded-md z-50">
+            <div className="absolute text-lg right-0 mt-2 w-20 bg-white shadow-lg rounded-md z-50">
               <Link href="/gift">
                 <p className="text-customPink font-semibold p-2 cursor-pointer hover:bg-darkPink">
                   Gift

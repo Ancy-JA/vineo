@@ -41,16 +41,16 @@ export default function VineoCoinsSection() {
 
       {/* Right Side - Text Content */}
       <div className="w-full md:w-1/2  ml-5 text-center md:text-left transform md:translate-x-10">
-        <div className="text-xl md:text-2xl lg:text-3xl font-domine text-customGray mb-3">
+        <div className="text-3xl md:text-4xl lg:text-5xl font-domine text-customGray mb-7">
           Your Benefits
         </div>
-        <div className="text-xl md:text-2xl lg:text-3xl font-semibold font-domine text-customGray mb-6">
+        <div className="text-3xl md:text-4xl lg:text-5xl font-semibold font-domine text-customGray mb-6">
           Vineo Coins
         </div>
-        <div className="text-lg md:text-xl lg:text-2xl font-domine text-description mb-14">
+        <div className="text-xl md:text-2xl lg:text-3xl font-domine text-description mb-14">
           Vineo Coins will allow you to access exclusive discounts, premium wines, and unique experiences.
         </div>
-        <button className="bg-customPink hover:bg-darkPink text-white text-xl md:text-2xl font-semibold py-4 px-11 rounded-xl shadow-lg">
+        <button className="bg-customPink hover:bg-darkPink text-white text-2xl md:text-3xl  py-4 px-11 rounded-xl shadow-lg">
           Start
         </button>
       </div>

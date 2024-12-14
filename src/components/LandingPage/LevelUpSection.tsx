@@ -10,8 +10,8 @@ const LevelUpSection: React.FC = () => {
         backgroundImage: `url(${IMAGES.paperbg})`,
       }}
     >
-      <div className="text-2xl md:text-3xl font-bold text-customGray ">Level up with every box</div>
-      <div className="mt-4 mb-14 text-lg md:text-xl lg:text-2xl text-description max-w-[30rem] md:max-w-[45rem]">
+      <div className="text-3xl md:text-4xl font-domine font-bold text-customGray ">Level up with every box</div>
+      <div className="mt-7 mb-14 text-xl md:text-2xl lg:text-3xl text-description max-w-[30rem] md:max-w-[60rem]">
         Invite friends, rate your wines, and access discounts and unique benefits with your Vineo Coins.
       </div>
     </div>

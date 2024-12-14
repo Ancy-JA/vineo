@@ -33,7 +33,7 @@ export default function HowItWorksSection() {
 
       {/* "How It Works" Section */}
       <div className="mt-12">
-        <div className="text-center text-2xl md:text-3xl font-domine font-bold text-customGray mb-12 pb-12 mt-12 pt-12">
+        <div className="text-center text-4xl md:text-5xl font-domine font-bold text-customGray mb-12 pb-12 mt-12 pt-12">
           How It Works
         </div>
       </div>
@@ -43,23 +43,23 @@ export default function HowItWorksSection() {
         {cards.map((card, index) => (
           <div
             key={index}
-            className="relative bg-custom-gradient1 p-6 rounded-xl shadow-all-sides-2xl text-center flex flex-col items-center flex-1 max-w-[30rem] min-h-[19rem] md:min-h-[24rem] xl:min-h-[16rem] "
+            className="relative bg-custom-gradient1 p-6 rounded-xl shadow-all-sides-2xl text-center flex flex-col items-center flex-1 max-w-[30rem] max-h-[25rem] md:min-h-[30rem] lg:min-h-[26rem] xl:min-h-[23rem] 2xl:min-h-[20rem] "
           >
             {/* Image positioned half inside and half outside */}
             <div className="absolute -top-12 md:-top-16">
               <Image
                 src={card.image}
                 alt={card.title}
-                width={150}
-                height={150}
+                width={170}
+                height={170}
                 
                
               />
             </div>
-            <div className="font-semibold font-domine text-customGray text-xl md:text-2xl mb-2 mt-16">
+            <div className="font-bold font-domine text-customGray text-2xl md:text-3xl mb-5 mt-16">
               {card.title}
             </div>
-            <div className="text-lg md:text-xl font-domine text-description max-w-[25rem]">
+            <div className="text-xl md:text-2xl font-domine text-description max-w-[25rem]">
               {card.description}
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
       {/* Call to Action Button */}
       <div className="flex justify-center mt-11 mb-11 w-full">
         <Link href="/[locale]/unauth/sign-in" as="/sign-in">
-          <button className="bg-customPink hover:bg-darkPink text-white font-domine py-5 px-12 rounded-xl shadow-lg text-lg md:text-2xl  max-w-md">
+          <button className="bg-customPink hover:bg-darkPink text-white font-domine py-5 px-12 rounded-xl shadow-lg text-lg md:text-2xl  max-w-md xl:mt-9">
             Answer the Questionnaire
           </button>
         </Link>

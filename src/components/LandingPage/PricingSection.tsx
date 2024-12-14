@@ -44,10 +44,10 @@ export default function PricingSection() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="text-xl md:text-2xl lg:text-3xl font-bold font-domine text-customGray mt-8 mb-4">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-domine text-customGray mt-8 mb-4">
         Choose the service that best suits you
       </div>
-      <div className="text-lg md:text-xl lg:text-2xl font-domine text-description pb-12 mb-12">
+      <div className="text-xl md:text-2xl lg:text-3xl font-domine text-description pb-12 mb-12">
         Vineo tailored to you
       </div>
       <div className="container pb-11 mb-6">

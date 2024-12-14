@@ -48,10 +48,10 @@ export default function FAQSection() {
 
   return (
     <div className="md:py-16 py-10 bg-white flex flex-col items-center  px-6 md:px-12 lg:px-20 ">
-      <div className="text-xl md:text-2xl lg:text-3xl font-bold font-domine items-center text-center text-customGray mb-4">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-domine items-center text-center text-customGray mb-[3rem]">
         Frequently Asked Questions
       </div>
-      <div className="text-lg md:text-xl lg:text-2xl font-domine text-center text-description mb-8 max-w-[60rem]">
+      <div className="text-xl md:text-2xl lg:text-3xl font-domine text-center text-description mb-8 max-w-[60rem]">
         We answer your questions here, but if you still have any that are not resolved in this section, do not hesitate to contact us via WhatsApp.
       </div>
 
@@ -61,7 +61,7 @@ export default function FAQSection() {
           <div key={index} className="border-b border-borderBottom mb-4">
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center text-left  py-4 text-customGray font-semibold text-xl transition-all duration-300"
+              className="w-full flex justify-between items-center text-left  py-4 text-customGray font-domine font-semibold text-2xl transition-all duration-300"
             >
               {item.question}
               <span
@@ -74,7 +74,7 @@ export default function FAQSection() {
 
 
             {activeIndex === index && (
-              <div className="text-lg font-domine text-description text-left  mb-4">
+              <div className="text-xl font-domine text-description text-left  mb-4">
                 {item.answer}
               </div>
             )}
