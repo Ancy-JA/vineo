@@ -4,6 +4,7 @@ import React from "react";
 //import CardList from "src/components/CardList";
 import { IMAGES } from "@/app/constants/imageconstants";
 import LandingCard from "./LandingCard";
+import Heading from '@/components/Atoms/Heading';
 
 export default function PricingSection() {
   const pricingPlans = [
@@ -44,12 +45,24 @@ export default function PricingSection() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-domine text-customGray mt-8 mb-4">
-        Choose the service that best suits you
-      </div>
-      <div className="text-xl md:text-2xl lg:text-3xl font-domine text-description pb-12 mb-12">
-        Vineo tailored to you
-      </div>
+      {/* First heading */}
+      <Heading 
+        text="Choose the service that best suits you" 
+        size="large" // Matches 'text-3xl md:text-4xl lg:text-5xl'
+        color="text-customGray" 
+        bold // Matches 'font-bold'
+        align="" // Remove default alignment
+        className="mt-8 mb-4" 
+      />
+      
+      {/* Second heading */}
+      <Heading 
+        text="Vineo tailored to you" 
+        size="medium" // Matches 'text-xl md:text-2xl lg:text-3xl'
+        color="text-description" 
+        align="" // Remove default alignment
+        className="pb-12 mb-12" 
+      />
       <div className="container pb-11 mb-6">
         <LandingCard items={pricingPlans} />
       </div>

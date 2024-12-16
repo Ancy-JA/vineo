@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IMAGES } from '@/app/constants/imageconstants';
+import Heading from '@/components/Atoms/Heading';
 
 const LevelUpSection: React.FC = () => {
   return (
@@ -10,7 +11,15 @@ const LevelUpSection: React.FC = () => {
         backgroundImage: `url(${IMAGES.paperbg})`,
       }}
     >
-      <div className="text-3xl md:text-4xl font-domine font-bold text-customGray ">Level up with every box</div>
+      {/* Heading for "Level up with every box" */}
+      <Heading 
+        text="Level up with every box" 
+        size="medium" // Slightly smaller if this matches the size requirement
+        color="text-customGray" 
+        bold // Matches 'font-bold'
+        align="" // Remove default alignment if needed
+        className="md:text-4xl" // Custom override for medium screens
+      />
       <div className="mt-7 mb-14 text-xl md:text-2xl lg:text-3xl text-description max-w-[30rem] md:max-w-[60rem]">
         Invite friends, rate your wines, and access discounts and unique benefits with your Vineo Coins.
       </div>

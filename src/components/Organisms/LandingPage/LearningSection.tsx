@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { IMAGES} from '@/app/constants/imageconstants';
+import Heading from '@/components/Atoms/Heading';
 
 export default function LearningSection() {
   return (
@@ -21,12 +22,23 @@ export default function LearningSection() {
 
         {/* Right Side - Text Content */}
         <div className="w-full md:w-1/2 max-w-[45rem] lg:w-1/2  text-center md:text-left transform md:translate-x-9 lg:translate-x-13 pr-8">
-          <div className="text-3xl md:text-4xl lg:text-5xl font-domine text-customGray mb-10">
-            Your Learning
-          </div>
-          <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-domine text-customGray mb-6">
-            Learn about wines with every box
-          </div>
+        <Heading 
+        text="Your Learning" 
+        size="large" // Matches 'text-3xl md:text-4xl lg:text-5xl'
+        color="text-customGray" 
+        align="" // Remove default 'text-center' alignment
+        className="mb-10" 
+      />
+      
+      {/* Second heading */}
+      <Heading 
+        text="Learn about wines with every box" 
+        size="large" // Matches 'text-3xl md:text-4xl lg:text-5xl'
+        color="text-customGray" 
+        bold // Matches 'font-bold'
+        align="" // Remove default alignment
+        className="mb-6" 
+      />
           <div className="text-xl md:text-2xl lg:text-3xl text-description font-domine mb-12">
             Our goal is to offer you a varied selection of wines, including a wide range of types, flavors, and regions.
           </div>

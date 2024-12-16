@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Heading from '@/components/Atoms/Heading';
 
 export default function FAQSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -48,9 +49,15 @@ export default function FAQSection() {
 
   return (
     <div className="md:py-16 py-10 bg-white flex flex-col items-center  px-6 md:px-12 lg:px-20 ">
-      <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-domine items-center text-center text-customGray mb-[3rem]">
-        Frequently Asked Questions
-      </div>
+      {/* Heading for "Frequently Asked Questions" */}
+      <Heading 
+        text="Frequently Asked Questions" 
+        size="large" // Matches 'text-3xl md:text-4xl lg:text-5xl'
+        color="text-customGray" 
+        bold // Matches 'font-bold'
+        align="text-center" // Matches 'text-center'
+        className="items-center mb-[3rem]" // Adds the additional margin and centering class
+      />
       <div className="text-xl md:text-2xl lg:text-3xl font-domine text-center text-description mb-8 max-w-[60rem]">
         We answer your questions here, but if you still have any that are not resolved in this section, do not hesitate to contact us via WhatsApp.
       </div>
@@ -61,11 +68,11 @@ export default function FAQSection() {
           <div key={index} className="border-b border-borderBottom mb-4">
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center text-left  py-4 text-customGray font-domine font-semibold text-2xl transition-all duration-300"
+              className="w-full flex justify-between items-center text-left  py-4 text-customGray font-domine font-semibold text:xl md:text-2xl transition-all duration-300"
             >
               {item.question}
               <span
-                className={`font-domine text-5xl text-pluscolor transform transition-transform duration-500 ${activeIndex === index ? 'rotate-45' : 'rotate-0'
+                className={`font-domine text-5xl pl-3 text-pluscolor transform transition-transform duration-500 ${activeIndex === index ? 'rotate-45' : 'rotate-0'
                   }`}
               >
                 +

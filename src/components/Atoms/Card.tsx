@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { SharedCardProps } from './Types';
+import { SharedCardProps } from '../Types';
 
 const SharedCard: React.FC<SharedCardProps> = ({
   title,

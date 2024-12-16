@@ -37,7 +37,11 @@ const config: Config = {
         'unselectedOptiongradient': 'linear-gradient(174.04deg, #FBF9F6 -9.19%, #FFFFFF 18.02%, #FBF9F6 46.92%, #FFFFFF 69.43%, #FBF9F6 91.85%)',
         'blurgradient': 'linear-gradient(90.59deg, rgba(255, 255, 255, 0) 0.12%, rgba(180, 180, 180, 0.17) 31.44%, rgba(255, 255, 255, 0) 60.4%, rgba(141, 141, 141, 0.21) 78.19%, rgba(255, 255, 255, 0) 102.28%)',
         'progressbargradient': 'linear-gradient(90deg, #F78A79 16.31%, #E86A58 91.85%)',
+        'paperbg': "url('/assets/images/paper.png')",
+        'LandingImg':"url('/assets/images/landingimage1.svg')",
+        'winedroping':"url('/assets/images/winedroping.svg')",
       },
+  
       backdropBlur: {
         // Add custom blur values
         'xs': '0.125rem', // Unselected option blur

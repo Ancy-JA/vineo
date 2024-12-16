@@ -1,7 +1,7 @@
 // SubscriptionCard.tsx
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import SharedCard from 'src/components/Card';
+import SharedCard from '@/components/Atoms/Card';
 
 interface SubscriptionCardProps {
   title: string;

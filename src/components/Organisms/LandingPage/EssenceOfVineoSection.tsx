@@ -7,7 +7,7 @@ export default function EssenceOfVineoSection() {
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-6 md:px-12 lg:px-20">
         {/* Image Section */}
         <div className="relative w-full md:w-1/2 flex justify-center items-center ">
-          <div className=" mb-5 relative ml-7 -mt-[7.3rem] xsm:-mt-[9.3rem] sm:-mt-[14.25rem] md:-mt-[25.125rem] lg:-mt-[21.125rem] md:-mr-[210px] lg:-mr-[210px] md:pt-9">
+          <div className=" mb-5 relative ml-7 -mt-[7.3rem] xsm:-mt-[9.3rem] sm:-mt-[14.25rem] md:-mt-[29.125rem] lg:-mt-[21.125rem] md:-mr-[15.125rem] lg:-mr-[13.125rem] md:pt-9 md:-translate-x-12 lg:-translate-x-8">
             <Image
               src={IMAGES.winepack}
               alt="Vineo Wine Box"

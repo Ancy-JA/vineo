@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import SharedCard from 'src/components/Card';
+import SharedCard from '@/components/Atoms/Card';
 import { SharedCardProps } from 'src/components/Types';
 
 interface LandingCardProps {

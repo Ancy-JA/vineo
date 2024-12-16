@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 //import Image from 'next/image';
-import Logo from '@/components/QuestionPage/Logo';
+import Logo from '@/components/Atoms/Logo';
 import { IMAGES } from '@/app/constants/imageconstants';
 
 const CongratulationsPage: React.FC = () => {

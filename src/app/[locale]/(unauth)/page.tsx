@@ -1,26 +1,27 @@
-"use client";
+'use client';
 
-//import Image from 'next/image';
-//import Link from 'next/link';
-import HeroSection from '@/components/LandingPage/HeroSection';
-import HowItWorksSection from '@/components/LandingPage/HowItWorksSection';
-import ProcessSection from '@/components/LandingPage/ProcessSection';
-import EssenceOfVineoSection from '@/components/LandingPage/EssenceOfVineoSection';
-import AlgorithmSection from '@/components/LandingPage/AlgorithmSection';
-import LearningSection from '@/components/LandingPage/LearningSection';
-import VineoCoinsSection from '@/components/LandingPage/VineoCoinsSection';
-import PricingSection from '@/components/LandingPage/PricingSection';
-import FAQSection from '@/components/LandingPage/FAQSection'
-import NewsletterSection from '@/components/LandingPage/NewsLetter';
-import Footer from '@/components/LandingPage/Footer';
-import LevelUpSection from '@/components/LandingPage/LevelUpSection';
+import React from 'react';
+import useLenisScroll from '@/utils/useLenisScroll';
+import HeroSection from '@/components/Organisms/LandingPage/HeroSection';
+import HowItWorksSection from '@/components/Organisms/LandingPage/HowItWorksSection';
+import ProcessSection from '@/components/Organisms/LandingPage/ProcessSection';
+import EssenceOfVineoSection from '@/components/Organisms/LandingPage/EssenceOfVineoSection';
+import AlgorithmSection from '@/components/Organisms/LandingPage/AlgorithmSection';
+import LearningSection from '@/components/Organisms/LandingPage/LearningSection';
+import VineoCoinsSection from '@/components/Organisms/LandingPage/VineoCoinsSection';
+import PricingSection from '@/components/Organisms/LandingPage/PricingSection';
+import FAQSection from '@/components/Organisms/LandingPage/FAQSection';
+import NewsletterSection from '@/components/Organisms/LandingPage/NewsLetter';
+import Footer from '@/components/Organisms/LandingPage/Footer';
+import LevelUpSection from '@/components/Organisms/LandingPage/LevelUpSection';
 
+const Welcome: React.FC = () => {
+  const scrollRef = useLenisScroll(); // Use the Lenis hook
 
-export default function Welcome() {
   return (
-    <div className="bg-white">
+    <div ref={scrollRef} className="bg-white">
       <div className="max-w-[108rem] mx-auto px-4">
-        <HeroSection />      
+        <HeroSection />
         <HowItWorksSection />
         <ProcessSection />
         <EssenceOfVineoSection />
@@ -35,7 +36,6 @@ export default function Welcome() {
       </div>
     </div>
   );
-}
+};
 
-  
-
+export default Welcome;

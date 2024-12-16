@@ -1,16 +1,14 @@
 'use client';
 import React, { useState } from 'react';
-import { IMAGES } from '@/app/constants/imageconstants';
-import Logo from '@/components/QuestionPage/Logo';
-//import ProgressBar from '@/components/QuestionPage/ProgressBar';
+import Logo from '@/components/Atoms/Logo';
 import QuestionTitle from '@/components/QuestionPage/QuestionTitle';
 import QuestionImage from '@/components/QuestionPage/QuestionImage';
 import OptionsSection from '@/components/QuestionPage/OptionsSection';
 import NavigationButtons from '@/components/QuestionPage/NavigationButtons';
 import { useGetQuestionsQuery } from '@/app/redux/authApi';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation'; 
 
-const CoffeeChoicePage: React.FC = () => {
+const ChoiceSelectionPage: React.FC = () => {
   const router = useRouter(); // Initialize useRouter
   const { data, error, isLoading } = useGetQuestionsQuery(undefined);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -48,10 +46,8 @@ const CoffeeChoicePage: React.FC = () => {
 
   return (
     <div
-      className="flex justify-center items-center min-h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${IMAGES.paperbg})`, // Background image from constants
-      }}
+      className="flex justify-center items-center bg-paperbg min-h-screen bg-cover bg-center"
+      
     >
       {/* Fixed container width */}
       <div className="relative max-w-[1728px] w-full flex flex-col items-center">
@@ -80,4 +76,4 @@ const CoffeeChoicePage: React.FC = () => {
   );
 };
 
-export default CoffeeChoicePage;
+export default ChoiceSelectionPage;
