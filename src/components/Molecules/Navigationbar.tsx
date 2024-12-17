@@ -6,6 +6,7 @@ import { IMAGES } from '@/app/constants/imageconstants';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '@/components/Atoms/Button';
+import Icon from '@/components/Atoms/Icon';
 
 export default function Navbar() {
   const router = useRouter();
@@ -97,11 +98,12 @@ export default function Navbar() {
               />
 
               {/* WhatsApp Link */}
-              <Link href="https://wa.me" target="_blank" rel="noopener noreferrer">
-                <div className="flex items-center pl-9 p-2 hover:bg-gray-100">
-                  <Image src={IMAGES.WhatsApp} alt="WhatsApp Icon" width={24} height={24} />
-                </div>
-              </Link>
+              <Icon
+  href="https://wa.me"
+  src={IMAGES.WhatsApp}
+  alt="WhatsApp Icon"
+  className="pl-9 p-2"
+/>
             </div>
           )}
 

@@ -2,15 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 
 interface ButtonProps {
-  text: string; // Button label
-  onClick?: () => void; // Click event handler
-  variant?: 'primary' | 'secondary' | 'outline' | 'transparent'; // Styling variants
-  size?: 'small' | 'medium' | 'large'; // Button sizes
-  href?: string; // If the button is a link
-  disabled?: boolean; // Disabled state
-  loading?: boolean; // Loading state
-  className?: string; // Additional custom styles
-  icon?: React.ReactNode; // Optional icon
+  text?: string;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary' | 'outline' | 'transparent';
+  size?: 'small' | 'medium' | 'large';
+  href?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  className?: string;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
+  noPadding?: boolean; // New prop to disable default padding
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,13 +25,15 @@ const Button: React.FC<ButtonProps> = ({
   loading = false,
   className = '',
   icon,
+  children,
+  noPadding = false,
 }) => {
   const baseStyles = `rounded font-domine focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-200 flex items-center justify-center gap-2`;
   const variantStyles = {
     primary: 'bg-customPink text-white hover:bg-darkPink',
     secondary: 'bg-gray-500 text-white hover:bg-gray-600',
     outline: 'border border-customPink text-customPink hover:bg-pink-100',
-    transparent: 'bg-transparent text-customPink hover:text-darkPink', // New variant for buttons with no background or border
+    transparent: 'bg-transparent text-customPink hover:text-darkPink',
   };
   const sizeStyles = {
     small: 'text-sm px-3 py-1',
@@ -39,11 +43,13 @@ const Button: React.FC<ButtonProps> = ({
 
   const isDisabled = disabled || loading;
 
-  const content = (
+  const paddingClass = noPadding ? 'p-0' : sizeStyles[size];
+
+  const content = children || (
     <>
       {loading && <span className="loader-spinner"></span>}
       {icon && <span>{icon}</span>}
-      <span>{text}</span>
+      {text && <span>{text}</span>}
     </>
   );
 
@@ -51,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({
     return (
       <Link href={href}>
         <a
-          className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className} ${
+          className={`${baseStyles} ${variantStyles[variant]} ${paddingClass} ${className} ${
             isDisabled ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           onClick={onClick}
@@ -65,7 +71,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className} ${
+      className={`${baseStyles} ${variantStyles[variant]} ${paddingClass} ${className} ${
         isDisabled ? 'opacity-50 cursor-not-allowed' : ''
       }`}
       onClick={onClick}
@@ -75,5 +81,6 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
 
 export default Button;

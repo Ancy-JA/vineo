@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import { IMAGES } from '@/app/constants/imageconstants';
+import Link from '@/components/Atoms/Link';
+import Button from '@/components/Atoms/Button';
+import Icon from '@/components/Atoms/Icon';
 //import { FaWhatsapp, FaFacebook, FaInstagram } from 'react-icons/fa';
 
 export default function Footer() {
@@ -7,7 +10,7 @@ export default function Footer() {
     <footer className=" bg-footer-gradient pt-[8rem] py-8 px-6 md:px-12 lg:px-20 text-customGray relative "
 
     >
-      
+
       {/* Footer Content in Rows */}
       <div className="flex flex-col gap-6 text-center border-t border-borderColor mb-5">
         {/* Logo Section */}
@@ -16,16 +19,10 @@ export default function Footer() {
         </div>
 
         {/* Links Section */}
-        <div className="flex items-center justify-center text:lg md:text-xl gap-7 xsm:gap-12 ">
-          <a href="/terms-of-use" className="hover:text-customPink font-semibold ">
-            Terms of Use
-          </a>
-          <a href="/privacy-policy" className="hover:text-customPink font-semibold ">
-            Privacy Policy
-          </a>
-          <a href="/support" className="hover:text-customPink font-semibold ">
-            Support
-          </a>
+        <div className="flex items-center justify-center text:lg md:text-xl gap-7 xsm:gap-12">
+          <Link href="/terms-of-use">Terms of Use</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/support">Support</Link>
         </div>
 
         {/* Social Media Icons */}
@@ -35,42 +32,26 @@ export default function Footer() {
           </div>
           <div className="flex gap-9 mt-5">
             {/* WhatsApp */}
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <div className="bg-customPink rounded-full  flex items-center justify-center hover:scale-110 transition-transform">
-                <Image
-                  src={IMAGES.whatsappFooter}
-                  alt="WhatsApp"
-                  width={40} // Increased size
-                  height={40} // Increased size
-                />
-              </div>
-            </a>
+            <Icon
+              href="https://wa.me"
+              src={IMAGES.whatsappFooter}
+              alt="WhatsApp"
+            />
 
             {/* Facebook */}
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <div className="bg-customPink rounded-full  flex items-center justify-center hover:scale-110 transition-transform">
-                <Image
-                  src={IMAGES.facebookFooter}
-                  alt="Facebook"
-                  width={40} // Increased size
-                  height={40} // Increased size
-                />
-              </div>
-            </a>
+            <Icon
+              href="https://facebook.com"
+              src={IMAGES.facebookFooter}
+              alt="Facebook"
+            />
 
             {/* Instagram */}
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <div className="bg-customPink rounded-full  flex items-center justify-center hover:scale-110 transition-transform">
-                <Image
-                  src={IMAGES.instaFooter}
-                  alt="Instagram"
-                  width={40} // Increased size
-                  height={40} // Increased size
-                />
-              </div>
-            </a>
+            <Icon
+              href="https://instagram.com"
+              src={IMAGES.instaFooter}
+              alt="Instagram"
+            />
           </div>
-
         </div>
 
       </div>
@@ -83,18 +64,20 @@ export default function Footer() {
       </div>
 
       {/* Back to Top Button */}
-      <button
+      <Button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className=" rounded-full w-[7rem] absolute bottom-6 right-10 "
+        className="rounded-full w-[7rem] absolute bottom-6 right-10"
+        variant="transparent"
+        noPadding={true} // Ensures no extra padding
       >
         <Image
-          src="/assets/images/top.svg"
+          src={IMAGES.top}
           alt="Scroll to top"
           width={120} // Specify width
           height={120} // Specify height
         />
-      </button>
-     
+      </Button>
+
     </footer>
   );
 }
